@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Button } from '../components/button';
 
+import { Button } from '../components/button';
 import { Section } from '../layouts/section';
 import { Logo } from './logo';
 
@@ -10,7 +10,7 @@ const Navbar = () => (
       <div>
         <Link href="/">
           <a>
-            <Logo xl />
+            <Logo />
           </a>
         </Link>
       </div>
@@ -42,10 +42,10 @@ const Navbar = () => (
             @apply mr-6;
           }
           .navbar :global(li) {
-            @apply transition duration-200
+            @apply transition duration-200;
           }
           .navbar :global(li:hover) {
-            @apply text-neutral-300
+            @apply text-neutral-300;
           }
         `}
       </style>
