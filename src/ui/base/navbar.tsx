@@ -18,7 +18,7 @@ const Navbar = () => (
       <nav>
         <ul className="navbar flex items-center font-medium text-lg">
           <li>
-            <Link href="https://docs.pintswap.com" target="_blank">
+            <Link href="https://docs.pintswap.exchange" target="_blank">
               <a>Docs</a>
             </Link>
           </li>
