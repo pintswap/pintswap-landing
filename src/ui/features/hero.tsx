@@ -13,7 +13,7 @@ const Hero = () => (
           width="120" 
         />
         <Logo />
-        <h3 className="text-center text-lg">The most secure peer-to-peer token swap</h3>
+        <h3 className="text-center text-lg">Peer-to-peer token swaps using multi-party transaction scripts.</h3>
       </div>
     </Section>
   </Background>
