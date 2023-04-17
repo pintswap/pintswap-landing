@@ -5,18 +5,18 @@ import { Section } from '../layouts/section';
 import { Logo } from './logo';
 
 const Navbar = () => (
-  <Section yPadding="py-8">
+  <Section yPadding="py-4 md:py-5 lg:py-6">
     <div className="flex flex-wrap justify-between items-center">
       <div>
         <Link href="/">
           <a>
-            <Logo />
+            <Logo textSize="text-2xl lg:text-3xl" />
           </a>
         </Link>
       </div>
 
       <nav>
-        <ul className="navbar flex items-center font-medium text-lg">
+        <ul className="navbar flex items-center font-medium md:text-lg">
           <li>
             <Link href="https://docs.pintswap.exchange" target="_blank">
               <a>Docs</a>
@@ -25,7 +25,7 @@ const Navbar = () => (
           <li>
             <Link href="https://pintswap.eth.limo" target="_blank">
               <a>
-                <Button>Enter App</Button>
+                <Button className="md:text-lg">Enter App</Button>
               </a>
             </Link>
           </li>
@@ -39,7 +39,7 @@ const Navbar = () => (
           }
 
           .navbar :global(li:not(:last-child)) {
-            @apply mr-6;
+            @apply mr-3 lg:mr-6;
           }
           .navbar :global(li) {
             @apply transition duration-200;

@@ -28,7 +28,7 @@
       },
       "rules": {
         "prettier/prettier": [
-          "warning",
+          "warn",
           {
             "singleQuote": true
           }

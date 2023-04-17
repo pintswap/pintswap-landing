@@ -5,12 +5,14 @@ type ISectionProps = {
   description?: string;
   yPadding?: string;
   children: ReactNode;
+  className?: string;
 };
 
 const Section = (props: ISectionProps) => (
   <div
-    className={`max-w-screen-xl mx-auto px-3 
+    className={`max-w-screen-xl mx-auto px-3 md:px-6
       ${props.yPadding ? props.yPadding : 'py-16'}
+      ${props.className ? props.className : ''}
     `}
   >
     {(props.title || props.description) && (
