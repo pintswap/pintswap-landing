@@ -1,33 +1,38 @@
 import { Background } from '../layouts/background';
 import { Section } from '../layouts/section';
-import {} from 'react-icons/md';
+import Link from 'next/link';
 
 const Hero = () => (
-  <Background color="bg-[#212121]" fullscreen className="flex flex-col">
-    <Section yPadding="py-20 lg:py-32">
-      <div className="grid grid-cols-1 lg:grid-cols-2 justify-evenly justify-items-center content-evenly items-center gap-6">
-        <div className="flex flex-col items-center lg:items-start gap-4 max-w-xl order-2 lg:order-1">
-          <h3 className="text-center lg:text-left text-xl">
-            Peer-to-peer token swaps using multi-party transaction scripts.
-          </h3>
-          <p className="text-center lg:text-left leading-7">
+  <Background color="bg-[#212121]" fullscreen>
+    <Section yPadding="py-20">
+      <div className="flex flex-col items-center justify-center gap-6 text-center">
+        <img
+          src="/logo/ps-logo.png"
+          alt="PintSwap Logo"
+          height="120"
+          width="120"
+        />
+        <div className="max-w-xl">
+          <span className="text-xs text-indigo-500">Introducing PintSwap</span>
+          <h1 className="text-2xl lg:text-3xl mb-3 lg:mb-6">
+            Peer-to-Peer token swaps using multi-party transaction scripts.
+          </h1>
+          <h2 className="text-gray-300">
             Built with the OTC use-case in mind, PintSwap is a DEX using LibP2P
-            where there is no persistent contract that facilitates trades. The
-            contract only exists atomically and solely contains the logic to
-            execute the trade, after which it self-destructs.
-          </p>
+            where there is no persistent contract that facilitates trades.
+          </h2>
         </div>
-        <div className="order-1 lg:order-2">
-          <img
-            src="/logo/ps-logo.png"
-            alt="PintSwap Logo"
-            height="200"
-            width="200"
-          />
-        </div>
+        <button className="text-white transition duration-200 border-x-2 px-2 hover:border-indigo-600 hover:text-neutral-300">
+          <Link href="https://docs.pintswap.exchange" target="_blank">
+            <a>Learn More</a>
+          </Link>
+        </button>
       </div>
     </Section>
-    <Section>{/* TODO: add scroll down animation here */}</Section>
+    {/* <Section className="flex flex-col justify-center items-center gap-4">
+      <span className="text-xs text-gray-500">Scroll to Explore</span>
+      <div className="scroll" />
+    </Section> */}
   </Background>
 );
 

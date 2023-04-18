@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 import { AppConfig } from '../../utils/app-config';
-import { Footer } from './footer';
 import { Meta } from './meta';
 import { Navbar } from './navbar';
 
@@ -14,7 +13,7 @@ const Base = (props: IBaseProps) => (
     <Meta title={AppConfig.title} description={AppConfig.description} />
     <Navbar />
     {props.children}
-    <Footer />
+    {/* <Footer /> */}
   </div>
 );
 
