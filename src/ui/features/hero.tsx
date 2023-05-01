@@ -3,8 +3,8 @@ import { Section } from '../layouts/section';
 import Link from 'next/link';
 
 const Hero = () => (
-  <Background color="bg-[#212121]" fullscreen>
-    <Section yPadding="py-20">
+  <Background color="bg-transparent" fullscreen>
+    <Section yPadding="py-20" className="z-10 relative">
       <div className="flex flex-col items-center justify-center gap-6 text-center">
         <img
           src="/logo/ps-logo.png"
@@ -22,7 +22,7 @@ const Hero = () => (
             where there is no persistent contract that facilitates trades.
           </h2>
         </div>
-        <button className="text-white transition duration-200 border-x-2 px-2 hover:border-indigo-600 hover:text-neutral-300">
+        <button className="text-white transition duration-200 border-x-2 px-2 hover:border-pink-500 hover:text-pink-200">
           <Link href="https://docs.pintswap.exchange" target="_blank">
             <a>Learn More</a>
           </Link>

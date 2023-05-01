@@ -50,7 +50,7 @@ const Navbar = () => {
               @apply transition duration-200;
             }
             .navbar :global(li:hover) {
-              @apply text-neutral-300;
+              @apply text-pink-100;
             }
           `}
         </style>
