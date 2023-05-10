@@ -1,12 +1,11 @@
-import { Background } from '../layouts/background';
-import { Section } from '../layouts/section';
+import { Padding } from '../layouts/padding';
 
 const Footer = () => (
-  <Background color="bg-indigo-900">
-    <Section>
+  <div className="bg-indigo-900">
+    <Padding>
       <div>PintSwap LLC.</div>
-    </Section>
-  </Background>
+    </Padding>
+  </div>
 );
 
 export { Footer };

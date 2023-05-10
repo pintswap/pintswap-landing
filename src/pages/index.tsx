@@ -1,10 +1,10 @@
 import { Base } from '../ui/base';
-import { Hero } from '../ui/features/hero';
+import { Hero } from '../ui/views/hero';
 
-const Index = () => (
+const Index = () => {
   <Base>
     <Hero />
-  </Base>
-);
+  </Base>;
+};
 
 export default Index;
