@@ -6,8 +6,8 @@ type IPaddingProps = {
 };
 
 export const Padding = ({ children, type = 'full' }: IPaddingProps) => {
-  const yPadClass = `py-4 md:py-5 lg:py-6`;
-  const xPadClass = `px-2 md:px-4 lg:px-6`;
+  const yPadClass = `py-4 lg:py-5 xl:py-6`;
+  const xPadClass = `px-2 lg:px-4 xl:px-6`;
 
   const determinePadClass = () => {
     switch (type) {

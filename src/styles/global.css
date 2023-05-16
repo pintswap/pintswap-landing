@@ -10,10 +10,9 @@
   body {
     padding: 0;
     margin: 0;
-    background: rgb(2,0,36);
-    background: linear-gradient(180deg, rgba(0,0,10,1) 0%, rgba(2,2,20,1) 60%, rgba(10,10,50,1) 100%);
     color: #fff;
     font-family: 'Dela Gothic One', cursive;
+    background: rgb(0,0,0);
   }
 
   .scroll {
