@@ -12,11 +12,10 @@ const Hero = () => {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'contain',
-          paddingTop: '4rem',
         }}
       >
         <Padding type="x">
-          <div className="flex justify-center relative -top-16 md:-top-28 lg:-top-36 2xl:-top-60">
+          <div className="flex justify-center relative -top-10 md:-top-16 lg:-top-20 2xl:-top-36">
             <img
               src="/logo/ps-logo.png"
               alt="PintSwap Logo"
@@ -24,7 +23,7 @@ const Hero = () => {
             />
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-4 text-center relative top-16 lg:top-24 2xl:top-60">
+          <div className="flex flex-col items-center justify-center gap-4 text-center relative top-24 lg:top-36 2xl:top-60">
             <h2 className="md:text-lg text-gray-400">
               Peer-to-Peer token swaps
               <br className="block" /> using multi-party transaction scripts.
