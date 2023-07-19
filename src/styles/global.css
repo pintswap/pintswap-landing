@@ -15,6 +15,10 @@
     background: rgb(0,0,0);
   }
 
+  img {
+    margin: 0 auto;
+  }
+
   .scroll {
   width: 30px;
   height: 30px;

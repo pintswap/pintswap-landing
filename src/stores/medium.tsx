@@ -7,19 +7,21 @@ import {
 } from 'react';
 
 // Types
+export type IMediumPost = {
+  author: string;
+  categories: string[];
+  content: any;
+  description: any;
+  enclosure: any;
+  guid: string;
+  link: string;
+  pubDate: string;
+  thumbnail: string;
+  title: string;
+};
+
 type IStoreProps = {
-  posts: {
-    author: string;
-    categories: string[];
-    content: any;
-    description: any;
-    enclosure: any;
-    guid: string;
-    link: string;
-    pubDate: string;
-    thumbnail: string;
-    title: string;
-  }[];
+  posts: IMediumPost[];
   isLoading: boolean;
   isError: boolean;
 };

@@ -19,8 +19,10 @@ export function ParticlesContainer() {
     []
   );
 
+  const CastedParticles = Particles as any;
+
   return (
-    <Particles
+    <CastedParticles
       id="tsparticles"
       init={customInit}
       loaded={particlesLoaded}
