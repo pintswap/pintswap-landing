@@ -1,5 +1,5 @@
 export const formatDomNode = (
-  domNode: React.ReactElement<any, any | React.JSXElementConstructor<any>>
+  domNode: React.ReactElement<any, any | React.JSXElementConstructor<any>> | any
 ) => {
   switch (domNode.type) {
     case 'h3': {
