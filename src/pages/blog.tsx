@@ -6,12 +6,14 @@ import { Padding } from '../ui/layouts/padding';
 const Blog = () => {
   const { posts } = useMediumStore();
   return (
-    <Base>
-      <Padding>
-        {posts.map((post, i) => (
-          <PostArticle key={`medium-article-${i}`} post={post} isPreview />
-        ))}
-      </Padding>
+    <Base nav>
+      <div className="max-w-6xl mx-auto">
+        <Padding>
+          {posts.map((post, i) => (
+            <PostArticle key={`medium-article-${i}`} post={post} isPreview />
+          ))}
+        </Padding>
+      </div>
     </Base>
   );
 };

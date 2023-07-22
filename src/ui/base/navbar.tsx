@@ -8,7 +8,7 @@ import { Padding } from '../layouts/padding';
 const Navbar = () => {
   const { width } = useWindowSize();
   return (
-    <div className="w-full fixed">
+    <div className="w-full">
       <Padding>
         <div className="flex flex-wrap justify-between items-center max-w-7xl mx-auto">
           <div>
@@ -51,7 +51,7 @@ const Navbar = () => {
                 @apply transition duration-200;
               }
               .navbar :global(li:hover) {
-                @apply text-pink-100;
+                @apply text-pink-400;
               }
             `}
           </style>
