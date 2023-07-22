@@ -1,12 +1,13 @@
 import className from 'classnames';
 import { ReactNode } from 'react';
-import { FaPlay, FaBook, FaNewspaper } from 'react-icons/fa';
+import { FaPlay, FaBook, FaNewspaper, FaChevronRight } from 'react-icons/fa';
 
 type IButtonProps = {
   xl?: boolean;
   children: string | ReactNode;
   className?: string;
   cta?: boolean;
+  link?: boolean;
   icon?: 'FaPlay' | 'FaBook' | 'FaNewspaper';
 };
 
@@ -19,6 +20,14 @@ const Button = (props: IButtonProps) => {
     'btn-primary': true,
   });
 
+  if (props.link) {
+    return (
+      <button className="flex items-center gap-1.5 uppercase transition duration-200 hover:text-pink-600">
+        {props.children}
+        <FaChevronRight size="12px" />
+      </button>
+    );
+  }
   if (props.cta) {
     const move = `relative top-5 left-4`;
     const iconClass = `${move} !left-6 fill-slate-200`;
