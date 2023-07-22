@@ -7,7 +7,7 @@ export const AnimatedBrand = ({
 }) => (
   <div className="flex flex-col text-center justify-center w-full">
     {subtitle && (
-      <h2 className="uppercase text-lg relative top-20 md:top-36">
+      <h2 className="uppercase md:text-lg relative top-20 md:top-36">
         {subtitle}
       </h2>
     )}
