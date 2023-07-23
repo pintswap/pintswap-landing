@@ -1,6 +1,7 @@
 export const formatDomNode = (
   domNode: React.ReactElement<any, any | React.JSXElementConstructor<any>> | any
 ) => {
+  if (!domNode) return;
   switch (domNode.type) {
     case 'h3': {
       return <h3 className="text-xl">{domNode.props.children[0]}</h3>;
