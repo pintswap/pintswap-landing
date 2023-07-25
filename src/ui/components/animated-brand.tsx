@@ -13,7 +13,7 @@ export const AnimatedBrand = ({
     )}
     <div
       style={{
-        backgroundImage: 'url("/assets/pintswap-dripping.gif")',
+        backgroundImage: 'url("/assets/ps-drip.gif")',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',

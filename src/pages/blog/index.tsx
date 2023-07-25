@@ -10,9 +10,14 @@ const Blog = () => {
     <Base nav>
       <div className="max-w-6xl mx-auto">
         <Padding>
-          {posts.map((post, i) => (
-            <PostArticle key={`medium-article-${i}`} post={post} isPreview />
-          ))}
+          <h1 className="uppercase text-xl md:text-2xl text-center mb-6">
+            Blog
+          </h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {posts.map((post, i) => (
+              <PostArticle key={`medium-article-${i}`} post={post} isPreview />
+            ))}
+          </div>
         </Padding>
       </div>
     </Base>
