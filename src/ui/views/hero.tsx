@@ -1,63 +1,50 @@
 import Link from 'next/link';
-import { Padding } from '../layouts/padding';
 import { Button } from '../components/button';
+import { AnimatedBrand } from '../components/animated-brand';
+import { useWindowSize } from '../../hooks/window-size';
+import { SocialList } from '../components/social-list';
 
 const Hero = () => {
+  const { width } = useWindowSize();
   return (
     <>
-      <div
-        className="h-screen flex justify-center items-center md:px-8 lg:px-16 xl:px-24"
-        style={{
-          backgroundImage: 'url("/assets/pintswap-dripping.gif")',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'contain',
-        }}
-      >
-        <Padding type="x">
-          <div className="flex justify-center relative -top-10 md:-top-16 lg:-top-20 2xl:-top-36">
-            <img
-              src="/logo/ps-logo.png"
-              alt="PintSwap Logo"
-              className="w-20 h-20 md:w-24 md:h-24"
-            />
+      <SocialList
+        direction={'vertical'}
+        absolute={width > 769 ? 'right-center' : 'bottom-right'}
+      />
+      <div className="flex flex-col justify-center items-center w-full h-screen relative -top-8">
+        <AnimatedBrand
+          size={width > 768 ? '420px' : '240px'}
+          subtitle="INTRODUCING"
+        />
+        <div className="w-full px-12 relative -top-8">
+          <div className="flex flex-col gap-4 max-w-sm mx-auto">
+            <Link href="https://pintswap.eth.limo" target="_blank">
+              <a>
+                <Button cta icon="FaPlay">
+                  LAUNCH APP
+                </Button>
+              </a>
+            </Link>
+            <div className="grid grid-cols-2 items-center justify-center gap-4">
+              <Link href="https://docs.pintswap.exchange" target="_blank">
+                <a>
+                  <Button icon="FaBook" cta>
+                    DOCS
+                  </Button>
+                </a>
+              </Link>
+              <Link href="/blog">
+                <a>
+                  <Button icon="FaNewspaper" cta>
+                    BLOG
+                  </Button>
+                </a>
+              </Link>
+            </div>
           </div>
-
-          <div className="flex flex-col items-center justify-center gap-4 text-center relative top-24 lg:top-36 2xl:top-60">
-            <h2 className="md:text-lg text-gray-400">
-              Peer-to-Peer token swaps
-              <br className="block" /> using multi-party transaction scripts.
-            </h2>
-
-            <ul className="navbar flex flex-col gap-3 items-center font-medium">
-              <li>
-                <Link href="https://pintswap.eth.limo" target="_blank">
-                  <a>
-                    <Button>Launch App</Button>
-                  </a>
-                </Link>
-              </li>
-              <li className="transition duration-200 hover:text-neutral-300">
-                <Link href="https://docs.pintswap.exchange" target="_blank">
-                  <a>Docs</a>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </Padding>
+        </div>
       </div>
-
-      {/* <div className="absolute left-6 top-36 lg:left-20 lg:top-20 -rotate-[20deg]">
-        <AnimatedText text="No Slippage!" size="text-xl" />
-      </div>
-
-      <div className="absolute right-6 lg:right-20 bottom-20 -rotate-[20deg]">
-        <AnimatedText text="Censorship Resistant!" delay="animate-delay-1000" size="text-md" />
-      </div>
-
-      <div className="absolute right-6 lg:right-20 top-48 rotate-[10deg]">
-        <AnimatedText text="Completely Decentralized!" delay="animate-delay-500" size="text-lg" />
-      </div> */}
     </>
   );
 };
