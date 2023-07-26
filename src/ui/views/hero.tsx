@@ -3,40 +3,14 @@ import { Button } from '../components/button';
 import { AnimatedBrand } from '../components/animated-brand';
 import { useWindowSize } from '../../hooks/window-size';
 import { SocialList } from '../components/social-list';
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { hourDiff } from '../../utils/helpers';
+import { CountdownTimer } from '../components/countdown-timer';
 
 const Hero = () => {
   const { width } = useWindowSize();
-  const deadline = new Date('August 1, 2023 17:00:00');
-
-  const determineSize = () => {
-    if (width > 1024) return 160;
-    if (width > 768) return 120;
-    return 100;
-  };
   return (
     <>
       <div className="absolute flex flex-col items-center gap-2 text-center top-5 left-5 md:top-12 md:left-12 -rotate-12 lg:bottom-32 lg:top-auto lg:left-32 lg:rotate-12">
-        <CountdownCircleTimer
-          isPlaying
-          duration={hourDiff(deadline, new Date())}
-          colors={['#0ea5e9', '#ec4899']}
-          colorsTime={[70, 10]}
-          isSmoothColorTransition
-          size={determineSize()}
-          updateInterval={3600}
-        >
-          {({ remainingTime }) => (
-            <div className="flex flex-col items-center">
-              <span className="text-md md:text-lg">{remainingTime}</span>
-              <span className="text-xs md:text-sm">HOURS</span>
-            </div>
-          )}
-        </CountdownCircleTimer>
-        <span className="text-sm md:text-lg">
-          Until <span className="text-sky-500">TRIS</span> Mint
-        </span>
+        <CountdownTimer />
       </div>
 
       <SocialList
