@@ -53,7 +53,7 @@ export const SocialList = ({
         </button> */}
         <button className="transition duration-200 group relative z-10 cursor-pointer">
           <Link href={SOCIAL_LINKS.twitter} target="_blank">
-            <a>
+            <a target="_blank">
               <FaTwitter
                 size={`${size}`}
                 className="group-hover:fill-pink-400 transition duration-200"
