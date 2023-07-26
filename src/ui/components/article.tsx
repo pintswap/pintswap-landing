@@ -18,7 +18,7 @@ export const PostArticle = ({
     return (
       <Link href={`/blog/${convertToUrl(post?.title)}`}>
         <article
-          className="rounded-lg h-60 flex flex-col justify-end overflow-hidden transition duration-200 group cursor-pointer"
+          className="rounded-lg h-52 flex flex-col justify-end overflow-hidden transition duration-200 group cursor-pointer"
           style={{
             backgroundImage: `url("${post?.thumbnail}")`,
             backgroundPosition: 'center',
