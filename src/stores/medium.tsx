@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { SOCIAL_LINKS } from '../utils/constants';
 
 // Types
 export type IMediumPost = {
@@ -41,7 +42,7 @@ export function MediumStore(props: { children: ReactNode }) {
 
   async function getPosts() {
     const res = await fetch(
-      `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/pintswap`
+      `https://api.rss2json.com/v1/api.json?rss_url=${SOCIAL_LINKS.medium}`
     );
     const json = await res.json();
     if (json.status === 'ok' && json.items.length) {

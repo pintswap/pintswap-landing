@@ -5,7 +5,7 @@ import { Padding } from '../../ui/layouts/padding';
 
 const Blog = () => {
   const { posts } = useMediumStore();
-  console.log(posts);
+  console.log('posts', posts);
   return (
     <Base nav>
       <div className="max-w-6xl mx-auto">
