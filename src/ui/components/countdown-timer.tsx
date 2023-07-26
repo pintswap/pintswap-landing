@@ -12,15 +12,6 @@ export const CountdownTimer = () => {
   };
   return (
     <>
-      <svg>
-        <defs>
-          <linearGradient id="color-id" x1="1" y1="0" x2="0" y2="0">
-            <stop offset="5%" stopColor="#0ea5e9" />
-            <stop offset="95%" stopColor="#ec4899" />
-          </linearGradient>
-        </defs>
-      </svg>
-
       <CountdownCircleTimer
         isPlaying
         duration={hourDiff(deadline, new Date())}
@@ -39,6 +30,14 @@ export const CountdownTimer = () => {
       <span className="text-sm md:text-lg">
         Until <span className="text-sky-500">TRIS</span> Mint
       </span>
+      <svg className="absolute">
+        <defs>
+          <linearGradient id="color-id" x1="1" y1="0" x2="0" y2="0">
+            <stop offset="5%" stopColor="#0ea5e9" />
+            <stop offset="95%" stopColor="#ec4899" />
+          </linearGradient>
+        </defs>
+      </svg>
     </>
   );
 };
