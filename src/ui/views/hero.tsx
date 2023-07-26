@@ -6,6 +6,7 @@ import { SocialList } from '../components/social-list';
 
 const Hero = () => {
   const { width } = useWindowSize();
+
   return (
     <>
       <SocialList
@@ -13,11 +14,8 @@ const Hero = () => {
         absolute={width > 769 ? 'right-center' : 'bottom-right'}
       />
       <div className="flex flex-col justify-center items-center w-full h-screen relative -top-8">
-        <AnimatedBrand
-          size={width > 768 ? '420px' : '240px'}
-          subtitle="INTRODUCING"
-        />
-        <div className="w-full px-12 relative -top-8">
+        <AnimatedBrand subtitle="INTRODUCING" />
+        <div className="w-full px-12 relative -top-8 md:-top-10 lg:-top-28">
           <div className="flex flex-col gap-4 max-w-sm mx-auto">
             <Link href="https://pintswap.eth.limo" target="_blank">
               <a>

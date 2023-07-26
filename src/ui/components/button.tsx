@@ -22,7 +22,7 @@ const Button = (props: IButtonProps) => {
 
   if (props.link) {
     return (
-      <button className="flex items-center gap-1.5 uppercase transition duration-200 hover:text-pink-600">
+      <button className="flex items-center gap-1.5 uppercase transition duration-200 hover:text-pink-500">
         {props.children}
         <FaChevronRight size="12px" />
       </button>
@@ -51,7 +51,7 @@ const Button = (props: IButtonProps) => {
       >
         {props.children}
         <span
-          className={`h-[90px] w-[90px] bg-sky-300 group-hover:bg-sky-400 duration-200 transition rounded-full ${move}`}
+          className={`h-[90px] w-[90px] bg-sky-400 group-hover:bg-sky-500 duration-200 transition rounded-full ${move}`}
         >
           {renderIcon()}
         </span>
@@ -74,11 +74,11 @@ const Button = (props: IButtonProps) => {
             }
 
             .btn-primary {
-              @apply text-slate-900 bg-gradient-to-r from-slate-100 to-slate-300 transition duration-150;
+              @apply text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 transition duration-150;
             }
 
             .btn-primary:hover {
-              @apply bg-slate-300 cursor-pointer text-pink-600;
+              @apply bg-slate-300 cursor-pointer text-pink-500;
             }
           `}
         </style>
@@ -109,11 +109,11 @@ const Button = (props: IButtonProps) => {
           }
 
           .btn-primary {
-            @apply text-slate-900 bg-gradient-to-r from-slate-100 to-slate-300 transition duration-150;
+            @apply text-slate-800 bg-gradient-to-r from-slate-100 to-slate-300 transition duration-150;
           }
 
           .btn-primary:hover {
-            @apply bg-slate-300 cursor-pointer text-pink-600;
+            @apply bg-slate-300 cursor-pointer text-pink-500;
           }
         `}
       </style>
