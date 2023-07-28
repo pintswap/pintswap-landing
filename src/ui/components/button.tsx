@@ -1,6 +1,7 @@
-import className from 'classnames';
-import { ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 import { FaPlay, FaBook, FaNewspaper, FaChevronRight } from 'react-icons/fa';
+import { MdLocalDrink } from 'react-icons/md';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 type IButtonProps = {
   xl?: boolean;
@@ -8,18 +9,14 @@ type IButtonProps = {
   className?: string;
   cta?: boolean;
   link?: boolean;
-  icon?: 'FaPlay' | 'FaBook' | 'FaNewspaper';
+  icon?: 'play' | 'book' | 'newspaper' | 'drink';
+  wallet?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button = (props: IButtonProps) => {
-  const btnClass = className({
-    btn: true,
-    'btn-xl': props.xl,
-    'btn-cta': props.cta,
-    'btn-base': !props.xl,
-    'btn-primary': true,
-  });
-
+  const btnClass = `inline-block rounded-md text-center py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 hover:to-slate-300 cursor-pointer hover:text-pink`;
+  const ctaBtnClass = `hover:bg-slate-300 hover:cursor-pointer hover:text-pink-500 inline-block rounded-md text-center py-2 pl-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none p-3 pr-0 !text-left flex items-end h-[72px] text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400`;
   if (props.link) {
     return (
       <button className="flex items-center gap-1.5 uppercase transition duration-200 hover:text-pink-500">
@@ -28,6 +25,77 @@ const Button = (props: IButtonProps) => {
       </button>
     );
   }
+
+  if (props.wallet) {
+    const walletClass = `py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 rounded-md text-center text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 hover:shadow-none hover:to-slate-300 hover:text-pink-500`;
+    return (
+      <ConnectButton.Custom>
+        {({
+          account,
+          chain,
+          openChainModal,
+          openConnectModal,
+          openAccountModal,
+          mounted,
+        }) => {
+          const ready = mounted;
+          const connected = ready && account && chain;
+
+          return (
+            <div
+              {...(!ready && {
+                'aria-hidden': true,
+                style: {
+                  opacity: 0,
+                  pointerEvents: 'none',
+                  userSelect: 'none',
+                },
+              })}
+            >
+              {(() => {
+                if (!connected) {
+                  return (
+                    <button
+                      onClick={openConnectModal}
+                      className={walletClass}
+                      type="button"
+                    >
+                      {props.children}
+                    </button>
+                  );
+                }
+
+                if (chain.unsupported) {
+                  return (
+                    <button
+                      onClick={openChainModal}
+                      className={walletClass}
+                      type="button"
+                    >
+                      Wrong network
+                    </button>
+                  );
+                }
+
+                return (
+                  <div style={{ display: 'flex', gap: 12 }}>
+                    <button
+                      onClick={openAccountModal}
+                      className={walletClass}
+                      type="button"
+                    >
+                      {account.displayName}
+                    </button>
+                  </div>
+                );
+              })()}
+            </div>
+          );
+        }}
+      </ConnectButton.Custom>
+    );
+  }
+
   if (props.cta) {
     const move = `relative top-5 left-4`;
     const iconClass = `${move} !left-6 fill-slate-200`;
@@ -35,17 +103,19 @@ const Button = (props: IButtonProps) => {
 
     const renderIcon = () => {
       switch (props.icon) {
-        case 'FaBook':
+        case 'book':
           return <FaBook className={iconClass} size={iconSize} />;
-        case 'FaNewspaper':
+        case 'newspaper':
           return <FaNewspaper className={iconClass} size={iconSize} />;
+        case 'drink':
+          return <MdLocalDrink className={iconClass} size={iconSize} />;
         default:
           return <FaPlay className={iconClass} size={iconSize} />;
       }
     };
     return (
       <div
-        className={`transition group duration-200 flex justify-between overflow-hidden ${btnClass} ${
+        className={`transition group duration-200 flex justify-between overflow-hidden ${ctaBtnClass} ${
           props.className ? props.className : ''
         }`}
       >
@@ -55,68 +125,12 @@ const Button = (props: IButtonProps) => {
         >
           {renderIcon()}
         </span>
-        <style jsx>
-          {`
-            .btn {
-              @apply inline-block rounded-md text-center;
-            }
-
-            .btn-base {
-              @apply py-2 pl-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150;
-            }
-
-            .btn-base:hover {
-              @apply shadow-none;
-            }
-
-            .btn-cta {
-              @apply p-3 pr-0 !text-left flex items-end h-[72px];
-            }
-
-            .btn-primary {
-              @apply text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 transition duration-150;
-            }
-
-            .btn-primary:hover {
-              @apply bg-slate-300 cursor-pointer text-pink-500;
-            }
-          `}
-        </style>
       </div>
     );
   }
-
   return (
     <div className={`${btnClass} ${props.className ? props.className : ''}`}>
       {props.children}
-
-      <style jsx>
-        {`
-          .btn {
-            @apply inline-block rounded-md text-center;
-          }
-
-          .btn-base {
-            @apply py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150;
-          }
-
-          .btn-base:hover {
-            @apply shadow-none;
-          }
-
-          .btn-xl {
-            @apply text-xl px-6 py-4;
-          }
-
-          .btn-primary {
-            @apply text-slate-800 bg-gradient-to-r from-slate-100 to-slate-300 transition duration-150;
-          }
-
-          .btn-primary:hover {
-            @apply bg-slate-300 cursor-pointer text-pink-500;
-          }
-        `}
-      </style>
     </div>
   );
 };

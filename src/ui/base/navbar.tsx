@@ -1,12 +1,10 @@
 import Link from 'next/link';
-import { useWindowSize } from '../../hooks/window-size';
 
 import { Button } from '../components/button';
 import { Logo } from './logo';
 import { Padding } from '../layouts/padding';
 
 const Navbar = () => {
-  const { width } = useWindowSize();
   return (
     <div className="w-full">
       <Padding>
@@ -20,41 +18,24 @@ const Navbar = () => {
           </div>
 
           <nav>
-            <ul className="navbar flex items-center font-medium md:text-lg">
-              <li>
+            <ul className="flex gap-3 md:gap-4 lg:gap-6 items-center font-medium md:text-lg">
+              <li className="transition duration-150 hover:text-pink-500">
                 <Link href="https://docs.pintswap.exchange" target="_blank">
-                  <a>Docs</a>
+                  <a>DOCS</a>
                 </Link>
               </li>
               <li>
-                <Link href="https://pintswap.eth.limo" target="_blank">
+                <Button wallet>Connect</Button>
+                {/* <Link href="https://pintswap.eth.limo" target="_blank">
                   <a>
                     <Button className="md:text-lg">
                       Launch{width > 768 ? ' App' : ''}
                     </Button>
                   </a>
-                </Link>
+                </Link> */}
               </li>
             </ul>
           </nav>
-
-          <style jsx>
-            {`
-              .navbar :global(li:not(:first-child)) {
-                @apply mt-0;
-              }
-
-              .navbar :global(li:not(:last-child)) {
-                @apply mr-3 lg:mr-6;
-              }
-              .navbar :global(li) {
-                @apply transition duration-200;
-              }
-              .navbar :global(li:hover) {
-                @apply text-pink-400;
-              }
-            `}
-          </style>
         </div>
       </Padding>
     </div>
