@@ -14,6 +14,13 @@
     "build-types": "tsc --noEmit --pretty",
     "prepare": "husky install"
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "net": false,
+    "tls": false
+  },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^1.0.7",
     "classnames": "^2.3.1",
