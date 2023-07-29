@@ -15,8 +15,8 @@ type IButtonProps = {
 };
 
 const Button = (props: IButtonProps) => {
-  const btnClass = `inline-block rounded-md text-center py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 hover:to-slate-300 cursor-pointer hover:text-pink`;
-  const ctaBtnClass = `hover:bg-slate-300 hover:cursor-pointer hover:text-pink-500 inline-block rounded-md text-center py-2 pl-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none p-3 pr-0 !text-left flex items-end h-[72px] text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400`;
+  const btnClass = `inline-block rounded-md text-center py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 hover:to-slate-300 cursor-pointer hover:text-pink-500`;
+  const ctaBtnClass = `hover:text-pink-500 inline-block rounded-md text-center py-2 pl-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none p-3 pr-0 !text-left flex items-end h-[72px] text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400`;
   if (props.link) {
     return (
       <button className="flex items-center gap-1.5 uppercase transition duration-200 hover:text-pink-500">
@@ -27,7 +27,7 @@ const Button = (props: IButtonProps) => {
   }
 
   if (props.wallet) {
-    const walletClass = `py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 rounded-md text-center text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 hover:shadow-none hover:to-slate-300 hover:text-pink-500`;
+    const walletClass = `py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 rounded-md text-center text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 hover:shadow-none hover:text-pink-500`;
     return (
       <ConnectButton.Custom>
         {({
@@ -114,7 +114,7 @@ const Button = (props: IButtonProps) => {
       }
     };
     return (
-      <div
+      <button
         className={`transition group duration-200 flex justify-between overflow-hidden ${ctaBtnClass} ${
           props.className ? props.className : ''
         }`}
@@ -125,13 +125,16 @@ const Button = (props: IButtonProps) => {
         >
           {renderIcon()}
         </span>
-      </div>
+      </button>
     );
   }
   return (
-    <div className={`${btnClass} ${props.className ? props.className : ''}`}>
+    <button
+      onClick={props.onClick}
+      className={`${btnClass} ${props.className ? props.className : ''}`}
+    >
       {props.children}
-    </div>
+    </button>
   );
 };
 

@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
+    "dev:sepolia": "NEXT_PUBLIC_NETWORK=sepolia next dev",
     "build": "next build",
     "start": "next start",
+    "start:sepolia": "NEXT_PUBLIC_NETWORK=sepolia next start",
     "build-stats": "cross-env ANALYZE=true npm run build",
     "export": "next export",
     "build-prod": "run-s clean build export",
@@ -16,6 +18,7 @@
   "dependencies": {
     "@rainbow-me/rainbowkit": "^1.0.7",
     "classnames": "^2.3.1",
+    "merkletreejs": "^0.3.10",
     "next": "^12.0.9",
     "next-seo": "^4.29.0",
     "react": "^17.0.2",

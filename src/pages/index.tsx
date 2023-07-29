@@ -1,13 +1,12 @@
 import { Base } from '../ui/base';
-import { Hero } from '../ui/views/hero';
+import { HeroView } from '../ui/views/hero';
 
 const Index = () => {
   return (
     <Base>
       <div className="z-50 relative">
-        <Hero />
+        <HeroView />
       </div>
-      {/* <ParticlesContainer /> */}
     </Base>
   );
 };

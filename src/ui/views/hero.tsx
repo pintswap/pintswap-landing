@@ -8,7 +8,7 @@ import {
 } from '../components';
 import { IS_MINT_ENABLED } from '../../utils';
 
-const Hero = () => {
+export const HeroView = () => {
   const { width } = useWindowSize();
   return (
     <>
@@ -57,5 +57,3 @@ const Hero = () => {
     </>
   );
 };
-
-export { Hero };

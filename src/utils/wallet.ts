@@ -2,10 +2,16 @@ import '@rainbow-me/rainbowkit/styles.css';
 
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { mainnet } from 'wagmi/chains';
+import { mainnet, sepolia } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+import { NETWORK } from './constants';
 
-const { chains, publicClient } = configureChains([mainnet], [publicProvider()]);
+const ACTIVE_CHAIN = NETWORK === 'sepolia' ? sepolia : mainnet;
+
+const { chains, publicClient } = configureChains(
+  [ACTIVE_CHAIN],
+  [publicProvider()]
+);
 
 const { connectors } = getDefaultWallets({
   appName: 'PintSwap',
@@ -19,4 +25,11 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 
-export { WagmiConfig, wagmiConfig, RainbowKitProvider, chains };
+export {
+  WagmiConfig,
+  wagmiConfig,
+  RainbowKitProvider,
+  chains,
+  publicClient,
+  ACTIVE_CHAIN,
+};
