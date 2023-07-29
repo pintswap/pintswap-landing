@@ -6,7 +6,6 @@
     "dev:sepolia": "NEXT_PUBLIC_NETWORK=sepolia next dev",
     "build": "next build",
     "start": "next start",
-    "start:sepolia": "NEXT_PUBLIC_NETWORK=sepolia next start",
     "build-stats": "cross-env ANALYZE=true npm run build",
     "export": "next export",
     "build-prod": "run-s clean build export",
