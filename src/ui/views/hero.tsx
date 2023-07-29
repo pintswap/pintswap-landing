@@ -1,11 +1,14 @@
 import Link from 'next/link';
-import { Button } from '../components/button';
-import { AnimatedBrand } from '../components/animated-brand';
-import { useWindowSize } from '../../hooks/window-size';
-import { SocialList } from '../components/social-list';
-import { CountdownTimer } from '../components/countdown-timer';
+import { useWindowSize } from '../../hooks';
+import {
+  CountdownTimer,
+  SocialList,
+  AnimatedBrand,
+  Button,
+} from '../components';
+import { IS_MINT_ENABLED } from '../../utils';
 
-const Hero = () => {
+export const HeroView = () => {
   const { width } = useWindowSize();
   return (
     <>
@@ -22,24 +25,27 @@ const Hero = () => {
         <AnimatedBrand subtitle="INTRODUCING" />
         <div className="w-full px-12 relative -top-8 md:-top-10 lg:-top-28">
           <div className="flex flex-col gap-4 max-w-sm mx-auto">
-            <Link href="https://pintswap.eth.limo" target="_blank">
+            <Link
+              href={IS_MINT_ENABLED ? '/mint' : 'https://pintswap.eth.limo'}
+              target="_blank"
+            >
               <a>
-                <Button cta icon="FaPlay">
-                  LAUNCH APP
+                <Button cta icon={IS_MINT_ENABLED ? 'drink' : 'play'}>
+                  {IS_MINT_ENABLED ? 'MINT TRIS' : 'LAUNCH APP'}
                 </Button>
               </a>
             </Link>
             <div className="grid grid-cols-2 items-center justify-center gap-4">
               <Link href="https://docs.pintswap.exchange" target="_blank">
                 <a>
-                  <Button icon="FaBook" cta>
+                  <Button icon="book" cta>
                     DOCS
                   </Button>
                 </a>
               </Link>
               <Link href="/blog">
                 <a>
-                  <Button icon="FaNewspaper" cta>
+                  <Button icon="newspaper" cta>
                     BLOG
                   </Button>
                 </a>
@@ -51,5 +57,3 @@ const Hero = () => {
     </>
   );
 };
-
-export { Hero };

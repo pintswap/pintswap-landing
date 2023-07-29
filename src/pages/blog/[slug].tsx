@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useMediumStore } from '../../stores/medium';
 import { Base } from '../../ui/base';
-import { PostArticle } from '../../ui/components/article';
-import { Padding } from '../../ui/layouts/padding';
+import { PostArticle } from '../../ui/components';
+import { Padding } from '../../ui/layouts';
 import { convertToUrl } from '../../utils/helpers';
 import { useEffect } from 'react';
 

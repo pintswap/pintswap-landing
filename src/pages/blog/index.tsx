@@ -1,7 +1,7 @@
 import { useMediumStore } from '../../stores/medium';
 import { Base } from '../../ui/base';
-import { PostArticle } from '../../ui/components/article';
-import { Padding } from '../../ui/layouts/padding';
+import { PostArticle } from '../../ui/components';
+import { Padding } from '../../ui/layouts';
 
 const Blog = () => {
   const { posts } = useMediumStore();
