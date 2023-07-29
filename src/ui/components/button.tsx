@@ -115,7 +115,7 @@ const Button = (props: IButtonProps) => {
     };
     return (
       <button
-        className={`transition group duration-200 flex justify-between overflow-hidden ${ctaBtnClass} ${
+        className={`w-full transition group duration-200 flex justify-between overflow-hidden ${ctaBtnClass} ${
           props.className ? props.className : ''
         }`}
       >
