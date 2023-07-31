@@ -19,7 +19,7 @@ export const Skeleton = ({
     return (
       <div
         className={`
-        bg-neutral-800 animate-pulse
+        bg-neutral-800 animate-pulse mx-auto
         ${shape ? 'rounded-full' : 'rounded'} 
         ${height || 'h-6 md:h-7'} 
         ${width || 'w-24 md:w-28'}

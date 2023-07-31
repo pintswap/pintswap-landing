@@ -34,6 +34,13 @@ const abi = [
     stateMutability: 'view',
     type: 'function',
   },
+  {
+    inputs: [{ internalType: 'address', name: 'owner', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ internalType: 'uint256', name: 'balance', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
 ] as const;
 
 export const useNftMint = () => {
@@ -77,11 +84,18 @@ export const useNftMint = () => {
       return tx;
     } catch (err) {
       setIsLoading(false);
-      const errorMsg = String(err).includes(`reverted`) ? String(err) : '';
+      const errorMsg =
+        String(err).includes(`reverted`) ||
+        String(err).includes('exceeds the balance')
+          ? String(err)
+          : '';
       if (errorMsg) {
         if (errorMsg.includes('Minting is not enabled'))
           setError('Minting not enabled');
-        else if (errorMsg.includes('Not enough ETH sent'))
+        else if (
+          errorMsg.includes('Not enough ETH sent') ||
+          errorMsg.includes('exceeds the balance of the account')
+        )
           setError('Not enough ETH');
         else if (errorMsg.includes('Exceeds token supply'))
           setError('TRIS is sold out');
@@ -109,11 +123,17 @@ export const useNftMint = () => {
       tris.read.publicMint(),
       tris.read.mintingEnabled(),
     ]);
+    let userMinted = false;
+    if (address) {
+      const balance = await tris.read.balanceOf([address]);
+      if (balance.toString() === '1') userMinted = true;
+    }
     return {
       totalSupply: data[0].toString(),
       publicMintEnabled: data[1],
       privateMintEnabled: data[2],
       address: CONTRACT_ADDRESSES[NETWORK].tris,
+      userMinted,
     };
   };
 

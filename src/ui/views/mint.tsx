@@ -22,6 +22,12 @@ export const MintView = () => {
     refetchInterval: 5000,
   });
 
+  const renderButtonText = () => {
+    if (error) return error;
+    if (trisData?.userMinted) return 'Already claimed';
+    return 'GET TRIS';
+  };
+
   return (
     <Padding>
       <div className="flex flex-col items-center justify-center gap-6 lg:gap-8 mt-6 md:mt-12 lg:mt-20">
@@ -41,12 +47,12 @@ export const MintView = () => {
             <DataDisplay
               link={`${EXPLORER_URLS[NETWORK]}/address/${CONTRACT_ADDRESSES[NETWORK].tris}`}
               text="Address"
-              value={truncate(trisData?.address)}
+              value={truncate(trisData?.address) || 'N/A'}
               loading={trisDataLoading}
             />
             <DataDisplay
               text="Minted"
-              value={`${trisData?.totalSupply} / 1000`}
+              value={`${trisData?.totalSupply || 0} / 1000`}
               loading={trisDataLoading}
             />
             <DataDisplay
@@ -77,8 +83,9 @@ export const MintView = () => {
                 onClick={mint}
                 loading={isLoading}
                 loadingText="Pouring up"
+                disabled={trisData?.userMinted}
               >
-                {error || 'GET TRIS'}
+                {renderButtonText()}
               </Button>
             ) : (
               <Button wallet>Connect Wallet</Button>

@@ -15,10 +15,11 @@ type IButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   loading?: boolean;
   loadingText?: string;
+  disabled?: boolean;
 };
 
 const Button = (props: IButtonProps) => {
-  const btnClass = `inline-block rounded-md text-center py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 hover:to-slate-300 cursor-pointer hover:text-pink-500`;
+  const btnClass = `inline-block rounded-md text-center py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 cursor-pointer hover:text-pink-500`;
   const ctaBtnClass = `hover:text-pink-500 inline-block rounded-md text-center py-2 pl-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none p-3 pr-0 !text-left flex items-end h-[72px] text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400`;
   if (props.link) {
     return (
@@ -134,7 +135,12 @@ const Button = (props: IButtonProps) => {
   return (
     <button
       onClick={props.onClick}
-      className={`${btnClass} ${props.className ? props.className : ''}`}
+      className={`${btnClass} ${props.className ? props.className : ''} ${
+        props.disabled
+          ? 'cursor-not-allowed !shadow-none !text-slate-800 hover:!to-slate-'
+          : ''
+      }`}
+      disabled={props.disabled}
     >
       {props.loading ? (
         <span className="flex justify-center items-center gap-2">
