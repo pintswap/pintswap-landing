@@ -11,11 +11,12 @@ export const CountdownTimer = () => {
     if (width > breakpoints.sm) return 100;
     return 80;
   };
+  const timeLeft = hourDiff(deadline, new Date());
   return (
     <div className="flex flex-col justify-center items-center gap-2">
       <CountdownCircleTimer
         isPlaying
-        duration={hourDiff(deadline, new Date())}
+        duration={timeLeft}
         colors={'url(#color-id)'}
         isSmoothColorTransition
         size={determineSize()}
