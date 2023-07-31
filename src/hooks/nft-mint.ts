@@ -43,12 +43,6 @@ export const useNftMint = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [contract, setContract] = useState({
-    address: '',
-    publicMintEnabled: false,
-    mintStarted: false,
-    totalSupply: '0',
-  });
 
   // TRIS Contract
   const tris = getContract({
@@ -86,15 +80,15 @@ export const useNftMint = () => {
       const errorMsg = String(err).includes(`reverted`) ? String(err) : '';
       if (errorMsg) {
         if (errorMsg.includes('Minting is not enabled'))
-          setError('Minting is not enabled');
+          setError('Minting not enabled');
         else if (errorMsg.includes('Not enough ETH sent'))
           setError('Not enough ETH');
         else if (errorMsg.includes('Exceeds token supply'))
           setError('TRIS is sold out');
         else if (errorMsg.includes('User already claimed'))
-          setError('You have already claimed your TRIS NFT');
+          setError('Already claimed');
         else if (errorMsg.includes('Invalid merkle proof'))
-          setError('You are not on the whitelist');
+          setError('Not on whitelist');
       }
       console.error(err);
     }
@@ -109,30 +103,25 @@ export const useNftMint = () => {
   }, [error]);
 
   // Get contract data
-  useEffect(() => {
-    if (tris && !contract.address) {
-      (async () => {
-        await Promise.all([
-          tris.read.totalSupply(),
-          tris.read.publicMint(),
-          tris.read.mintingEnabled(),
-        ]).then((data) => {
-          setContract({
-            address: tris.address,
-            publicMintEnabled: data[1],
-            mintStarted: data[2],
-            totalSupply: data[0].toString(),
-          });
-        });
-      })().catch((err) => console.error(err));
-    }
-  }, [tris]);
+  const getTrisData = async () => {
+    const data = await Promise.all([
+      tris.read.totalSupply(),
+      tris.read.publicMint(),
+      tris.read.mintingEnabled(),
+    ]);
+    return {
+      totalSupply: data[0].toString(),
+      publicMintEnabled: data[1],
+      privateMintEnabled: data[2],
+      address: CONTRACT_ADDRESSES[NETWORK].tris,
+    };
+  };
 
   return {
     mint,
     isLoading,
     txHash,
-    contract,
+    getTrisData,
     error,
   };
 };

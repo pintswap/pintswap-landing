@@ -2,38 +2,88 @@ import Link from 'next/link';
 import { useNftMint } from '../../hooks/nft-mint';
 import { Button, DataDisplay } from '../components';
 import { Padding } from '../layouts';
-import { EXPLORER_URLS, NETWORK, truncate } from '../../utils';
+import {
+  CONTRACT_ADDRESSES,
+  EXPLORER_URLS,
+  NETWORK,
+  truncate,
+} from '../../utils';
 import { useAccount } from 'wagmi';
+import { useQuery } from '@tanstack/react-query';
+import { useWindowSize } from '../../hooks';
 
 export const MintView = () => {
-  const { mint, isLoading, txHash, contract, error } = useNftMint();
+  const { width, height } = useWindowSize();
+  const { mint, isLoading, txHash, getTrisData, error } = useNftMint();
   const { address } = useAccount();
+  const { isLoading: trisDataLoading, data: trisData } = useQuery({
+    queryKey: [`tris-data`],
+    queryFn: getTrisData,
+    refetchInterval: 5000,
+  });
+
   return (
     <Padding>
-      <div className="flex flex-col items-center justify-center gap-12 mt-12 md:mt-16 lg:mt-24">
-        <div className="grid grid-cols-2 md:grid-cols-4 text-center justify-center items-center gap-2 gap-y-4 w-full max-w-2xl">
-          <DataDisplay text="Address" value={truncate(contract.address)} />
-          <DataDisplay text="Minted" value={`${contract.totalSupply} / 1000`} />
-          <DataDisplay
-            text="Private Mint"
-            value={contract.mintStarted ? 'ENABLED' : 'DISABLED'}
-            color={contract.mintStarted ? 'text-green-400' : 'text-red-400'}
-          />
-          <DataDisplay
-            text="Public Mint"
-            value={contract.publicMintEnabled ? 'ENABLED' : 'DISABLED'}
-            color={
-              contract.publicMintEnabled ? 'text-green-400' : 'text-red-400'
-            }
-          />
+      <div className="flex flex-col items-center justify-center gap-6 lg:gap-8 mt-6 md:mt-12 lg:mt-20">
+        <div className="flex flex-col items-center justify-center gap-3 md:gap-6 lg:gap-12 w-full">
+          {height > 800 && (
+            <div className="flex justify-center items-center w-72 h-72 bg-white rainbow-animation rounded">
+              <img
+                src="https://i.ibb.co/BVqTyS7/tris.png"
+                alt="tris"
+                height="360"
+                width="180"
+              />
+            </div>
+          )}
+
+          <div className="grid grid-cols-2 md:grid-cols-4 text-center justify-center items-center gap-2 gap-y-4 w-full max-w-2xl mt-2">
+            <DataDisplay
+              link={`${EXPLORER_URLS[NETWORK]}/address/${CONTRACT_ADDRESSES[NETWORK].tris}`}
+              text="Address"
+              value={truncate(trisData?.address)}
+              loading={trisDataLoading}
+            />
+            <DataDisplay
+              text="Minted"
+              value={`${trisData?.totalSupply} / 1000`}
+              loading={trisDataLoading}
+            />
+            <DataDisplay
+              text="Private Mint"
+              value={trisData?.privateMintEnabled ? 'ENABLED' : 'DISABLED'}
+              color={
+                trisData?.privateMintEnabled ? 'text-green-400' : 'text-red-400'
+              }
+              loading={trisDataLoading}
+            />
+            <DataDisplay
+              text="Public Mint"
+              value={trisData?.publicMintEnabled ? 'ENABLED' : 'DISABLED'}
+              color={
+                trisData?.publicMintEnabled ? 'text-green-400' : 'text-red-400'
+              }
+              loading={trisDataLoading}
+            />
+          </div>
         </div>
 
-        {address ? (
-          <Button onClick={mint} loading={isLoading} loadingText="Pouring up">
-            {error || 'GET TRIS'}
-          </Button>
+        {Number(trisData?.totalSupply) === 1000 ? (
+          <span className="text-xl font-bold">SOLD OUT</span>
         ) : (
-          <Button wallet>Connect Wallet</Button>
+          <>
+            {address ? (
+              <Button
+                onClick={mint}
+                loading={isLoading}
+                loadingText="Pouring up"
+              >
+                {error || 'GET TRIS'}
+              </Button>
+            ) : (
+              <Button wallet>Connect Wallet</Button>
+            )}
+          </>
         )}
 
         {txHash && (
@@ -47,7 +97,7 @@ export const MintView = () => {
 
       <div className="absolute bottom-0 right-0 sm:right-2 md:right-4 lg:right-6">
         <img
-          src="/assets/ps-syrup.png"
+          src={'https://i.ibb.co/1G7ZMg6/ps-syrup.png'}
           alt="TRIS Pour"
           width="200"
           height="250"

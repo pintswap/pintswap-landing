@@ -6,3 +6,4 @@ export * from './countdown-timer';
 export * from './social-list';
 export * from './spinner-loader';
 export * from './data-display';
+export * from './skeleton';

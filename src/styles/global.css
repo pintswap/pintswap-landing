@@ -23,6 +23,27 @@
     border-radius: 8px;
   }
 
+  /* Rainbow Animation */
+  .rainbow-animation {
+  -webkit-animation: rainbow 4s steps(36) infinite;
+}
+
+@-webkit-keyframes rainbow {
+   from { -webkit-filter:hue-rotate(10deg); }
+     to { -webkit-filter:hue-rotate(360deg); }
+}
+
+@keyframes rainbow {
+ from {
+    -webkit-filter:hue-rotate(10deg);
+            filter:hue-rotate(10deg);
+    }
+  to {
+    -webkit-filter:hue-rotate(360deg);
+            filter:hue-rotate(360deg);
+    }
+}
+
   /* Scroll Animation */
   .scroll {
   width: 30px;
