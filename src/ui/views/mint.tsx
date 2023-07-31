@@ -8,7 +8,7 @@ import {
   NETWORK,
   truncate,
 } from '../../utils';
-import { useAccount } from 'wagmi';
+import { useAccount, useNetwork } from 'wagmi';
 import { useQuery } from '@tanstack/react-query';
 import { useWindowSize } from '../../hooks';
 
@@ -16,6 +16,7 @@ export const MintView = () => {
   const { height } = useWindowSize();
   const { mint, isLoading, txHash, getTrisData, error } = useNftMint();
   const { address } = useAccount();
+  const { chain } = useNetwork();
   const { isLoading: trisDataLoading, data: trisData } = useQuery({
     queryKey: [`tris-data`],
     queryFn: getTrisData,
@@ -78,7 +79,7 @@ export const MintView = () => {
           <span className="text-xl font-bold">SOLD OUT</span>
         ) : (
           <>
-            {address ? (
+            {address && !chain?.unsupported ? (
               <Button
                 onClick={mint}
                 loading={isLoading}

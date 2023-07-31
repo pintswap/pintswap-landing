@@ -2,7 +2,7 @@
   "name": "next-js-boilerplate",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "NEXT_PUBLIC_NETWORK=mainnet next dev",
     "dev:sepolia": "NEXT_PUBLIC_NETWORK=sepolia next dev",
     "build": "next build",
     "start": "next start",
