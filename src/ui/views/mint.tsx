@@ -3,7 +3,6 @@ import { useNftMint } from '../../hooks/nft-mint';
 import { Button, DataDisplay } from '../components';
 import { Padding } from '../layouts';
 import { EXPLORER_URLS, NETWORK, truncate } from '../../utils';
-import Image from 'next/image';
 import { useAccount } from 'wagmi';
 
 export const MintView = () => {
@@ -47,7 +46,7 @@ export const MintView = () => {
       </div>
 
       <div className="absolute bottom-0 right-0 sm:right-2 md:right-4 lg:right-6">
-        <Image
+        <img
           src="/assets/ps-syrup.png"
           alt="TRIS Pour"
           width="200"

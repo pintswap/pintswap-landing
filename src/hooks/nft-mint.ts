@@ -79,8 +79,10 @@ export const useNftMint = () => {
       });
       const tx = await signer.writeContract(request);
       setTxHash(tx);
+      setIsLoading(false);
       return tx;
     } catch (err) {
+      setIsLoading(false);
       const errorMsg = String(err).includes(`reverted`) ? String(err) : '';
       if (errorMsg) {
         if (errorMsg.includes('Minting is not enabled'))
@@ -96,7 +98,6 @@ export const useNftMint = () => {
       }
       console.error(err);
     }
-    setIsLoading(false);
   };
 
   // Reset error
