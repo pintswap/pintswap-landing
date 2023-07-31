@@ -1,10 +1,11 @@
 import Link from 'next/link';
-
 import { Button } from '../components/button';
 import { Logo } from './logo';
 import { Padding } from '../layouts/padding';
+// import { useWindowSize } from '../../hooks';
 
 const Navbar = () => {
+  // const { width } = useWindowSize();
   return (
     <div className="w-full">
       <Padding>

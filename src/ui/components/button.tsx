@@ -2,6 +2,7 @@ import { MouseEventHandler, ReactNode } from 'react';
 import { FaPlay, FaBook, FaNewspaper, FaChevronRight } from 'react-icons/fa';
 import { MdLocalDrink } from 'react-icons/md';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { SpinnerLoader } from './spinner-loader';
 
 type IButtonProps = {
   xl?: boolean;
@@ -12,6 +13,8 @@ type IButtonProps = {
   icon?: 'play' | 'book' | 'newspaper' | 'drink';
   wallet?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  loading?: boolean;
+  loadingText?: string;
 };
 
 const Button = (props: IButtonProps) => {
@@ -133,7 +136,14 @@ const Button = (props: IButtonProps) => {
       onClick={props.onClick}
       className={`${btnClass} ${props.className ? props.className : ''}`}
     >
-      {props.children}
+      {props.loading ? (
+        <span className="flex justify-center items-center gap-2">
+          <span>{props.loadingText ? props.loadingText : props.children}</span>
+          <SpinnerLoader height="min-h-0" color="text-slate-800" />
+        </span>
+      ) : (
+        <>{props.children}</>
+      )}
     </button>
   );
 };
