@@ -7,10 +7,10 @@ export const AnimatedBrand = ({
   size?: string;
   subtitle?: string;
 }) => {
-  const { width } = useWindowSize();
+  const { width, breakpoints } = useWindowSize();
   const determineAnimationSize = () => {
-    if (width > 1024) return '540px';
-    if (width > 768) return '420px';
+    if (width > breakpoints.lg) return '540px';
+    if (width > breakpoints.md) return '420px';
     return '240px';
   };
   return (

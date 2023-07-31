@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useWindowSize } from '../../hooks';
 
 export const MintView = () => {
-  const { width, height } = useWindowSize();
+  const { height } = useWindowSize();
   const { mint, isLoading, txHash, getTrisData, error } = useNftMint();
   const { address } = useAccount();
   const { isLoading: trisDataLoading, data: trisData } = useQuery({
@@ -26,7 +26,7 @@ export const MintView = () => {
     <Padding>
       <div className="flex flex-col items-center justify-center gap-6 lg:gap-8 mt-6 md:mt-12 lg:mt-20">
         <div className="flex flex-col items-center justify-center gap-3 md:gap-6 lg:gap-12 w-full">
-          {height > 800 && (
+          {height > 750 && (
             <div className="flex justify-center items-center w-72 h-72 bg-white rainbow-animation rounded">
               <img
                 src="https://i.ibb.co/BVqTyS7/tris.png"

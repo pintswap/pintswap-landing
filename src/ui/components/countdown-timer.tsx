@@ -4,14 +4,15 @@ import { hourDiff } from '../../utils/helpers';
 
 export const CountdownTimer = () => {
   const deadline = new Date('August 1, 2023 17:00:00');
-  const { width } = useWindowSize();
+  const { width, breakpoints } = useWindowSize();
   const determineSize = () => {
-    if (width > 1024) return 160;
-    if (width > 768) return 120;
-    return 100;
+    if (width > breakpoints.lg) return 160;
+    if (width > breakpoints.md) return 120;
+    if (width > breakpoints.sm) return 100;
+    return 80;
   };
   return (
-    <>
+    <div className="flex flex-col justify-center items-center gap-2">
       <CountdownCircleTimer
         isPlaying
         duration={hourDiff(deadline, new Date())}
@@ -19,15 +20,16 @@ export const CountdownTimer = () => {
         isSmoothColorTransition
         size={determineSize()}
         updateInterval={3600}
+        strokeWidth={width > breakpoints.sm ? 12 : 6}
       >
         {({ remainingTime }) => (
           <div className="flex flex-col items-center">
             <span className="text-md md:text-lg">{remainingTime}</span>
-            <span className="text-xs md:text-sm">HOURS</span>
+            <span className="text-[10px] sm:text-xs md:text-sm">HOURS</span>
           </div>
         )}
       </CountdownCircleTimer>
-      <span className="text-sm md:text-lg">
+      <span className="text-xs sm:text-sm md:text-lg">
         Until <span className="text-sky-500">TRIS</span> Mint
       </span>
       <svg className="absolute">
@@ -38,6 +40,6 @@ export const CountdownTimer = () => {
           </linearGradient>
         </defs>
       </svg>
-    </>
+    </div>
   );
 };

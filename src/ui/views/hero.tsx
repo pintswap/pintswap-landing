@@ -9,19 +9,27 @@ import {
 import { IS_MINT_ENABLED } from '../../utils';
 
 export const HeroView = () => {
-  const { width } = useWindowSize();
+  const { width, height, breakpoints } = useWindowSize();
   return (
     <>
-      <div className="absolute flex flex-col items-center gap-2 text-center top-5 left-5 md:top-12 md:left-12 -rotate-12 lg:bottom-32 lg:top-auto lg:left-32 lg:rotate-12">
+      <div
+        className={`absolute ${
+          height > 660 ? 'top-5 -rotate-12' : 'bottom-5 rotate-12'
+        } left-5 md:top-12 md:left-12 lg:bottom-32 lg:top-auto lg:left-32 lg:rotate-12`}
+      >
         <CountdownTimer />
       </div>
 
       <SocialList
         direction={'vertical'}
-        absolute={width > 769 ? 'right-center' : 'bottom-right'}
+        absolute={width > breakpoints.md ? 'right-center' : 'bottom-right'}
       />
 
-      <div className="flex flex-col justify-center items-center w-full h-screen relative -top-8">
+      <div
+        className={`flex flex-col justify-center items-center w-full h-screen relative ${
+          height > 660 ? '-top-8' : '-top-20'
+        }`}
+      >
         <AnimatedBrand subtitle="INTRODUCING" />
         <div className="w-full px-12 relative -top-8 md:-top-10 lg:-top-28">
           <div className="flex flex-col gap-4 max-w-sm mx-auto">

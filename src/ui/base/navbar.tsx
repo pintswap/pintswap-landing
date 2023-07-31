@@ -2,10 +2,15 @@ import Link from 'next/link';
 import { Button } from '../components/button';
 import { Logo } from './logo';
 import { Padding } from '../layouts/padding';
-// import { useWindowSize } from '../../hooks';
+import { useWindowSize } from '../../hooks';
+
+const NAV_ITEMS = [
+  { text: 'DOCS', link: 'https://docs.pintswap.exchange', target: '_blank' },
+  { text: 'BLOG', link: '/blog', target: '_self' },
+];
 
 const Navbar = () => {
-  // const { width } = useWindowSize();
+  const { width, breakpoints } = useWindowSize();
   return (
     <div className="w-full">
       <Padding>
@@ -20,17 +25,23 @@ const Navbar = () => {
 
           <nav>
             <ul className="flex gap-3 md:gap-4 lg:gap-6 items-center font-medium md:text-lg">
-              <li className="transition duration-150 hover:text-pink-500">
-                <Link href="https://docs.pintswap.exchange" target="_blank">
-                  <a>DOCS</a>
-                </Link>
-              </li>
+              {width > breakpoints.sm &&
+                NAV_ITEMS.map((el, i) => (
+                  <li
+                    key={`nav-item-${i}`}
+                    className="transition duration-150 hover:text-pink-500 uppercase"
+                  >
+                    <Link href={el.link} target={el.target}>
+                      <a>{el.text}</a>
+                    </Link>
+                  </li>
+                ))}
               <li>
                 <Button wallet>Connect</Button>
                 {/* <Link href="https://pintswap.eth.limo" target="_blank">
                   <a>
                     <Button className="md:text-lg">
-                      Launch{width > 768 ? ' App' : ''}
+                      Launch{width > breakpoints.sm ? ' App' : ''}
                     </Button>
                   </a>
                 </Link> */}
