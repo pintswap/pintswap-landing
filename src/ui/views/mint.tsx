@@ -9,10 +9,9 @@ import { useAccount } from 'wagmi';
 export const MintView = () => {
   const { mint, isLoading, txHash, contract, error } = useNftMint();
   const { address } = useAccount();
-  console.log(contract);
   return (
     <Padding>
-      <div className="flex flex-col items-center justify-center gap-12 min-h-[50vh]">
+      <div className="flex flex-col items-center justify-center gap-12 mt-12 md:mt-16 lg:mt-24">
         <div className="grid grid-cols-2 md:grid-cols-4 text-center justify-center items-center gap-2 gap-y-4 w-full max-w-2xl">
           <DataDisplay text="Address" value={truncate(contract.address)} />
           <DataDisplay text="Minted" value={`${contract.totalSupply} / 1000`} />
@@ -32,7 +31,7 @@ export const MintView = () => {
 
         {address ? (
           <Button onClick={mint} loading={isLoading} loadingText="Pouring up">
-            {error || 'Get TRIS'}
+            {error || 'GET TRIS'}
           </Button>
         ) : (
           <Button wallet>Connect Wallet</Button>
