@@ -9,7 +9,7 @@ export const NETWORK = process.env.NEXT_PUBLIC_NETWORK || 'mainnet';
 
 export const CONTRACT_ADDRESSES: any = {
   sepolia: {
-    tris: '0x6ab5E7fB352a2ccF58613703dA10AF7516A8dCae',
+    tris: '0xD56c53cf839066524501483fDD4343B75dCEdf98', // '0x6ab5E7fB352a2ccF58613703dA10AF7516A8dCae',
   },
   mainnet: {
     tris: '',

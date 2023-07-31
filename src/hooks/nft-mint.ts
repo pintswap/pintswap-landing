@@ -59,7 +59,8 @@ export const useNftMint = () => {
   });
 
   // Merkle Root
-  const leaves = WHITELISTED.map((account) => padBuffer(account));
+  const cleanedUpWhitelist = WHITELISTED.map((el) => el.replace(/\s/g, ''));
+  const leaves = cleanedUpWhitelist.map((account) => padBuffer(account));
   const merkleTree = new MerkleTree(leaves, keccak256, { sort: true });
 
   // Mint NFT
