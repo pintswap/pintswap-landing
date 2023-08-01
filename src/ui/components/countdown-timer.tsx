@@ -1,9 +1,9 @@
 import { useWindowSize } from '../../hooks/window-size';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { minutesDiff } from '../../utils/helpers';
+import { secondsDiff } from '../../utils/helpers';
 
 const deadline = new Date('August 1, 2023 13:00:00');
-const timeLeft = minutesDiff(deadline, new Date());
+const timeLeft = secondsDiff(deadline, new Date());
 
 export const CountdownTimer = () => {
   const { width, breakpoints } = useWindowSize();
@@ -21,13 +21,12 @@ export const CountdownTimer = () => {
         colors={'url(#color-id)'}
         isSmoothColorTransition
         size={determineSize()}
-        updateInterval={60}
         strokeWidth={width > breakpoints.sm ? 12 : 6}
       >
         {({ remainingTime }) => (
           <div className="flex flex-col items-center">
             <span className="text-md md:text-lg">{remainingTime}</span>
-            <span className="text-[10px] sm:text-xs md:text-sm">MIN</span>
+            <span className="text-[10px] sm:text-xs md:text-sm">SEC</span>
           </div>
         )}
       </CountdownCircleTimer>
