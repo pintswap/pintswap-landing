@@ -2,8 +2,10 @@ import { useWindowSize } from '../../hooks/window-size';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import { hourDiff } from '../../utils/helpers';
 
+const deadline = new Date('August 1, 2023 13:00:00');
+const timeLeft = hourDiff(deadline, new Date());
+
 export const CountdownTimer = () => {
-  const deadline = new Date('August 1, 2023 17:00:00');
   const { width, breakpoints } = useWindowSize();
   const determineSize = () => {
     if (width > breakpoints.lg) return 160;
@@ -11,7 +13,6 @@ export const CountdownTimer = () => {
     if (width > breakpoints.sm) return 100;
     return 80;
   };
-  const timeLeft = hourDiff(deadline, new Date());
   return (
     <div className="flex flex-col justify-center items-center gap-2">
       <CountdownCircleTimer
