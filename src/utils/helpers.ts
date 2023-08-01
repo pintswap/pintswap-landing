@@ -10,6 +10,10 @@ export function hourDiff(dt2: Date, dt1: Date) {
   return Math.abs(Math.round(diff));
 }
 
+export function secondsDiff(dt2: Date, dt1: Date) {
+  return (dt2.getTime() - dt1.getTime()) / 1000;
+}
+
 export function minutesDiff(dateTimeValue2: Date, dateTimeValue1: Date) {
   let differenceValue =
     (dateTimeValue2.getTime() - dateTimeValue1.getTime()) / 1000;
