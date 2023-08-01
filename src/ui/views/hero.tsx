@@ -1,25 +1,12 @@
 import Link from 'next/link';
 import { useWindowSize } from '../../hooks';
-import {
-  CountdownTimer,
-  SocialList,
-  AnimatedBrand,
-  Button,
-} from '../components';
+import { SocialList, AnimatedBrand, Button } from '../components';
 import { IS_MINT_ENABLED } from '../../utils';
 
 export const HeroView = () => {
   const { width, height, breakpoints } = useWindowSize();
   return (
     <>
-      <div
-        className={`absolute ${
-          height > 660 ? 'top-5 -rotate-12' : 'bottom-5 rotate-12'
-        } left-5 md:top-12 md:left-12 lg:bottom-32 lg:top-auto lg:left-32 lg:rotate-12`}
-      >
-        <CountdownTimer />
-      </div>
-
       <SocialList
         direction={'vertical'}
         absolute={width > breakpoints.md ? 'right-center' : 'bottom-right'}
@@ -37,7 +24,7 @@ export const HeroView = () => {
               href={IS_MINT_ENABLED ? '/mint' : 'https://pintswap.eth.limo'}
               target="_blank"
             >
-              <a>
+              <a target="_blank">
                 <Button cta icon={IS_MINT_ENABLED ? 'drink' : 'play'}>
                   {IS_MINT_ENABLED ? 'MINT TRIS' : 'LAUNCH APP'}
                 </Button>

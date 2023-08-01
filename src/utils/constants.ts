@@ -1,4 +1,4 @@
-export const IS_MINT_ENABLED = true;
+export const IS_MINT_ENABLED = false;
 
 export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com/pintswap0x',
