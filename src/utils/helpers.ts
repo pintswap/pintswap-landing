@@ -10,6 +10,13 @@ export function hourDiff(dt2: Date, dt1: Date) {
   return Math.abs(Math.round(diff));
 }
 
+export function minutesDiff(dateTimeValue2: Date, dateTimeValue1: Date) {
+  let differenceValue =
+    (dateTimeValue2.getTime() - dateTimeValue1.getTime()) / 1000;
+  differenceValue /= 60;
+  return Math.abs(Math.round(differenceValue));
+}
+
 export function padBuffer(addr: string) {
   return Buffer.from(addr.substr(2).padStart(32 * 2, '0'), 'hex');
 }
