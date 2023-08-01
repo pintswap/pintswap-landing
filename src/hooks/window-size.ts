@@ -5,7 +5,13 @@ type WindowDimentions = {
   height: number;
 };
 
-const useWindowSize = (): WindowDimentions => {
+const breakpoints = {
+  sm: 600,
+  md: 769,
+  lg: 1024,
+};
+
+const useWindowSize = () => {
   const [windowDimensions, setWindowDimensions] = useState<WindowDimentions>({
     width: 0,
     height: 0,
@@ -22,7 +28,7 @@ const useWindowSize = (): WindowDimentions => {
     return (): void => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return windowDimensions;
+  return { ...windowDimensions, breakpoints };
 };
 
 export { useWindowSize };

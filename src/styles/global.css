@@ -12,16 +12,37 @@
     color: #fff;
     min-height: 100vh;
     font-family: 'Days One', sans-serif;
-    background: rgb(12,12,12);
-    background: -moz-linear-gradient(180deg, rgba(12,12,12,1) 10%, rgba(24,24,24,1) 100%);
-    background: -webkit-linear-gradient(180deg, rgba(12,12,12,1) 10%, rgba(24,24,24,1) 100%);
-    background: linear-gradient(180deg, rgba(12,12,12,1) 10%, rgba(24,24,24,1) 100%);
+    background: rgb(10,10,10);
+    background: -moz-linear-gradient(180deg, rgba(10,10,10,1) 20%, rgba(30,30,30,1) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(10,10,10,1) 20%, rgba(30,30,30,1) 100%);
+    background: linear-gradient(180deg, rgba(10,10,10,1) 20%, rgba(30,30,30,1) 100%);
   }
 
   img {
     margin: 0 auto;
     border-radius: 8px;
   }
+
+  /* Rainbow Animation */
+  .rainbow-animation {
+  -webkit-animation: rainbow 4s steps(36) infinite;
+}
+
+@-webkit-keyframes rainbow {
+   from { -webkit-filter:hue-rotate(10deg); }
+     to { -webkit-filter:hue-rotate(360deg); }
+}
+
+@keyframes rainbow {
+ from {
+    -webkit-filter:hue-rotate(10deg);
+            filter:hue-rotate(10deg);
+    }
+  to {
+    -webkit-filter:hue-rotate(360deg);
+            filter:hue-rotate(360deg);
+    }
+}
 
   /* Scroll Animation */
   .scroll {

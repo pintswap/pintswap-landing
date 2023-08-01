@@ -1,11 +1,11 @@
 import { Base } from '../ui/base';
-import { HeroView } from '../ui/views/hero';
+import { MintView } from '../ui/views/mint';
 
 const Index = () => {
   return (
-    <Base>
-      <div className="z-50 relative">
-        <HeroView />
+    <Base nav>
+      <div className="max-w-6xl mx-auto">
+        <MintView />
       </div>
     </Base>
   );
