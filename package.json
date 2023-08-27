@@ -1,5 +1,5 @@
 {
-  "name": "next-js-boilerplate",
+  "name": "pintswap-landing",
   "version": "1.0.0",
   "scripts": {
     "dev": "NEXT_PUBLIC_NETWORK=mainnet next dev",
