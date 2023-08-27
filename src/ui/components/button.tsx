@@ -16,6 +16,7 @@ type IButtonProps = {
   loading?: boolean;
   loadingText?: string;
   disabled?: boolean;
+  noIcon?: boolean;
 };
 
 const Button = (props: IButtonProps) => {
@@ -23,9 +24,13 @@ const Button = (props: IButtonProps) => {
   const ctaBtnClass = `hover:text-pink-500 inline-block rounded-md text-center py-2 pl-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none p-3 pr-0 !text-left flex items-end h-[72px] text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400`;
   if (props.link) {
     return (
-      <button className="flex items-center gap-1.5 uppercase transition duration-200 hover:text-pink-500">
+      <button
+        className={`${
+          props.className || ''
+        } flex items-center gap-1.5 uppercase transition duration-200 hover:text-pink-500`}
+      >
         {props.children}
-        <FaChevronRight size="12px" />
+        {!props.noIcon && <FaChevronRight size="12px" />}
       </button>
     );
   }

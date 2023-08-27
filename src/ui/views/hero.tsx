@@ -18,7 +18,7 @@ export const HeroView = () => {
         }`}
       >
         <AnimatedBrand subtitle="INTRODUCING" />
-        <div className="w-full px-12 relative -top-8 md:-top-10 lg:-top-28">
+        <div className="w-full px-10 relative -top-8 md:-top-10 lg:-top-28">
           <div className="flex flex-col gap-4 max-w-sm mx-auto">
             <Link
               href={IS_MINT_ENABLED ? '/mint' : 'https://pintswap.eth.limo'}
@@ -46,6 +46,13 @@ export const HeroView = () => {
                 </a>
               </Link>
             </div>
+            <Link href="https://analytics.pintswap.exchange" target="_blank">
+              <a className="mt-4" target="_blank">
+                <Button link className="w-full mx-auto justify-center">
+                  Analytics
+                </Button>
+              </a>
+            </Link>
           </div>
         </div>
       </div>
