@@ -5,6 +5,11 @@ import { Padding } from '../layouts/padding';
 import { useWindowSize } from '../../hooks';
 
 const NAV_ITEMS = [
+  {
+    text: 'STATS',
+    link: 'https://analytics.pintswap.exchange',
+    target: '_blank',
+  },
   { text: 'DOCS', link: 'https://docs.pintswap.exchange', target: '_blank' },
   { text: 'BLOG', link: '/blog', target: '_self' },
 ];
@@ -41,7 +46,7 @@ const Navbar = () => {
                 <Link href="https://pintswap.eth.limo" target="_blank">
                   <a>
                     <Button className="md:text-lg">
-                      Launch{width > breakpoints.sm ? ' App' : ''}
+                      Launch{width > breakpoints.md ? ' App' : ''}
                     </Button>
                   </a>
                 </Link>
