@@ -1,11 +1,9 @@
-import { Padding } from '../layouts/padding';
+import { Section } from '../layouts';
 
 const Footer = () => (
-  <div className="bg-indigo-900">
-    <Padding>
-      <div>PintSwap LLC.</div>
-    </Padding>
-  </div>
+  <Section background="bg-indigo-900" type="wide">
+    <div>Cold Water Labs &copy; {new Date().getFullYear()}</div>
+  </Section>
 );
 
 export { Footer };

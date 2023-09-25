@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { Button } from '../components/button';
 import { Logo } from './logo';
-import { Padding } from '../layouts/padding';
 import { useWindowSize } from '../../hooks';
+import { Section } from '../layouts';
 
 const NAV_ITEMS = [
   {
@@ -17,45 +17,38 @@ const NAV_ITEMS = [
 const Navbar = () => {
   const { width, breakpoints } = useWindowSize();
   return (
-    <div className="w-full">
-      <Padding>
-        <div className="flex flex-wrap justify-between items-center max-w-7xl mx-auto">
-          <div>
-            <Link href="/">
-              <a>
-                <Logo textSize="text-2xl lg:text-3xl" />
-              </a>
-            </Link>
-          </div>
-
-          <nav>
-            <ul className="flex gap-3 md:gap-4 lg:gap-6 items-center font-medium md:text-lg">
-              {width > breakpoints.sm &&
-                NAV_ITEMS.map((el, i) => (
-                  <li
-                    key={`nav-item-${i}`}
-                    className="transition duration-150 hover:text-pink-500 uppercase"
-                  >
-                    <Link href={el.link} target={el.target}>
-                      <a>{el.text}</a>
-                    </Link>
-                  </li>
-                ))}
-              <li>
-                {/* <Button wallet>Connect</Button> */}
-                <Link href="https://pintswap.eth.limo" target="_blank">
-                  <a>
-                    <Button className="md:text-lg">
-                      Launch{width > breakpoints.md ? ' App' : ''}
-                    </Button>
-                  </a>
-                </Link>
-              </li>
-            </ul>
-          </nav>
+    <Section wrapperClass="!z-50" type="wide">
+      <div className="flex flex-wrap justify-between items-center max-w-7xl mx-auto">
+        <div>
+          <Link href="/">
+            <Logo textSize="text-2xl lg:text-3xl" />
+          </Link>
         </div>
-      </Padding>
-    </div>
+
+        <nav>
+          <ul className="flex gap-3 md:gap-4 lg:gap-6 items-center font-medium md:text-lg">
+            {width > breakpoints.sm &&
+              NAV_ITEMS.map((el, i) => (
+                <li key={`nav-item-${i}`}>
+                  <Link
+                    href={el.link}
+                    target={el.target}
+                    className="transition duration-150 hover:text-pink-500 uppercase block h-full"
+                  >
+                    {el.text}
+                  </Link>
+                </li>
+              ))}
+            <li>
+              {/* <Button wallet>Connect</Button> */}
+              <Link href="https://pintswap.eth.limo" target="_blank">
+                <Button>Launch{width > breakpoints.md ? ' App' : ''}</Button>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </Section>
   );
 };
 

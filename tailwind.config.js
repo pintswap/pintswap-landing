@@ -37,10 +37,6 @@ module.exports = {
       lineHeight: {
         hero: '4.5rem',
       },
-      fontFamily: {
-        'gothic-bold': ['Dela Gothic One', 'cursive'],
-        gothic: ['Pathway Gothic One', 'sans-serif'],
-      },
     },
   },
   variants: {},
