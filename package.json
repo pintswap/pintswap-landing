@@ -34,6 +34,7 @@
     "react-dom": "^18.2.0",
     "react-html-parser": "^2.0.2",
     "react-icons": "^4.8.0",
+    "react-parallax-mouse": "^2.0.1",
     "react-particles": "^2.9.3",
     "styled-jsx-plugin-postcss": "^4.0.1",
     "tailwindcss-animated": "^1.0.0",

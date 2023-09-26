@@ -9,7 +9,6 @@ import { Footer } from './footer';
 type IBaseProps = {
   children?: ReactNode;
   nav?: boolean;
-  max?: boolean;
 };
 
 const Base = (props: IBaseProps) => {
