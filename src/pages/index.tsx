@@ -36,6 +36,7 @@ const Index = () => {
           style={{ ...defaultParallaxStyle, top: '98px', right: '-10px' }}
           factorX={defaultFactor}
           factorY={defaultFactor}
+          className="hidden md:block"
         >
           <Image
             src="/assets/img/bubble-3.png"
