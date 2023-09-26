@@ -41,7 +41,7 @@ const Button = (props: IButtonProps) => {
         <button
           className={`${
             props.className || ''
-          } flex items-center gap-1.5 uppercase transition duration-200 hover:text-neutral-300`}
+          } flex items-center gap-1.5 uppercase transition duration-150 hover:text-neutral-300`}
         >
           {props.children}
           {!props.noIcon && <FaChevronRight size="12px" />}
@@ -136,13 +136,13 @@ const Button = (props: IButtonProps) => {
       };
       return (
         <button
-          className={`w-full transition group duration-200 flex justify-between overflow-hidden ${ctaBtnClass} ${
+          className={`w-full transition group duration-150 flex justify-between overflow-hidden ${ctaBtnClass} ${
             props.className ? props.className : ''
           }`}
         >
           {props.children}
           <span
-            className={`h-[90px] w-[90px] bg-sky-400 group-hover:bg-sky-500 duration-200 transition rounded-full ${move}`}
+            className={`h-[90px] w-[90px] bg-sky-400 group-hover:bg-sky-500 duration-150 transition rounded-full ${move}`}
           >
             {renderIcon()}
           </span>

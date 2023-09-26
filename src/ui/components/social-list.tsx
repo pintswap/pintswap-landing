@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { FaTwitter } from 'react-icons/fa';
+import { FaDiscord, FaTwitter } from 'react-icons/fa';
 import { SOCIAL_LINKS } from '../../utils/constants';
 
 export const SocialList = ({
-  direction = 'vertical',
-  size = '30px',
+  direction,
+  size = '24px',
   absolute,
 }: {
   direction?: 'vertical' | 'horizontal';
@@ -29,10 +29,12 @@ export const SocialList = ({
         customClass = 'bottom-1/2 left-4';
         break;
       }
-      default: {
+      case 'right-center': {
         customClass = 'bottom-1/2 right-4';
         break;
       }
+      default:
+        return '';
     }
     return `${baseClass} ${customClass}`;
   };
@@ -41,24 +43,20 @@ export const SocialList = ({
       <div
         className={`flex ${directionClass} items-center justify-center gap-4 md:gap-6`}
       >
-        {/* <button className="transition duration-200 group relative z-10 cursor-pointer">
+        <button className="transition duration-150 group relative z-10 cursor-pointer">
           <Link href="" target="_blank">
-            <a>
-              <FaDiscord
-                size={`${size}`}
-                className="group-hover:fill-pink-400 transition duration-200"
-              />
-            </a>
+            <FaDiscord
+              size={`${size}`}
+              className="group-hover:fill-neutral-300 transition duration-150"
+            />
           </Link>
-        </button> */}
-        <button className="transition duration-200 group relative z-10 cursor-pointer">
+        </button>
+        <button className="transition duration-150 group relative z-10 cursor-pointer">
           <Link href={SOCIAL_LINKS.twitter} target="_blank">
-            <a target="_blank">
-              <FaTwitter
-                size={`${size}`}
-                className="group-hover:fill-pink-400 transition duration-200"
-              />
-            </a>
+            <FaTwitter
+              size={`${size}`}
+              className="group-hover:fill-neutral-300 transition duration-150"
+            />
           </Link>
         </button>
       </div>
