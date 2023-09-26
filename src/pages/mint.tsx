@@ -4,9 +4,7 @@ import { Base } from '../ui/base';
 const MintPage = () => {
 return (
 <Base>
-//       <div className="max-w-6xl mx-auto">
-//         <MintView />
-//       </div>
+<span>mint</span>#
      </Base>
    );
  };
