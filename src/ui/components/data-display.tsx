@@ -8,6 +8,7 @@ type IDataDisplay = {
   link?: string;
   loading?: boolean;
   align?: 'center' | 'left' | 'right';
+  type?: 'fancy' | 'simple';
 };
 
 export const DataDisplay = ({
@@ -17,9 +18,10 @@ export const DataDisplay = ({
   link,
   loading,
   align,
+  type = 'simple',
 }: IDataDisplay) => {
-  const determineAlign = () => {
-    switch (align) {
+  const determineAlign = (_align?: 'center' | 'left' | 'right') => {
+    switch (_align || align) {
       case 'left':
         return 'items-start text-left';
       case 'right':
@@ -28,6 +30,22 @@ export const DataDisplay = ({
         'items-center text-center';
     }
   };
+  if (type === 'fancy') {
+    return (
+      <div>
+        <div
+          className={`border-l-8 rounded-l-lg pl-3 border-primary-light flex flex-col justify-center ${determineAlign(
+            'left'
+          )}`}
+        >
+          <span className={`text-2xl md:text-3xl font-medium ${color || ''}`}>
+            {value}
+          </span>
+          <span className="text-sm">{text}</span>
+        </div>
+      </div>
+    );
+  }
   const wrapperClass = `flex flex-col justify-center ${determineAlign()}`;
   return (
     <div className={wrapperClass}>

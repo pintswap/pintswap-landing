@@ -25,7 +25,7 @@ export const HeroView = () => {
               target="_blank"
             >
               <a target="_blank">
-                <Button cta icon={IS_MINT_ENABLED ? 'drink' : 'play'}>
+                <Button type="cta" icon={IS_MINT_ENABLED ? 'drink' : 'play'}>
                   {IS_MINT_ENABLED ? 'MINT TRIS' : 'LAUNCH APP'}
                 </Button>
               </a>
@@ -33,14 +33,14 @@ export const HeroView = () => {
             <div className="grid grid-cols-2 items-center justify-center gap-4">
               <Link href="https://docs.pintswap.exchange" target="_blank">
                 <a>
-                  <Button icon="book" cta>
+                  <Button icon="book" type="cta">
                     DOCS
                   </Button>
                 </a>
               </Link>
               <Link href="/blog">
                 <a>
-                  <Button icon="newspaper" cta>
+                  <Button icon="newspaper" type="cta">
                     BLOG
                   </Button>
                 </a>
@@ -48,7 +48,7 @@ export const HeroView = () => {
             </div>
             <Link href="https://analytics.pintswap.exchange" target="_blank">
               <a className="mt-4" target="_blank">
-                <Button link className="w-full mx-auto justify-center">
+                <Button type="link" className="w-full mx-auto justify-center">
                   Analytics
                 </Button>
               </a>

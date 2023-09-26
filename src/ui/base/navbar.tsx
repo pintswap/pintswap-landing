@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { Button } from '../components/button';
-import { Logo } from './logo';
 import { useWindowSize } from '../../hooks';
 import { Section } from '../layouts';
+import Image from 'next/image';
 
 const NAV_ITEMS = [
   {
@@ -17,11 +17,18 @@ const NAV_ITEMS = [
 const Navbar = () => {
   const { width, breakpoints } = useWindowSize();
   return (
-    <Section wrapperClass="!z-50" type="wide">
-      <div className="flex flex-wrap justify-between items-center max-w-7xl mx-auto">
+    <Section wrapperClass="!z-50" type="wide" padding="y">
+      <div className="flex flex-wrap justify-between items-center mx-auto">
         <div>
           <Link href="/">
-            <Logo textSize="text-2xl lg:text-3xl" />
+            <div className="max-w-[190px] max-h-[36px]">
+              <Image
+                src={'/assets/logo/pintswap-logo.png'}
+                alt="PintSwap is a decentralized, P2P OTC crypto exchange"
+                width={790}
+                height={149}
+              />
+            </div>
           </Link>
         </div>
 
@@ -30,12 +37,10 @@ const Navbar = () => {
             {width > breakpoints.sm &&
               NAV_ITEMS.map((el, i) => (
                 <li key={`nav-item-${i}`}>
-                  <Link
-                    href={el.link}
-                    target={el.target}
-                    className="transition duration-150 hover:text-pink-500 uppercase block h-full"
-                  >
-                    {el.text}
+                  <Link href={el.link} target={el.target}>
+                    <Button type="link" noIcon>
+                      {el.text}
+                    </Button>
                   </Link>
                 </li>
               ))}

@@ -34,7 +34,7 @@ export const PostArticle = ({
               </span>
               <div className=" line-clamp-2">{formatDomNode(description)}</div>
             </div>
-            <Button link>
+            <Button type="link">
               <span className="mt-1">Read More</span>
             </Button>
           </div>
@@ -54,7 +54,7 @@ export const PostArticle = ({
       <br />
       <Link href="/blog">
         <a>
-          <Button link>Back to all blog posts</Button>
+          <Button type="link">Back to all blog posts</Button>
         </a>
       </Link>
     </article>
