@@ -9,19 +9,20 @@ import { Footer } from './footer';
 type IBaseProps = {
   children?: ReactNode;
   nav?: boolean;
+  max?: boolean;
 };
 
 const Base = (props: IBaseProps) => {
   const { pathname } = useRouter();
   return (
-    <div className="antialiased">
+    <>
       <Meta title={AppConfig.title} description={AppConfig.description} />
       <Navbar />
-      <div className={pathname !== '/' ? 'pb-4 sm:pb-0' : ''}>
+      <div className={`${pathname !== '/' ? 'pb-4 sm:pb-0' : ''}`}>
         {props.children}
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

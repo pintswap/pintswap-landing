@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Skeleton } from './skeleton';
+import { Glow } from './glow';
 
 type IDataDisplay = {
   value: string | number;
@@ -32,16 +33,17 @@ export const DataDisplay = ({
   };
   if (type === 'fancy') {
     return (
-      <div>
+      <div className="flex flex-row gap-3">
+        <Glow>
+          <span className="h-full w-1.5 bg-primary-light rounded-l-xl block" />
+        </Glow>
         <div
-          className={`border-l-8 rounded-l-lg pl-3 border-primary-light flex flex-col justify-center ${determineAlign(
-            'left'
-          )}`}
+          className={`flex flex-col justify-center ${determineAlign('left')}`}
         >
           <span className={`text-2xl md:text-3xl font-medium ${color || ''}`}>
             {value}
           </span>
-          <span className="text-sm">{text}</span>
+          <span className="text-sm text-neutral-400">{text}</span>
         </div>
       </div>
     );

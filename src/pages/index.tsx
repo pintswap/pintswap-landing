@@ -4,11 +4,11 @@ import { Section } from '../ui/layouts';
 
 const Index = () => {
   return (
-    <Base>
-      <div className="absolute left-0 top-0 w-screen h-[60vh] bg-gradient-to-b from-primary via-secondary-black to-secondary-black opacity-25" />
+    <Base max>
+      <div className="absolute left-0 top-0 w-screen h-[50vh] bg-gradient-to-b from-primary to-secondary-black opacity-25" />
 
       <Section id="home" padding="y">
-        <div className="flex flex-col md:items-end md:flex-row justify-between">
+        <div className="flex flex-col md:items-center md:flex-row justify-between">
           <div className="flex flex-col gap-3 md:gap-6">
             <div className="flex flex-col gap-2">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight">
@@ -37,7 +37,7 @@ const Index = () => {
               </Button>
             </div>
           </div>
-          <div className="hidden md:block w-[300px] h-[300px]" />
+          <div className="hidden md:block w-[300px] h-[400px]" />
         </div>
       </Section>
       <Section padding="y">
