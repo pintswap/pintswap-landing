@@ -21,7 +21,7 @@ export const Section = ({
   const widthClass =
     type === 'wide' ? 'max-w-7xl px-2 xl:px-0' : 'max-w-6xl px-6 xl:px-0';
   return (
-    <div className={`${background} relative z-10 ${wrapperClass || ''}`}>
+    <div className={`${background || ''} relative z-10 ${wrapperClass || ''}`}>
       <div id={id} className={`${widthClass} mx-auto`}>
         <Padding type={padding}>{children}</Padding>
       </div>

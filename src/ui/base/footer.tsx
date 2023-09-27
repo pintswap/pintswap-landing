@@ -4,13 +4,15 @@ import { Section } from '../layouts';
 
 const Footer = () => (
   <Section
-    background="bg-indigo-900"
+    background="bg-primary-dark"
     type="wide"
     padding="y"
     wrapperClass="mt-24"
   >
-    <div className="flex flex-col-reverse gap-1.5 justify-center items-center lg:grid lg:grid-cols-3">
-      <span>Cold Water Labs &copy; {new Date().getFullYear()}</span>
+    <div className="flex flex-col-reverse gap-2 justify-center items-center lg:grid lg:grid-cols-3">
+      <span className="text-xs">
+        Cold Water Labs &copy; {new Date().getFullYear()}
+      </span>
       <div className="justify-self-center">
         <SocialList />
       </div>

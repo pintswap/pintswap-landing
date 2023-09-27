@@ -7,3 +7,4 @@ export * from './data-display';
 export * from './skeleton';
 export * from './glow';
 export * from './parallax-child';
+export * from './animated-hamburger';

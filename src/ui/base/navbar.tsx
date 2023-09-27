@@ -3,6 +3,9 @@ import { Button } from '../components/button';
 import { useWindowSize } from '../../hooks';
 import { Section } from '../layouts';
 import Image from 'next/image';
+import { Transition } from '@headlessui/react';
+import { useState } from 'react';
+import { AnimatedHamburger } from '../components';
 
 const NAV_ITEMS = [
   {
@@ -16,10 +19,17 @@ const NAV_ITEMS = [
 
 const Navbar = () => {
   const { width, breakpoints } = useWindowSize();
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
   return (
-    <Section wrapperClass="!z-50" type="wide" padding="y">
-      <div className="flex flex-wrap justify-between items-center mx-auto">
-        <div>
+    <>
+      <Section
+        background={isMobileOpen ? 'bg-neutral-900' : 'bg-transparent'}
+        wrapperClass={`!z-[102]`}
+        type="wide"
+        padding="y"
+      >
+        <div className="flex flex-wrap justify-between items-center mx-auto">
           <Link href="/">
             <div className="max-w-[190px] max-h-[36px]">
               <Image
@@ -30,12 +40,11 @@ const Navbar = () => {
               />
             </div>
           </Link>
-        </div>
 
-        <nav>
-          <ul className="flex gap-3 md:gap-4 lg:gap-6 items-center font-medium md:text-lg">
-            {width > breakpoints.sm &&
-              NAV_ITEMS.map((el, i) => (
+          <nav className="flex">
+            {/* Desktop Menu */}
+            <ul className="hidden sm:flex gap-3 md:gap-4 lg:gap-6 items-center font-medium md:text-lg">
+              {NAV_ITEMS.map((el, i) => (
                 <li key={`nav-item-${i}`}>
                   <Link href={el.link} target={el.target}>
                     <Button type="link" noIcon>
@@ -44,16 +53,74 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
-            <li>
-              {/* <Button wallet>Connect</Button> */}
-              <Link href="https://pintswap.eth.limo" target="_blank">
-                <Button>Enter{width > breakpoints.md ? ' App' : ''}</Button>
+              <li>
+                {/* <Button wallet>Connect</Button> */}
+                <Link href="https://pintswap.eth.limo" target="_blank">
+                  <Button>Enter{width > breakpoints.md ? ' App' : ''}</Button>
+                </Link>
+              </li>
+            </ul>
+
+            {/* Mobile Menu */}
+            <button
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="px-0.5 sm:hidden"
+            >
+              <AnimatedHamburger state={isMobileOpen} />
+            </button>
+          </nav>
+        </div>
+      </Section>
+
+      <Transition
+        show={isMobileOpen}
+        enter="transform transition ease-in-out duration-500"
+        enterFrom="-translate-y-[100vw]"
+        enterTo="translate-y-0"
+        leave="transform transition ease-in-out duration-500"
+        leaveFrom="translate-y-0"
+        leaveTo="-translate-y-[100vw]"
+        className="absolute !z-[101] right-0 -top-0"
+      >
+        <ul className="flex flex-col w-screen bg-neutral-900 shadow-md p-2 items-start justify-end gap-1 pb-2 min-h-[16rem]">
+          {NAV_ITEMS.map((el, i) => (
+            <li key={`nav-item-${i}`} className="w-full">
+              <Link href={el.link} target={el.target}>
+                <Button type="link" noIcon className="text-lg p-2 font-medium">
+                  {el.text}
+                </Button>
               </Link>
             </li>
-          </ul>
-        </nav>
-      </div>
-    </Section>
+          ))}
+          <li className="w-full">
+            {/* <Button wallet>Connect</Button> */}
+            <Link
+              href="https://pintswap.eth.limo"
+              target="_blank"
+              className="w-full"
+            >
+              <Button className="text-lg w-full">Enter App</Button>
+            </Link>
+          </li>
+        </ul>
+      </Transition>
+
+      <Transition
+        show={isMobileOpen}
+        enter="transition-opacity ease-in-out duration-500 delay-100"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity ease-in-out duration-400"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+        className={`fixed bottom-0 left-0 w-screen h-full flex flex-grow z-[100]`}
+      >
+        <div
+          className="w-screen h-full bg-[rgba(0,0,0,0.3)]"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      </Transition>
+    </>
   );
 };
 

@@ -186,10 +186,15 @@ const Index = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 pb-8">
                 <Tab.List className="grid grid-cols-2 lg:grid-cols-1 lg:px-4 gap-2 lg:gap-4">
                   {TabItems.map((x, i) => (
-                    <Tab key={`how-it-works-tab-${i}`}>
+                    <Tab
+                      key={`how-it-works-tab-${i}`}
+                      className={
+                        'ring-0 focus-visible:ring-0 focus:outline-0 focus:ring-0 focus-visible:outline-0'
+                      }
+                    >
                       {({ selected }) => (
                         <div
-                          className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between ring-0 focus-visible:ring-0 focus:outline-0 focus:ring-0 focus-visible:outline-0 text-center ${
+                          className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between text-center ${
                             selected
                               ? 'bg-neutral-800 hover:bg-neutral-800'
                               : 'hover:bg-neutral-900'
