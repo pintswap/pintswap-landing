@@ -40,7 +40,7 @@ export const DataDisplay = ({
         <div
           className={`flex flex-col justify-center ${determineAlign('left')}`}
         >
-          <span className={`text-2xl md:text-3xl font-medium ${color || ''}`}>
+          <span className={`text-3xl lg:text-4xl font-medium ${color || ''}`}>
             {value}
           </span>
           <span className="text-sm text-neutral-400">{text}</span>

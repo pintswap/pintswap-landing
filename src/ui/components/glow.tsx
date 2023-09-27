@@ -5,5 +5,7 @@ type IGlow = {
 };
 
 export const Glow = ({ children }: IGlow) => {
-  return <div className="shadow-[0_0_30px_rgb(129,77,198)]">{children}</div>;
+  return (
+    <div className="shadow-[0_0_50px_5px_rgb(129,77,198)]">{children}</div>
+  );
 };

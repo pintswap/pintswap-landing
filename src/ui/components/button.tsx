@@ -153,7 +153,7 @@ const Button = (props: IButtonProps) => {
       return (
         <button
           onClick={props.onClick}
-          className={`${btnClass} !from-transparent !to-transparent ${
+          className={`${btnClass} !from-black !to-black ${
             props.className ? props.className : ''
           } ${
             props.disabled
