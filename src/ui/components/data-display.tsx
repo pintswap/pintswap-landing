@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Skeleton } from './skeleton';
 import { Glow } from './glow';
+import CountUp from 'react-countup';
 
 type IDataDisplay = {
   value: string | number;
@@ -41,7 +42,7 @@ export const DataDisplay = ({
           className={`flex flex-col justify-center ${determineAlign('left')}`}
         >
           <span className={`text-3xl lg:text-4xl font-medium ${color || ''}`}>
-            {value}
+            <CountUp end={Number(value)} />
           </span>
           <span className="text-sm text-neutral-400">{text}</span>
         </div>

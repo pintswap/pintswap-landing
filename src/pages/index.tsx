@@ -1,8 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Base } from '../ui/base';
-import { Button, DataDisplay, ParallaxChild } from '../ui/components';
-import { Section } from '../ui/layouts';
+import {
+  Button,
+  DataDisplay,
+  ParallaxMouseChild,
+  ParallaxScrollWrapper,
+} from '../ui/components';
+import { Section, Split } from '../ui/layouts';
 import { MouseParallaxContainer } from 'react-parallax-mouse';
 import { Tab } from '@headlessui/react';
 import {
@@ -88,7 +93,7 @@ const Index = () => {
   return (
     <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
       {ParallaxItems.map((x: any, i: number) => (
-        <ParallaxChild
+        <ParallaxMouseChild
           key={`parallax-${i}`}
           img={`/assets/img/${x.img}`}
           top={x.top}
@@ -155,7 +160,7 @@ const Index = () => {
             <div className="hidden md:flex">
               <Image
                 src="/assets/img/swap-module.png"
-                alt="iPhone preview of PintSwap facing right"
+                alt="Swap module preview on PintSwap app"
                 width={420}
                 height={410}
               />
@@ -165,14 +170,18 @@ const Index = () => {
 
         <Section wrapperClass="mt-12 ">
           <div className="flex flex-col md:grid md:grid-cols-3 gap-4">
-            <DataDisplay value="$1,000,000" text="Daily Volume" type="fancy" />
-            <DataDisplay value="1,852,124" text="Transactions" type="fancy" />
+            <DataDisplay value="1000000" text="Daily Volume" type="fancy" />
+            <DataDisplay value="1852124" text="Transactions" type="fancy" />
             <DataDisplay value="8" text="Peers" type="fancy" />
           </div>
         </Section>
 
-        <Section padding="y" id="how-it-works" wrapperClass="mt-16 xl:mt-32">
-          <div className="text-center mb-8 lg:mb-12">
+        <Section
+          padding="y"
+          id="how-it-works"
+          wrapperClass="mt-24 xl:mt-32 2xl:mt-36"
+        >
+          <div className="text-center mb-12 2xl:mb-20">
             <h2 className="text-3xl md:text-4xl font-medium">
               Trading Made <span className="text-accent-light">Easy</span>
             </h2>
@@ -230,8 +239,14 @@ const Index = () => {
           </div>
         </Section>
 
-        <Section id="partners" padding="y">
-          <div className="bg-neutral-900 rounded-3xl p-4">
+        <Section
+          id="partners"
+          padding="none"
+          type="wide"
+          background="bg-neutral-900"
+          wrapperClass="mt-24 xl:mt-32 2xl:mt-36"
+        >
+          <div className="p-4">
             <div className="text-center mb-2">
               <h2 className="text-3xl md:text-4xl font-medium">Partners</h2>
             </div>
@@ -249,6 +264,86 @@ const Index = () => {
                 />
               ))}
             </div>
+          </div>
+        </Section>
+
+        <Section
+          id="learn-more"
+          padding="y"
+          wrapperClass="mt-24 xl:mt-32 2xl:mt-36"
+        >
+          <div className="text-center mb-12 2xl:mb-20">
+            <h2 className="text-3xl md:text-4xl font-medium">
+              Lorem Ipsum <span className="text-accent-light">Dolor</span>
+            </h2>
+            <h4 className="text-neutral-300">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor.
+            </h4>
+          </div>
+          <div className="flex flex-col gap-24 md:gap-12 lg:gap-24 2xl:gap-32">
+            <Split>
+              <ParallaxScrollWrapper>
+                <Image
+                  src="/assets/img/swap-module.png"
+                  alt="Swap module preview on PintSwap app"
+                  width={420}
+                  height={410}
+                />
+              </ParallaxScrollWrapper>
+              <ParallaxScrollWrapper
+                reverse
+                className="mt-2 flex flex-col gap-3 md:gap-4"
+              >
+                <h3 className="text-3xl font-medium">Lorem Ipsum</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </p>
+                <Button type="outline" className="sm:w-fit">
+                  Launch App
+                </Button>
+              </ParallaxScrollWrapper>
+            </Split>
+            <Split>
+              <ParallaxScrollWrapper className="md:order-2">
+                <Image
+                  src="/assets/img/swap-module.png"
+                  alt="Swap module preview on PintSwap app"
+                  width={420}
+                  height={410}
+                />
+              </ParallaxScrollWrapper>
+              <ParallaxScrollWrapper
+                reverse
+                className="mt-2 flex flex-col md:order-1 gap-3 md:gap-4"
+              >
+                <h3 className="text-3xl font-medium">Lorem Ipsum</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </p>
+                <Button
+                  type="outline"
+                  borderColor="border-accent"
+                  className="sm:w-fit"
+                >
+                  Telegram Bot
+                </Button>
+              </ParallaxScrollWrapper>
+            </Split>
           </div>
         </Section>
       </Base>

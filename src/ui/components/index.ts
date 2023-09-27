@@ -6,5 +6,6 @@ export * from './spinner-loader';
 export * from './data-display';
 export * from './skeleton';
 export * from './glow';
-export * from './parallax-child';
+export * from './parallax-mouse-child';
 export * from './animated-hamburger';
+export * from './parallax-scroll-wrapper';

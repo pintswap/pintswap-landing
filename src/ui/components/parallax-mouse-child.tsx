@@ -19,7 +19,7 @@ type IParallaxChild = {
 const defaultParallaxStyle: any = { position: 'absolute', zIndex: '99' };
 const defaultFactor = 0.2;
 
-export const ParallaxChild = ({
+export const ParallaxMouseChild = ({
   top,
   bottom,
   left,
