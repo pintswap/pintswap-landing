@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Base } from '../ui/base';
 import { Button, DataDisplay, ParallaxChild } from '../ui/components';
 import { Section } from '../ui/layouts';
@@ -80,30 +81,38 @@ const Index = () => {
             <div className="flex flex-col gap-3 md:gap-6">
               <div className="flex flex-col gap-2">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight">
-                  <span>One place for</span>
+                  <span>P2P Crypto Trading</span>
                   <br />
                   <span className="text-accent-light">
-                    all your investment needs
+                    No Slippage. No Taxes.
                   </span>
                 </h1>
                 <p className="text-lg text-neutral-300">
-                  In pintswap we make sure you are up to In pintswap we make
+                  Trade <span className="font-semibold">low-liquidity</span>{' '}
+                  crypto without all the{' '}
+                  <span className="font-semibold">BS</span>. With our Telegram
+                  bot
                   <br className="hidden md:block" />
-                  sure you are up to
+                  and integrated app, enter and exit lowcaps with{' '}
+                  <span className="font-semibold">ease</span>.
                 </p>
               </div>
               <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 lg:gap-4">
-                <Button type="outline" size="lg" className="w-full md:w-fit">
-                  Explore Markets
-                </Button>
-                <Button
-                  type="outline"
-                  size="lg"
-                  className="w-full md:w-fit"
-                  borderColor="border-accent"
-                >
-                  Explore Peers
-                </Button>
+                <Link href="https://pintswap.eth.limo" target="_blank">
+                  <Button type="outline" size="lg" className="w-full md:w-fit">
+                    Get started
+                  </Button>
+                </Link>
+                <Link href="https://docs.pintswap.exchange" target="_blank">
+                  <Button
+                    type="outline"
+                    size="lg"
+                    className="w-full md:w-fit"
+                    borderColor="border-accent"
+                  >
+                    How it works
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="hidden md:flex">
@@ -131,7 +140,7 @@ const Index = () => {
           wrapperClass="mt-2 md:mt-6 lg:mt-12 xl:mt-16"
         >
           <h2 className="text-3xl md:text-4xl font-medium text-center">
-            Trading Made Easy
+            Trading Made <span className="text-accent-light">Easy</span>
           </h2>
           <div></div>
         </Section>
