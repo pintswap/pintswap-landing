@@ -107,7 +107,7 @@ const Index = () => {
 
         <Section id="home" padding="y" wrapperClass={`!z-[99] mt-12`}>
           <div className="flex flex-col md:items-center md:flex-row justify-between">
-            <div className="flex flex-col gap-3 md:gap-6">
+            <div className="flex flex-col gap-4 md:gap-6">
               <div className="flex flex-col gap-2">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight">
                   <span>P2P Crypto Trading</span>
@@ -126,25 +126,25 @@ const Index = () => {
                   <span className="font-semibold">ease</span>.
                 </p>
               </div>
-              <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 lg:gap-4 px-6 md:px-0">
+              <div className="flex flex-col sm:flex-row items-center gap-3 lg:gap-4 px-2 md:px-0">
                 <Link
                   href="https://pintswap.eth.limo"
                   target="_blank"
-                  className="w-full md:w-fit"
+                  className="w-full sm:w-fit"
                 >
-                  <Button type="outline" size="lg" className="w-full md:w-fit">
+                  <Button type="outline" size="lg" className="w-full sm:w-fit">
                     Get started
                   </Button>
                 </Link>
                 <Link
                   href="https://docs.pintswap.exchange"
                   target="_blank"
-                  className="w-full md:w-fit"
+                  className="w-full sm:w-fit"
                 >
                   <Button
                     type="outline"
                     size="lg"
-                    className="w-full md:w-fit"
+                    className="w-full sm:w-fit"
                     borderColor="border-accent"
                   >
                     How it works
@@ -189,7 +189,7 @@ const Index = () => {
                     <Tab key={`how-it-works-tab-${i}`}>
                       {({ selected }) => (
                         <div
-                          className={`lg:text-left px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 text-lg font-medium flex items-center justify-center lg:justify-between ring-0 focus-visible:ring-0 focus:outline-0 focus:ring-0 focus-visible:outline-0 text-center ${
+                          className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between ring-0 focus-visible:ring-0 focus:outline-0 focus:ring-0 focus-visible:outline-0 text-center ${
                             selected
                               ? 'bg-neutral-800 hover:bg-neutral-800'
                               : 'hover:bg-neutral-900'
@@ -212,7 +212,7 @@ const Index = () => {
                     </Tab>
                   ))}
                 </Tab.List>
-                <Tab.Panels className="px-1 lg:px-4">
+                <Tab.Panels className="px-1 lg:px-4 mt-2">
                   {TabItems.map((x, i) => (
                     <Tab.Panel key={`how-it-works-panel-${i}`}>
                       <h3 className="text-3xl font-medium">{x.title}</h3>
@@ -227,7 +227,7 @@ const Index = () => {
 
         <Section id="partners" padding="y">
           <div className="bg-neutral-900 rounded-3xl p-4">
-            <div className="text-center">
+            <div className="text-center mb-2">
               <h2 className="text-3xl md:text-4xl font-medium">Partners</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -240,7 +240,7 @@ const Index = () => {
                   alt={`PintSwap partner with ${x.toLowerCase()}`}
                   width={600}
                   height={100}
-                  className="bg-neutral-950 rounded-2xl p-2"
+                  className="bg-black rounded-xl px-4 py-2"
                 />
               ))}
             </div>

@@ -153,7 +153,7 @@ const Button = (props: IButtonProps) => {
       return (
         <button
           onClick={props.onClick}
-          className={`${btnClass} !from-black !to-black ${
+          className={`${btnClass} !from-[rgba(0,0,0,0.5)] !to-[rgba(0,0,0.5)] ${
             props.className ? props.className : ''
           } ${
             props.disabled
