@@ -12,6 +12,7 @@ type IParallaxChild = {
   img: string;
   alt?: string;
   className?: string;
+  inverted?: boolean;
 };
 
 const defaultParallaxStyle: any = { position: 'absolute', zIndex: '99' };
@@ -28,6 +29,7 @@ export const ParallaxChild = ({
   img,
   alt,
   className,
+  inverted,
 }: IParallaxChild) => {
   return (
     <MouseParallaxChild
@@ -41,6 +43,7 @@ export const ParallaxChild = ({
       className={className}
       factorX={factor || defaultFactor}
       factorY={factor || defaultFactor}
+      inverted={inverted}
     >
       <Image
         src={img}

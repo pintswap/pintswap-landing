@@ -7,11 +7,11 @@ import { MouseParallaxContainer } from 'react-parallax-mouse';
 const ParallaxItems: any = [
   {
     img: 'bubble-1.png',
-    top: '394px',
+    top: '494px',
     left: '98px',
     width: 68,
     height: 80,
-    factor: 1,
+    factor: 0.6,
   },
   {
     img: 'bubble-2.png',
@@ -20,6 +20,7 @@ const ParallaxItems: any = [
     width: 160,
     height: 181,
     factor: 0.3,
+    inverted: true,
   },
   {
     img: 'bubble-3.png',
@@ -32,7 +33,7 @@ const ParallaxItems: any = [
   },
   {
     img: 'bubble-4.png',
-    top: '206px',
+    top: '306px',
     left: '206px',
     width: 136,
     height: 114,
@@ -45,6 +46,7 @@ const ParallaxItems: any = [
     width: 63,
     height: 73,
     factor: 0.4,
+    inverted: true,
   },
 ];
 
@@ -62,14 +64,19 @@ const Index = () => {
           width={x.width}
           factor={x.factor}
           className={x.className}
+          inverted={x.inverted}
         />
       ))}
 
       <Base>
         <div className="absolute left-0 top-0 w-screen h-[50vh] bg-gradient-to-b from-primary to-secondary-black opacity-25" />
 
-        <Section id="home" padding="y" wrapperClass={`!z-[99]`}>
-          <div className="flex flex-col md:items-center md:flex-row justify-between mt-2 md:mt-6">
+        <Section
+          id="home"
+          padding="y"
+          wrapperClass={`!z-[99] mt-2 md:mt-6 lg:mt-12`}
+        >
+          <div className="flex flex-col md:items-center md:flex-row justify-between">
             <div className="flex flex-col gap-3 md:gap-6">
               <div className="flex flex-col gap-2">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight">
@@ -110,12 +117,23 @@ const Index = () => {
           </div>
         </Section>
 
-        <Section padding="y">
-          <div className="flex flex-col md:grid md:grid-cols-3 md:mt-6 gap-4">
+        <Section padding="y" wrapperClass="mt-2 md:mt-6 lg:mt-12 xl:mt-16">
+          <div className="flex flex-col md:grid md:grid-cols-3 gap-4">
             <DataDisplay value="$1,000,000" text="Daily Volume" type="fancy" />
             <DataDisplay value="1,852,124" text="Transactions" type="fancy" />
             <DataDisplay value="8" text="Peers" type="fancy" />
           </div>
+        </Section>
+
+        <Section
+          padding="y"
+          id="how-it-works"
+          wrapperClass="mt-2 md:mt-6 lg:mt-12 xl:mt-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-medium text-center">
+            Trading Made Easy
+          </h2>
+          <div></div>
         </Section>
       </Base>
     </MouseParallaxContainer>

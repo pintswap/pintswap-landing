@@ -41,7 +41,7 @@ const Button = (props: IButtonProps) => {
         <button
           className={`${
             props.className || ''
-          } flex items-center gap-1.5 uppercase transition duration-150 hover:text-neutral-300`}
+          } flex items-center gap-1.5 transition duration-150 hover:text-neutral-300`}
         >
           {props.children}
           {!props.noIcon && <FaChevronRight size="12px" />}

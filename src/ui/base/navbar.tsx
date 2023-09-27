@@ -6,12 +6,12 @@ import Image from 'next/image';
 
 const NAV_ITEMS = [
   {
-    text: 'STATS',
+    text: 'Stats',
     link: 'https://analytics.pintswap.exchange',
     target: '_blank',
   },
-  { text: 'DOCS', link: 'https://docs.pintswap.exchange', target: '_blank' },
-  { text: 'BLOG', link: '/blog', target: '_self' },
+  { text: 'Docs', link: 'https://docs.pintswap.exchange', target: '_blank' },
+  { text: 'Blog', link: '/blog', target: '_self' },
 ];
 
 const Navbar = () => {
@@ -23,7 +23,7 @@ const Navbar = () => {
           <Link href="/">
             <div className="max-w-[190px] max-h-[36px]">
               <Image
-                src={'/assets/logo/pintswap-logo.png'}
+                src={'/assets/logo/pintswap-logo.svg'}
                 alt="PintSwap is a decentralized, P2P OTC crypto exchange"
                 width={790}
                 height={149}
@@ -47,7 +47,7 @@ const Navbar = () => {
             <li>
               {/* <Button wallet>Connect</Button> */}
               <Link href="https://pintswap.eth.limo" target="_blank">
-                <Button>Launch{width > breakpoints.md ? ' App' : ''}</Button>
+                <Button>Enter{width > breakpoints.md ? ' App' : ''}</Button>
               </Link>
             </li>
           </ul>
