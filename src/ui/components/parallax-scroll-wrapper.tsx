@@ -27,7 +27,7 @@ export const ParallaxScrollWrapper = ({
   );
   const parallaxRef = useParallax<HTMLDivElement>({
     [animation]: isTranslate
-      ? [reverse ? '20px' : '-20px', reverse ? '-20px' : '20px']
+      ? [reverse ? '15px' : '-15px', reverse ? '-15px' : '15px']
       : [0.95, 1, 'easeInQuad'],
   });
 
