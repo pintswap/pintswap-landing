@@ -115,11 +115,11 @@ const Index = () => {
             <div className="flex flex-col gap-4 md:gap-6">
               <div className="flex flex-col gap-2">
                 <h1 className="leading-tight">
-                  <span className="text-3xl font-medium">
+                  <span className="text-2xl sm:text-3xl font-medium">
                     P2P Crypto Trading
                   </span>
                   <br />
-                  <span className="text-accent-light text-5xl font-semibold">
+                  <span className="text-accent-light text-4xl sm:text-5xl font-semibold">
                     Zero Slippage. <br className="sm:hidden" /> Zero Taxes.
                   </span>
                 </h1>
@@ -192,7 +192,7 @@ const Index = () => {
               trading.
             </h4>
           </div>
-          <div className="bg-gradient-to-b from-black to-white rounded-3xl">
+          <div className="bg-gradient-to-b from-black to-neutral-900 rounded-3xl">
             <Tab.Group>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 pb-8">
                 <Tab.List className="grid grid-cols-2 lg:grid-cols-1 lg:px-4 gap-2 lg:gap-4">
