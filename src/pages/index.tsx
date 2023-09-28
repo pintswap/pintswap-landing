@@ -123,7 +123,7 @@ const Index = () => {
                     Zero Slippage. <br className="sm:hidden" /> Zero Taxes.
                   </span>
                 </h1>
-                <p className="text-lg text-neutral-300">
+                <p className="sm:text-lg text-neutral-300">
                   Trade <span className="font-semibold">low-liquidity</span>{' '}
                   crypto without all the{' '}
                   <span className="font-semibold">BS</span>. With our Telegram

@@ -44,7 +44,7 @@ export const DataDisplay = ({
           <span className={`text-3xl lg:text-4xl font-medium ${color || ''}`}>
             <CountUp end={Number(value)} />
           </span>
-          <span className="text-sm text-neutral-400">{text}</span>
+          <span className="text-md text-neutral-400">{text}</span>
         </div>
       </div>
     );
