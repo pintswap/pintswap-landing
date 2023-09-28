@@ -66,24 +66,24 @@ const ParallaxItems: any = [
 
 const TabItems = [
   {
-    title: 'No Slippage',
+    title: 'Zero Slippage',
     icon: MdOutlineWater,
-    text: '1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    text: 'Trade with zero slippage, like it used to be. Comfortably swap large sums without the risk of losing anything.',
   },
   {
-    title: 'No Taxes',
+    title: 'Zero Taxes',
     icon: MdOutlineLocalOffer,
-    text: '2. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    text: 'Always trade with zero buy and sell taxes via PintSwap. Trading is not "buying" or "selling", so why pay that unnecessary fee.',
   },
   {
     title: 'Peer-to-Peer',
     icon: MdSupervisorAccount,
-    text: '3. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    text: 'Trade decentralized and permissionsless directly with your peers via LibP2P.',
   },
   {
     title: 'Limit Orders',
     icon: MdAvTimer,
-    text: '4. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    text: 'The ability to place limit orders to get that CEX-like experience.',
   },
 ];
 
@@ -118,7 +118,7 @@ const Index = () => {
                   <span>P2P Crypto Trading</span>
                   <br />
                   <span className="text-accent-light">
-                    No Slippage. No Taxes.
+                    Zero Slippage. Zero Taxes.
                   </span>
                 </h1>
                 <p className="text-lg text-neutral-300">
@@ -272,15 +272,6 @@ const Index = () => {
           padding="y"
           wrapperClass="mt-24 xl:mt-32 2xl:mt-36"
         >
-          <div className="text-center mb-12 2xl:mb-20">
-            <h2 className="text-3xl md:text-4xl font-medium">
-              Lorem Ipsum <span className="text-accent-light">Dolor</span>
-            </h2>
-            <h4 className="text-neutral-300">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor.
-            </h4>
-          </div>
           <div className="flex flex-col gap-24 md:gap-12 lg:gap-24 2xl:gap-32">
             <Split>
               <ParallaxScrollWrapper>
@@ -293,7 +284,7 @@ const Index = () => {
               </ParallaxScrollWrapper>
               <ParallaxScrollWrapper
                 reverse
-                className="mt-2 flex flex-col gap-3 md:gap-4"
+                className="mt-4 flex flex-col gap-3 md:gap-4"
               >
                 <h3 className="text-3xl font-medium">Lorem Ipsum</h3>
                 <p>
@@ -307,40 +298,7 @@ const Index = () => {
                   mollit anim id est laborum.
                 </p>
                 <Button type="outline" className="sm:w-fit">
-                  Launch App
-                </Button>
-              </ParallaxScrollWrapper>
-            </Split>
-            <Split>
-              <ParallaxScrollWrapper className="md:order-2">
-                <Image
-                  src="/assets/img/swap-module.png"
-                  alt="Swap module preview on PintSwap app"
-                  width={420}
-                  height={410}
-                />
-              </ParallaxScrollWrapper>
-              <ParallaxScrollWrapper
-                reverse
-                className="mt-2 flex flex-col md:order-1 gap-3 md:gap-4"
-              >
-                <h3 className="text-3xl font-medium">Lorem Ipsum</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </p>
-                <Button
-                  type="outline"
-                  borderColor="border-accent"
-                  className="sm:w-fit"
-                >
-                  Telegram Bot
+                  Launch Telegram Bot
                 </Button>
               </ParallaxScrollWrapper>
             </Split>
