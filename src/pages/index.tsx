@@ -110,7 +110,7 @@ const Index = () => {
       <Base>
         <div className="absolute left-0 top-0 w-screen h-[50vh] bg-gradient-to-b from-primary to-secondary-black opacity-25" />
 
-        <Section id="home" padding="y" wrapperClass={`!z-[99] mt-12`}>
+        <Section id="home" padding="y" wrapperClass={`!z-[99] mt-10 sm:mt-12`}>
           <div className="flex flex-col md:items-center md:flex-row justify-between">
             <div className="flex flex-col gap-4 md:gap-6">
               <div className="flex flex-col gap-2">
