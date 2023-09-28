@@ -115,7 +115,7 @@ const Index = () => {
             <div className="flex flex-col gap-4 md:gap-6">
               <div className="flex flex-col gap-2">
                 <h1 className="leading-tight">
-                  <span className="text-3xl font-medium">
+                  <span className="text-2xl sm:text-3xl font-medium">
                     P2P Crypto Trading
                   </span>
                   <br />

@@ -4,10 +4,10 @@ type IHamburgerProps = {
 };
 
 export const AnimatedHamburger = ({ state, className }: IHamburgerProps) => {
-  const genericHamburgerLine = `h-[3px] w-7 my-[3px] bg-white transition ease transform duration-200 rounded-sm`;
+  const genericHamburgerLine = `h-[2px] w-6 my-[3px] bg-white transition ease transform duration-200 rounded-[1px]`;
   return (
     <div
-      className={`p-1 group flex flex-col justify-center items-center ${
+      className={`p-1 group flex flex-col justify-center items-center h- ${
         className || ''
       }`}
     >
