@@ -16,6 +16,48 @@
     border-radius: 8px;
   }
 
+  .btn-hover {
+    color: #fff;
+    cursor: pointer;
+
+    moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+
+.btn-hover:hover {
+    moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    box-shadow: none !important;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.fill-click {
+  background-size: 200% 100%;
+    background-image: linear-gradient(to top right, #5d10c9, #3d167f, #3d167f);
+    box-shadow: 0 2px 6px 0 rgba(116, 79, 168, 0.3);
+}
+
+.btn-hover.fill-click:hover {
+  background-position: 95% 0;
+}
+
+.btn-hover.outline-click {
+  background-size: 200% 100%;
+    background-image: linear-gradient(to right, #FF6FA9, #FF4878, #FF6FA9);
+    box-shadow: 0 2px 6px 0 rgba(116, 79, 168, 0.3);
+}
+
+.btn-hover.outline-click:hover {
+  background-position: 100% 0;
+}
+
   /* Animations */
   .floating { 
     animation-name: floating;

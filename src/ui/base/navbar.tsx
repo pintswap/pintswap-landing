@@ -56,7 +56,7 @@ const Navbar = () => {
               <li>
                 {/* <Button wallet>Connect</Button> */}
                 <Link href="https://pintswap.eth.limo" target="_blank">
-                  <Button>Enter{width > breakpoints.md ? ' App' : ''}</Button>
+                  <Button>Launch{width > breakpoints.md ? ' App' : ''}</Button>
                 </Link>
               </li>
             </ul>

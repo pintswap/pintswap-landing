@@ -148,12 +148,7 @@ const Index = () => {
                   target="_blank"
                   className="w-full sm:w-fit"
                 >
-                  <Button
-                    type="outline"
-                    size="lg"
-                    className="w-full sm:w-fit"
-                    borderColor="border-accent"
-                  >
+                  <Button type="outline" size="lg" className="w-full sm:w-fit">
                     How it works
                   </Button>
                 </Link>
@@ -194,8 +189,8 @@ const Index = () => {
           </div>
           <div className="bg-gradient-to-b from-black to-neutral-900 rounded-3xl">
             <Tab.Group>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 pb-8">
-                <Tab.List className="grid grid-cols-2 lg:grid-cols-1 lg:px-4 gap-2 lg:gap-4">
+              <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 gap-6 px-4 pb-8">
+                <Tab.List className="grid grid-cols-2 lg:flex lg:flex-col lg:px-4 gap-2 lg:gap-4 lg:mt-10">
                   {TabItems.map((x, i) => (
                     <Tab
                       key={`how-it-works-tab-${i}`}
@@ -207,7 +202,7 @@ const Index = () => {
                         <div
                           className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between text-center ${
                             selected
-                              ? 'bg-neutral-800 hover:bg-neutral-800 !border-primary-light'
+                              ? 'bg-neutral-800 hover:bg-neutral-800 !border-neutral-300'
                               : 'hover:bg-neutral-900'
                           }`}
                         >
@@ -233,6 +228,13 @@ const Index = () => {
                     <Tab.Panel key={`how-it-works-panel-${i}`}>
                       <h3 className="text-3xl font-medium">{x.title}</h3>
                       <p>{x.text}</p>
+                      <Image
+                        src="https://placehold.co/500x300"
+                        width={600}
+                        height={400}
+                        alt=""
+                        className="p-2 mt-4"
+                      />
                     </Tab.Panel>
                   ))}
                 </Tab.Panels>
@@ -241,7 +243,7 @@ const Index = () => {
           </div>
         </Section>
 
-        <Section
+        {/* <Section
           id="partners"
           padding="none"
           type="wide"
@@ -267,7 +269,7 @@ const Index = () => {
               ))}
             </div>
           </div>
-        </Section>
+        </Section> */}
 
         <Section
           id="learn-more"
@@ -278,30 +280,43 @@ const Index = () => {
             <Split>
               <ParallaxScrollWrapper>
                 <Image
-                  src="/assets/img/swap-module.png"
+                  src="https://placehold.co/300x350"
                   alt="Swap module preview on PintSwap app"
-                  width={420}
-                  height={410}
+                  width={300}
+                  height={400}
                 />
               </ParallaxScrollWrapper>
               <ParallaxScrollWrapper
                 reverse
                 className="mt-4 flex flex-col gap-3 md:gap-4"
               >
-                <h3 className="text-3xl font-medium">Lorem Ipsum</h3>
+                <h3 className="text-3xl font-medium">
+                  Seamless Trading Experience
+                </h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  <span className="">
+                    Our telegram bot enables users to easily enter and exit
+                    trades quickly.
+                  </span>
+                  <br />
+                  <br />
+                  If the order exists in the{' '}
+                  <Link href="https://docs.pintswap.com/" className="underline">
+                    PintSwap orderbook
+                  </Link>
+                  , our{' '}
+                  <Link href="https://docs.pintswap.com/" className="underline">
+                    trading engine
+                  </Link>{' '}
+                  will instantly match to the appropriate offer at the best
+                  price with{' '}
+                  <span className="font-semibold">zero slippage</span> and{' '}
+                  <span className="font-semibold">
+                    avoiding any token taxes
+                  </span>
+                  .
                 </p>
-                <Button type="outline" className="sm:w-fit">
-                  Launch Telegram Bot
-                </Button>
+                <Button className="sm:w-fit">Launch Telegram Bot</Button>
               </ParallaxScrollWrapper>
             </Split>
           </div>

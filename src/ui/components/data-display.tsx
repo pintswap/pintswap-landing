@@ -36,7 +36,7 @@ export const DataDisplay = ({
     return (
       <div className="flex flex-row gap-3">
         <Glow>
-          <span className="h-full w-1.5 bg-primary-light rounded-l-xl block" />
+          <span className="h-full w-1.5 bg-primary rounded-l-xl block" />
         </Glow>
         <div
           className={`flex flex-col justify-center ${determineAlign('left')}`}

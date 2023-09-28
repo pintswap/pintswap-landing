@@ -31,9 +31,9 @@ const Button = (props: IButtonProps) => {
         return 'py-1.5 px-4';
     }
   };
-  const btnClass = `inline-block font-semibold rounded-lg text-center ${sizeClass()} transition duration-150 text-neutral-100 hover:text-neutral-300 border border-1 ${
-    props.borderColor || 'border-primary'
-  } bg-gradient-to-br from-primary to-primary-dark cursor-pointer`;
+  const btnClass = `inline-block font-semibold rounded-lg text-center ${sizeClass()} text-neutral-100 border border-1 ${
+    props.borderColor || 'border-primary-dark'
+  } cursor-pointer`;
 
   switch (props.type) {
     case 'link': {
@@ -151,27 +151,12 @@ const Button = (props: IButtonProps) => {
     }
     case 'outline': {
       return (
-        <button
-          onClick={props.onClick}
-          className={`${btnClass} !from-[rgba(0,0,0,0.5)] !to-[rgba(0,0,0.5)] ${
-            props.className ? props.className : ''
-          } ${
-            props.disabled
-              ? 'cursor-not-allowed !shadow-none !text-slate-800 hover:!to-slate-'
-              : ''
-          }`}
-          disabled={props.disabled}
-        >
-          {props.loading ? (
-            <span className="flex justify-center items-center gap-2">
-              <span>
-                {props.loadingText ? props.loadingText : props.children}
-              </span>
-              <SpinnerLoader height="min-h-0" color="text-slate-800" />
+        <button className="btn-hover outline-click rounded-lg p-0.5 text-white hover:text-neutral-200 w-full">
+          <div className="flex h-full w-full items-center justify-center bg-neutral-900 back rounded-lg">
+            <span className={`${sizeClass()} font-medium`}>
+              {props.children}
             </span>
-          ) : (
-            <>{props.children}</>
-          )}
+          </div>
         </button>
       );
     }
@@ -179,9 +164,11 @@ const Button = (props: IButtonProps) => {
       return (
         <button
           onClick={props.onClick}
-          className={`${btnClass} ${props.className ? props.className : ''} ${
+          className={`${btnClass} btn-hover fill-click ${
+            props.className ? props.className : ''
+          } ${
             props.disabled
-              ? 'cursor-not-allowed !shadow-none !text-slate-800 hover:!to-slate-'
+              ? 'cursor-not-allowed !shadow-none !text-slate-800 hover:!to-slate-800'
               : ''
           }`}
           disabled={props.disabled}

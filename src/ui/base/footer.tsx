@@ -4,7 +4,7 @@ import { Section } from '../layouts';
 
 const Footer = () => (
   <Section
-    background="bg-primary-dark"
+    background="bg-neutral-900"
     type="wide"
     padding="y"
     wrapperClass="mt-24"
