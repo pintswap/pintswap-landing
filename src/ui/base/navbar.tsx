@@ -31,7 +31,7 @@ const Navbar = () => {
       >
         <div className="flex flex-wrap justify-between items-center mx-auto">
           <Link href="/">
-            <div className="max-w-[190px] max-h-[36px]">
+            <div className="max-w-[160px] max-h-[30px]">
               <Image
                 src={'/assets/logo/pintswap-logo.svg'}
                 alt="PintSwap is a decentralized, P2P OTC crypto exchange"
