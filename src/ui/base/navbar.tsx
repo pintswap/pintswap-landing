@@ -89,7 +89,9 @@ const Navbar = () => {
                 <Button
                   type="link"
                   noIcon
-                  className="text-lg p-2 font-medium mx-auto"
+                  className={`text-lg p-2 font-medium mx-auto ${
+                    isMobileOpen ? '' : 'opacity-0'
+                  }`}
                 >
                   {el.text}
                 </Button>
@@ -101,7 +103,7 @@ const Navbar = () => {
             <Link
               href="https://app.pintswap.exchange"
               target="_blank"
-              className="w-full"
+              className={`w-full ${isMobileOpen ? '' : 'opacity-0'}`}
             >
               <Button className="text-lg w-full">Enter App</Button>
             </Link>

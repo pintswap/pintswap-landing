@@ -13,13 +13,13 @@ export const AnimatedHamburger = ({ state, className }: IHamburgerProps) => {
     >
       <div
         className={`${genericHamburgerLine} ${
-          state ? 'rotate-45 translate-y-[9px]' : ''
+          state ? 'rotate-45 translate-y-[8px]' : ''
         }`}
       />
       <div className={`${genericHamburgerLine} ${state ? 'opacity-0' : ''}`} />
       <div
         className={`${genericHamburgerLine} ${
-          state ? '-rotate-45 -translate-y-[9px]' : ''
+          state ? '-rotate-45 -translate-y-[8px]' : ''
         }`}
       />
     </div>
