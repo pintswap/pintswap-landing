@@ -1,5 +1,11 @@
 import { MouseEventHandler, ReactNode } from 'react';
-import { FaPlay, FaBook, FaNewspaper, FaChevronRight } from 'react-icons/fa';
+import {
+  FaPlay,
+  FaBook,
+  FaNewspaper,
+  FaChevronRight,
+  FaChevronLeft,
+} from 'react-icons/fa';
 import { MdLocalDrink } from 'react-icons/md';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { SpinnerLoader } from './spinner-loader';
@@ -17,6 +23,7 @@ type IButtonProps = {
   type?: 'cta' | 'link' | 'wallet' | 'outline' | 'default';
   size?: 'lg' | 'md' | 'sm';
   borderColor?: `border-${string}`;
+  back?: boolean;
 };
 
 const Button = (props: IButtonProps) => {
@@ -43,8 +50,9 @@ const Button = (props: IButtonProps) => {
             props.className || ''
           } flex items-center gap-1.5 transition duration-150 hover:text-neutral-300`}
         >
-          {props.children}
-          {!props.noIcon && <FaChevronRight size="12px" />}
+          {!props.noIcon && props.back && <FaChevronLeft size="12px" />}
+          <span className="pt-0.5">{props.children}</span>
+          {!props.noIcon && !props.back && <FaChevronRight size="12px" />}
         </button>
       );
     }

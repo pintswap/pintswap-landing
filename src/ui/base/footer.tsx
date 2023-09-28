@@ -7,7 +7,7 @@ const Footer = () => (
     background="bg-neutral-900"
     type="wide"
     padding="y"
-    wrapperClass="mt-24"
+    wrapperClass="mt-16"
   >
     <div className="flex flex-col-reverse gap-2 justify-center items-center lg:grid lg:grid-cols-3">
       <span className="text-xs">

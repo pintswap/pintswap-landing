@@ -8,7 +8,6 @@ import { Footer } from './footer';
 
 type IBaseProps = {
   children?: ReactNode;
-  nav?: boolean;
 };
 
 const Base = (props: IBaseProps) => {
