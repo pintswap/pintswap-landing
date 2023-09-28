@@ -9,7 +9,7 @@ import { AnimatedHamburger } from '../components';
 
 const NAV_ITEMS = [
   {
-    text: 'Stats',
+    text: 'Analytics',
     link: 'https://analytics.pintswap.exchange',
     target: '_blank',
   },
@@ -85,8 +85,12 @@ const Navbar = () => {
         <ul className="flex flex-col w-screen bg-neutral-900 shadow-md p-2 items-start justify-end gap-1 pb-2 min-h-[16rem]">
           {NAV_ITEMS.map((el, i) => (
             <li key={`nav-item-${i}`} className="w-full">
-              <Link href={el.link} target={el.target}>
-                <Button type="link" noIcon className="text-lg p-2 font-medium">
+              <Link href={el.link} target={el.target} className="text-center">
+                <Button
+                  type="link"
+                  noIcon
+                  className="text-lg p-2 font-medium mx-auto"
+                >
                   {el.text}
                 </Button>
               </Link>

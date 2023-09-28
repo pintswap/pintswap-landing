@@ -114,11 +114,13 @@ const Index = () => {
           <div className="flex flex-col md:items-center md:flex-row justify-between">
             <div className="flex flex-col gap-4 md:gap-6">
               <div className="flex flex-col gap-2">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight">
-                  <span>P2P Crypto Trading</span>
+                <h1 className="leading-tight">
+                  <span className="text-3xl font-medium">
+                    P2P Crypto Trading
+                  </span>
                   <br />
-                  <span className="text-accent-light">
-                    Zero Slippage. Zero Taxes.
+                  <span className="text-accent-light text-5xl font-semibold">
+                    Zero Slippage. <br className="sm:hidden" /> Zero Taxes.
                   </span>
                 </h1>
                 <p className="text-lg text-neutral-300">
@@ -137,7 +139,7 @@ const Index = () => {
                   target="_blank"
                   className="w-full sm:w-fit"
                 >
-                  <Button type="outline" size="lg" className="w-full sm:w-fit">
+                  <Button size="lg" className="w-full sm:w-fit">
                     Get started
                   </Button>
                 </Link>
@@ -168,7 +170,7 @@ const Index = () => {
           </div>
         </Section>
 
-        <Section wrapperClass="mt-12 ">
+        <Section wrapperClass="mt-10 sm:mt-12">
           <div className="flex flex-col md:grid md:grid-cols-3 gap-4">
             <DataDisplay value="1000000" text="Daily Volume" type="fancy" />
             <DataDisplay value="1852124" text="Transactions" type="fancy" />
@@ -179,9 +181,9 @@ const Index = () => {
         <Section
           padding="y"
           id="how-it-works"
-          wrapperClass="mt-24 xl:mt-32 2xl:mt-36"
+          wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
         >
-          <div className="text-center mb-12 2xl:mb-20">
+          <div className="text-center mb-10 sm:mb-12 2xl:mb-20">
             <h2 className="text-3xl md:text-4xl font-medium">
               Trading Made <span className="text-accent-light">Easy</span>
             </h2>
@@ -190,7 +192,7 @@ const Index = () => {
               trading.
             </h4>
           </div>
-          <div className="bg-gradient-to-b from-black to-neutral-900 rounded-3xl">
+          <div className="bg-gradient-to-b from-black to-white rounded-3xl">
             <Tab.Group>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 pb-8">
                 <Tab.List className="grid grid-cols-2 lg:grid-cols-1 lg:px-4 gap-2 lg:gap-4">
@@ -205,7 +207,7 @@ const Index = () => {
                         <div
                           className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between text-center ${
                             selected
-                              ? 'bg-neutral-800 hover:bg-neutral-800'
+                              ? 'bg-neutral-800 hover:bg-neutral-800 !border-primary-light'
                               : 'hover:bg-neutral-900'
                           }`}
                         >
@@ -226,7 +228,7 @@ const Index = () => {
                     </Tab>
                   ))}
                 </Tab.List>
-                <Tab.Panels className="px-1 lg:px-4 mt-2">
+                <Tab.Panels className="px-1 lg:px-4 mt-2 text-black">
                   {TabItems.map((x, i) => (
                     <Tab.Panel key={`how-it-works-panel-${i}`}>
                       <h3 className="text-3xl font-medium">{x.title}</h3>
@@ -244,7 +246,7 @@ const Index = () => {
           padding="none"
           type="wide"
           background="bg-neutral-900"
-          wrapperClass="mt-24 xl:mt-32 2xl:mt-36"
+          wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
         >
           <div className="p-4">
             <div className="text-center mb-2">
