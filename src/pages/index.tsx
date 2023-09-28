@@ -135,12 +135,12 @@ const Index = () => {
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-3 lg:gap-4 px-2 md:px-0">
                 <Link
-                  href="https://pintswap.eth.limo"
+                  href="https://app.pintswap.exchange"
                   target="_blank"
                   className="w-full sm:w-fit"
                 >
                   <Button size="lg" className="w-full sm:w-fit">
-                    Get started
+                    Launch App
                   </Button>
                 </Link>
                 <Link
@@ -295,8 +295,8 @@ const Index = () => {
                 </h3>
                 <p>
                   <span className="">
-                    Our telegram bot enables users to easily enter and exit
-                    trades quickly.
+                    Our telegram bot enables users to quickly enter and exit
+                    trades.
                   </span>
                   <br />
                   <br />

@@ -55,7 +55,7 @@ const Navbar = () => {
               ))}
               <li>
                 {/* <Button wallet>Connect</Button> */}
-                <Link href="https://pintswap.eth.limo" target="_blank">
+                <Link href="https://app.pintswap.exchange" target="_blank">
                   <Button>Launch{width > breakpoints.md ? ' App' : ''}</Button>
                 </Link>
               </li>
@@ -99,7 +99,7 @@ const Navbar = () => {
           <li className="w-full">
             {/* <Button wallet>Connect</Button> */}
             <Link
-              href="https://pintswap.eth.limo"
+              href="https://app.pintswap.exchange"
               target="_blank"
               className="w-full"
             >
