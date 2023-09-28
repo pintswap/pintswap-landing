@@ -49,6 +49,7 @@
           "warn",
           { "argsIgnorePattern": "^_" }
         ],
+        "no-nested-ternary": "off",
         "@typescript-eslint/no-unused-expressions": "warn"
       }
     }

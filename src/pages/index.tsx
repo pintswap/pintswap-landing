@@ -166,11 +166,17 @@ const Index = () => {
         </Section>
 
         <Section wrapperClass="mt-10 sm:mt-12">
-          <div className="flex flex-col md:grid md:grid-cols-3 gap-4">
+          <ParallaxScrollWrapper
+            animation="opacity"
+            reverse
+            startValue={2}
+            endValue={0.2}
+            className="flex flex-col md:grid md:grid-cols-3 gap-4"
+          >
             <DataDisplay value="1000000" text="Daily Volume" type="fancy" />
             <DataDisplay value="1852124" text="Transactions" type="fancy" />
             <DataDisplay value="8" text="Peers" type="fancy" />
-          </div>
+          </ParallaxScrollWrapper>
         </Section>
 
         <Section
@@ -178,69 +184,76 @@ const Index = () => {
           id="how-it-works"
           wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
         >
-          <div className="text-center mb-10 sm:mb-12 2xl:mb-20">
-            <h2 className="text-3xl md:text-4xl font-medium">
-              Trading Made <span className="text-accent-light">Easy</span>
-            </h2>
-            <h4 className="text-neutral-300">
-              We abstract the complexities of the tech, so you can focus on the
-              trading.
-            </h4>
-          </div>
-          <div className="bg-gradient-to-b from-black to-neutral-900 rounded-3xl">
-            <Tab.Group>
-              <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 gap-6 px-4 pb-8">
-                <Tab.List className="grid grid-cols-2 lg:flex lg:flex-col lg:px-4 gap-2 lg:gap-4 lg:mt-10">
-                  {TabItems.map((x, i) => (
-                    <Tab
-                      key={`how-it-works-tab-${i}`}
-                      className={
-                        'ring-0 focus-visible:ring-0 focus:outline-0 focus:ring-0 focus-visible:outline-0'
-                      }
-                    >
-                      {({ selected }) => (
-                        <div
-                          className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between text-center ${
-                            selected
-                              ? 'bg-neutral-800 hover:bg-neutral-800 !border-neutral-300'
-                              : 'hover:bg-neutral-900'
-                          }`}
-                        >
-                          <div className="flex items-center gap-2">
-                            <x.icon
-                              size={20}
-                              color="#FF6FA9"
+          <ParallaxScrollWrapper
+            animation="opacity"
+            reverse
+            startValue={2}
+            endValue={0.2}
+          >
+            <div className="text-center mb-10 sm:mb-12 2xl:mb-20">
+              <h2 className="text-3xl md:text-4xl font-medium">
+                Trading Made <span className="text-accent-light">Easy</span>
+              </h2>
+              <h4 className="text-neutral-300">
+                We abstract the complexities of the tech, so you can focus on
+                the trading.
+              </h4>
+            </div>
+            <div className="bg-gradient-to-b from-black to-neutral-900 rounded-3xl">
+              <Tab.Group>
+                <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 gap-6 px-4 pb-8">
+                  <Tab.List className="grid grid-cols-2 lg:flex lg:flex-col lg:px-4 gap-2 lg:gap-4 lg:mt-10">
+                    {TabItems.map((x, i) => (
+                      <Tab
+                        key={`how-it-works-tab-${i}`}
+                        className={
+                          'ring-0 focus-visible:ring-0 focus:outline-0 focus:ring-0 focus-visible:outline-0'
+                        }
+                      >
+                        {({ selected }) => (
+                          <div
+                            className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between text-center ${
+                              selected
+                                ? 'bg-neutral-800 hover:bg-neutral-800 !border-neutral-300'
+                                : 'hover:bg-neutral-900'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2">
+                              <x.icon
+                                size={20}
+                                color="#FF6FA9"
+                                className="hidden md:block"
+                              />
+                              <span>{x.title}</span>
+                            </div>
+                            <MdChevronRight
+                              size={24}
                               className="hidden md:block"
                             />
-                            <span>{x.title}</span>
                           </div>
-                          <MdChevronRight
-                            size={24}
-                            className="hidden md:block"
-                          />
-                        </div>
-                      )}
-                    </Tab>
-                  ))}
-                </Tab.List>
-                <Tab.Panels className="px-1 lg:px-4 mt-2">
-                  {TabItems.map((x, i) => (
-                    <Tab.Panel key={`how-it-works-panel-${i}`}>
-                      <h3 className="text-3xl font-medium">{x.title}</h3>
-                      <p>{x.text}</p>
-                      <Image
-                        src="https://placehold.co/500x300"
-                        width={600}
-                        height={400}
-                        alt=""
-                        className="p-2 mt-4"
-                      />
-                    </Tab.Panel>
-                  ))}
-                </Tab.Panels>
-              </div>
-            </Tab.Group>
-          </div>
+                        )}
+                      </Tab>
+                    ))}
+                  </Tab.List>
+                  <Tab.Panels className="px-1 lg:px-4 mt-2">
+                    {TabItems.map((x, i) => (
+                      <Tab.Panel key={`how-it-works-panel-${i}`}>
+                        <h3 className="text-3xl font-medium">{x.title}</h3>
+                        <p>{x.text}</p>
+                        <Image
+                          src="https://placehold.co/500x250"
+                          width={600}
+                          height={400}
+                          alt=""
+                          className="p-2 mt-4"
+                        />
+                      </Tab.Panel>
+                    ))}
+                  </Tab.Panels>
+                </div>
+              </Tab.Group>
+            </div>
+          </ParallaxScrollWrapper>
         </Section>
 
         {/* <Section
@@ -280,7 +293,7 @@ const Index = () => {
             <Split>
               <ParallaxScrollWrapper>
                 <Image
-                  src="https://placehold.co/300x350"
+                  src="https://placehold.co/300x300"
                   alt="Swap module preview on PintSwap app"
                   width={300}
                   height={400}
@@ -316,7 +329,9 @@ const Index = () => {
                   </span>
                   .
                 </p>
-                <Button className="sm:w-fit">Launch Telegram Bot</Button>
+                <Link href="#" target="_blank">
+                  <Button className="sm:w-fit">Launch Telegram Bot</Button>
+                </Link>
               </ParallaxScrollWrapper>
             </Split>
           </div>
