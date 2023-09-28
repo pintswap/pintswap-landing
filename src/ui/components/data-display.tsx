@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Skeleton } from './skeleton';
 import { Glow } from './glow';
 import CountUp from 'react-countup';
+import { useWindowSize } from '../../hooks';
 
 type IDataDisplay = {
   value: string | number;
@@ -11,6 +12,7 @@ type IDataDisplay = {
   loading?: boolean;
   align?: 'center' | 'left' | 'right';
   type?: 'fancy' | 'simple';
+  usd?: boolean;
 };
 
 export const DataDisplay = ({
@@ -21,7 +23,9 @@ export const DataDisplay = ({
   loading,
   align,
   type = 'simple',
+  usd,
 }: IDataDisplay) => {
+  const { width, breakpoints } = useWindowSize();
   const determineAlign = (_align?: 'center' | 'left' | 'right') => {
     switch (_align || align) {
       case 'left':
@@ -41,10 +45,20 @@ export const DataDisplay = ({
         <div
           className={`flex flex-col justify-center ${determineAlign('left')}`}
         >
-          <span className={`text-3xl lg:text-4xl font-medium ${color || ''}`}>
-            <CountUp end={Number(value)} />
-          </span>
-          <span className="text-sm text-neutral-400">{text}</span>
+          <Skeleton
+            width={width < breakpoints.sm ? 'w-[32px]' : 'w-[36px]'}
+            height={width < breakpoints.sm ? 'h-[30px]' : 'h-[36px]'}
+            loading={loading}
+          >
+            <span
+              className={`text-3xl lg:text-4xl font-medium ${
+                color || ''
+              } leading-none`}
+            >
+              <CountUp prefix={usd ? '$' : ''} end={Number(value)} />
+            </span>
+          </Skeleton>
+          <span className="text-sm text-neutral-400 mt-1">{text}</span>
         </div>
       </div>
     );

@@ -50,7 +50,7 @@
 .btn-hover.outline-click {
   background-size: 200% 100%;
     background-image: linear-gradient(to right, #FF6FA9, #FF4878, #FF6FA9);
-    box-shadow: 0 2px 6px 0 rgba(116, 79, 168, 0.3);
+    box-shadow: 0 2px 6px 0 rgba(116, 79, 168, 0.3); 
 }
 
 .btn-hover.outline-click:hover {

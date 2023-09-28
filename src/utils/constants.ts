@@ -20,3 +20,18 @@ export const EXPLORER_URLS: any = {
   sepolia: 'https://sepolia.etherscan.io',
   mainnet: 'https://etherscan.io',
 };
+
+export const SUBGRAPH_ENDPOINTS = {
+  pintswap:
+    'https://api.thegraph.com/subgraphs/name/pintswap/token-transfers-eth',
+  uniswapv2: 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v2-dev',
+  uniswapv3: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',
+};
+
+export const CHAINS_BY_ID: Record<string, string> = {
+  '1': 'Ethereum',
+};
+
+// Cache
+export const SYMBOL_CACHE: Record<string, string> = {};
+export const DECIMAL_CACHE: Record<string, number> = {};

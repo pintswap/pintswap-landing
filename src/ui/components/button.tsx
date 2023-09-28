@@ -159,8 +159,8 @@ const Button = (props: IButtonProps) => {
     }
     case 'outline': {
       return (
-        <button className="btn-hover outline-click rounded-lg p-0.5 text-white hover:text-neutral-200 w-full">
-          <div className="flex h-full w-full items-center justify-center bg-neutral-900 back rounded-lg">
+        <button className="btn-hover outline-click rounded-lg p-0.5 w-full">
+          <div className="flex h-full w-full items-center justify-center transtion duration-150 bg-neutral-900 text-white hover:text-neutral-100 hover:bg-[rgb(18,18,18)] back rounded-lg">
             <span className={`${sizeClass()} font-medium`}>
               {props.children}
             </span>

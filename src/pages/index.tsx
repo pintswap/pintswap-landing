@@ -17,6 +17,7 @@ import {
   MdSupervisorAccount,
   MdAvTimer,
 } from 'react-icons/md';
+import { useSubgraphStore } from '../stores';
 
 const ParallaxItems: any = [
   {
@@ -93,6 +94,8 @@ const TabItems = [
 const Partners = ['Pepe Analytics'];
 
 const Index = () => {
+  const { tokenStats, loading } = useSubgraphStore();
+  const isLoading = tokenStats?.all?.transactions === 0 || loading;
   return (
     <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
       {ParallaxItems.map((x: any, i: number) => (
@@ -166,9 +169,26 @@ const Index = () => {
             endValue={0.2}
             className="flex flex-col md:grid md:grid-cols-3 gap-4"
           >
-            <DataDisplay value="1000000" text="Daily Volume" type="fancy" />
-            <DataDisplay value="1852124" text="Transactions" type="fancy" />
-            <DataDisplay value="8" text="Peers" type="fancy" />
+            <DataDisplay
+              loading={isLoading}
+              usd
+              value={tokenStats?.all?.amountUsd || 0}
+              text="Total Volume"
+              type="fancy"
+            />
+            <DataDisplay
+              loading={isLoading}
+              value={tokenStats?.all?.transactions || 0}
+              text="Transactions"
+              type="fancy"
+            />
+            {/* TODO: connect */}
+            <DataDisplay
+              loading={isLoading}
+              value="8"
+              text="Peers"
+              type="fancy"
+            />
           </ParallaxScrollWrapper>
         </Section>
 
@@ -214,7 +234,7 @@ const Index = () => {
                             <div className="flex items-center gap-2">
                               <x.icon
                                 size={20}
-                                color="#FF6FA9"
+                                color={selected ? '#ff3869' : '#FF6FA9'}
                                 className="hidden md:block"
                               />
                               <span>{x.title}</span>
