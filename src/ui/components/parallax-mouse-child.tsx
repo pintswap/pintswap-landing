@@ -14,6 +14,7 @@ type IParallaxChild = {
   className?: string;
   inverted?: boolean;
   animation?: string;
+  blur?: `blur-${string}`;
 };
 
 const defaultParallaxStyle: any = { position: 'absolute', zIndex: '99' };
@@ -32,6 +33,7 @@ export const ParallaxMouseChild = ({
   className,
   inverted,
   animation = 'duration-[2000ms]',
+  blur,
 }: IParallaxChild) => {
   return (
     <MouseParallaxChild
@@ -52,7 +54,7 @@ export const ParallaxMouseChild = ({
         width={width}
         height={height}
         alt={alt || 'Parallax PintSwap Image'}
-        className={`floating ${animation}`}
+        className={`floating ${animation} ${blur || ''}`}
       />
     </MouseParallaxChild>
   );

@@ -20,15 +20,16 @@ import {
 
 const ParallaxItems: any = [
   {
-    img: 'bubble-1.png',
+    img: '/assets/img/bubble-1-min.png',
     top: '494px',
     left: '98px',
     width: 68,
     height: 80,
     factor: 0.6,
+    blur: 'blur-[3px]',
   },
   {
-    img: 'bubble-2.png',
+    img: '/assets/img/bubble-2-min.png',
     top: '147px',
     left: '-55px',
     width: 160,
@@ -37,7 +38,7 @@ const ParallaxItems: any = [
     inverted: true,
   },
   {
-    img: 'bubble-3.png',
+    img: '/assets/img/bubble-3-min.png',
     top: '98px',
     right: '-10px',
     width: 230,
@@ -46,21 +47,23 @@ const ParallaxItems: any = [
     className: 'hidden md:block',
   },
   {
-    img: 'bubble-4.png',
+    img: '/assets/img/bubble-4-min.png',
     top: '306px',
     left: '206px',
     width: 136,
     height: 114,
     factor: 0.1,
+    blur: 'blur-[1.5px]',
   },
   {
-    img: 'bubble-5.png',
+    img: '/assets/img/bubble-1-min.png',
     top: '374px',
     right: '256px',
     width: 63,
     height: 73,
     factor: 0.4,
     inverted: true,
+    blur: 'blur-[1.5px]',
   },
 ];
 
@@ -93,18 +96,7 @@ const Index = () => {
   return (
     <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
       {ParallaxItems.map((x: any, i: number) => (
-        <ParallaxMouseChild
-          key={`parallax-${i}`}
-          img={`/assets/img/${x.img}`}
-          top={x.top}
-          left={x.left}
-          right={x.right}
-          height={x.height}
-          width={x.width}
-          factor={x.factor}
-          className={x.className}
-          inverted={x.inverted}
-        />
+        <ParallaxMouseChild key={`parallax-${i}`} {...x} />
       ))}
 
       <Base>
@@ -156,10 +148,11 @@ const Index = () => {
             </div>
             <div className="hidden md:flex">
               <Image
-                src="/assets/img/swap-module.png"
+                src="/assets/img/swap-module-min.png"
                 alt="Swap module preview on PintSwap app"
                 width={420}
                 height={410}
+                className="rounded-lg shadow-[-3px_-3px_12px_2px_rgba(0,0,0,0.6),_3px_3px_12px_2px_rgba(0,0,0,0.6)]"
               />
             </div>
           </div>
