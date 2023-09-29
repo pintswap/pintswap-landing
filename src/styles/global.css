@@ -64,6 +64,20 @@
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
 }
+
+.floating-slow { 
+    animation-name: floating;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.floating-fast { 
+    animation-name: floating;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
  
 @keyframes floating {
 	0% {

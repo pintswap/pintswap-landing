@@ -28,6 +28,7 @@ const ParallaxItems: any = [
     height: 80,
     factor: 0.6,
     blur: 'blur-[3px]',
+    speed: 'floating-fast',
   },
   {
     img: '/assets/img/bubble-2-min.png',
@@ -37,6 +38,7 @@ const ParallaxItems: any = [
     height: 181,
     factor: 0.3,
     inverted: true,
+    speed: 'floating-fast',
   },
   {
     img: '/assets/img/bubble-3-min.png',
@@ -46,6 +48,7 @@ const ParallaxItems: any = [
     height: 233,
     factor: 0.2,
     className: 'hidden md:block',
+    speed: 'floating-slow',
   },
   {
     img: '/assets/img/bubble-4-min.png',
@@ -65,6 +68,7 @@ const ParallaxItems: any = [
     factor: 0.4,
     inverted: true,
     blur: 'blur-[1.5px]',
+    speed: 'floating-fast',
   },
 ];
 
