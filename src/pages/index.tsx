@@ -72,22 +72,22 @@ const TabItems = [
   {
     title: 'Zero Slippage',
     icon: MdOutlineWater,
-    text: 'Trade with zero slippage, like it used to be. Comfortably swap large sums without the risk of losing anything.',
+    text: 'Trade with zero slippage, like how it should be. Swap large sums with confidence, without the risk of any surprising losses.',
   },
   {
     title: 'Zero Taxes',
     icon: MdOutlineLocalOffer,
-    text: 'Always trade with zero buy and sell taxes via PintSwap. Trading is not "buying" or "selling", so why pay that unnecessary fee.',
+    text: "Trade with zero buy and sell taxes via PintSwap. Trading shouldn't involve any hidden fees, so we created a way to avoid them.",
   },
   {
     title: 'Peer-to-Peer',
     icon: MdSupervisorAccount,
-    text: 'Trade decentralized and permissionsless directly with your peers via LibP2P.',
+    text: 'Engage in decentralized and permissionless trading directly with your peers using LibP2P.',
   },
   {
     title: 'Limit Orders',
     icon: MdAvTimer,
-    text: 'The ability to place limit orders to get that CEX-like experience.',
+    text: 'Take control of your trades with the capability to place limit-orders for a CEX-like trading experience.',
   },
 ];
 
@@ -120,12 +120,11 @@ const Index = () => {
                 </h1>
                 <p className="sm:text-lg text-neutral-300">
                   Trade <span className="font-semibold">low-liquidity</span>{' '}
-                  crypto without all the{' '}
+                  tokens without all the{' '}
                   <span className="font-semibold">BS</span>. With our Telegram
                   bot
-                  <br className="hidden md:block" />
-                  and integrated app, enter and exit lowcaps with{' '}
-                  <span className="font-semibold">ease</span>.
+                  <br className="hidden md:block" /> and web app, enter and exit
+                  lowcaps with <span className="font-semibold">ease</span>.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-3 lg:gap-4 px-2 md:px-0">
@@ -135,7 +134,7 @@ const Index = () => {
                   className="w-full sm:w-fit"
                 >
                   <Button size="lg" className="w-full sm:w-fit">
-                    Launch App
+                    Enter App
                   </Button>
                 </Link>
                 <Link
@@ -155,7 +154,7 @@ const Index = () => {
                 alt="Swap module preview on PintSwap app"
                 width={420}
                 height={410}
-                className="rounded-lg shadow-[-3px_-3px_12px_2px_rgba(0,0,0,0.6),_3px_3px_12px_2px_rgba(0,0,0,0.6)]"
+                className="rounded-lg shadow-[-3px_-3px_12px_2px_rgba(0,0,0,0.5),_3px_3px_12px_2px_rgba(0,0,0,0.5)]"
               />
             </div>
           </div>
@@ -208,8 +207,8 @@ const Index = () => {
                 Trading Made <span className="text-accent-light">Easy</span>
               </h2>
               <h4 className="text-neutral-300">
-                We abstract the complexities of the tech, so you can focus on
-                the trading.
+                We simplify the technical complexities, allowing you to focus on
+                trading.
               </h4>
             </div>
             <div className="bg-gradient-to-b from-black to-neutral-900 rounded-3xl">
@@ -326,7 +325,7 @@ const Index = () => {
                   </span>
                   <br />
                   <br />
-                  If the order exists in the{' '}
+                  When the order exists in the{' '}
                   <Link href="https://docs.pintswap.com/" className="underline">
                     PintSwap orderbook
                   </Link>
