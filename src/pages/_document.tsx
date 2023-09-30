@@ -6,7 +6,11 @@ import { AppConfig } from '../utils/app-config';
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang={AppConfig.locale}>
+      <Html
+        lang={AppConfig.locale}
+        className="scroll-smooth"
+        style={{ scrollBehavior: 'smooth' }}
+      >
         <Head />
         <body>
           <Main />

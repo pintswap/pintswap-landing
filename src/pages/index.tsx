@@ -86,7 +86,7 @@ const TabItems = [
   {
     title: 'Peer-to-Peer',
     icon: MdSupervisorAccount,
-    text: 'Engage in decentralized and permissionless trading directly with your peers using LibP2P.',
+    text: 'Engage in decentralized and permissionless trading directly with your peers using LibP2P, making OTC trades easy.',
   },
   {
     title: 'Limit Orders',
@@ -114,7 +114,7 @@ const Index = () => {
             <div className="flex flex-col gap-4 md:gap-6">
               <div className="flex flex-col gap-2">
                 <h1 className="leading-tight">
-                  <span className="text-2xl sm:text-3xl font-medium">
+                  <span className="text-2xl md:text-3xl font-medium">
                     P2P Crypto Trading
                   </span>
                   <br />
@@ -141,11 +141,7 @@ const Index = () => {
                     Enter App
                   </Button>
                 </Link>
-                <Link
-                  href="https://docs.pintswap.exchange"
-                  target="_blank"
-                  className="w-full sm:w-fit"
-                >
+                <Link href="#how-it-works" className="w-full sm:w-fit">
                   <Button type="outline" size="lg" className="w-full sm:w-fit">
                     How it works
                   </Button>
@@ -197,7 +193,7 @@ const Index = () => {
 
         <Section
           padding="y"
-          id="how-it-works"
+          id="features"
           wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
         >
           <ParallaxScrollWrapper
@@ -206,7 +202,7 @@ const Index = () => {
             startValue={2}
             endValue={0.2}
           >
-            <div className="text-center mb-10 sm:mb-12 2xl:mb-20">
+            <ParallaxScrollWrapper className="text-center mb-10 sm:mb-12 2xl:mb-20">
               <h2 className="text-3xl md:text-4xl font-medium">
                 Trading Made <span className="text-accent-light">Easy</span>
               </h2>
@@ -214,7 +210,7 @@ const Index = () => {
                 We simplify the technical complexities, allowing you to focus on
                 trading.
               </h4>
-            </div>
+            </ParallaxScrollWrapper>
             <div className="bg-gradient-to-b from-black to-neutral-900 rounded-3xl">
               <Tab.Group>
                 <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 gap-6 px-4 pb-8">
@@ -301,55 +297,119 @@ const Index = () => {
         </Section> */}
 
         <Section
-          id="learn-more"
+          id="how-it-works"
           padding="y"
-          wrapperClass="mt-24 xl:mt-32 2xl:mt-36"
+          wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
         >
+          <ParallaxScrollWrapper className="text-center mb-10 sm:mb-12 2xl:mb-20">
+            <h2 className="text-3xl md:text-4xl font-medium">
+              <span className="text-accent-light">How</span> It Works
+            </h2>
+            <h4 className="text-neutral-300">
+              Think of us like a combination of Uniswap and Unibot, but better.
+            </h4>
+          </ParallaxScrollWrapper>
           <div className="flex flex-col gap-24 md:gap-12 lg:gap-24 2xl:gap-32">
-            <Split>
-              <ParallaxScrollWrapper>
-                <Image
-                  src="https://placehold.co/300x300"
-                  alt="Swap module preview on PintSwap app"
-                  width={300}
-                  height={400}
-                />
-              </ParallaxScrollWrapper>
-              <ParallaxScrollWrapper
-                reverse
-                className="mt-4 flex flex-col gap-3 md:gap-4"
-              >
-                <h3 className="text-3xl font-medium">
-                  Seamless Trading Experience
-                </h3>
-                <p>
-                  <span className="">
-                    Our telegram bot enables users to quickly enter and exit
-                    trades.
-                  </span>
-                  <br />
-                  <br />
-                  When the order exists in the{' '}
-                  <Link href="https://docs.pintswap.com/" className="underline">
-                    PintSwap orderbook
+            <ParallaxScrollWrapper
+              animation="opacity"
+              reverse
+              startValue={2}
+              endValue={0.2}
+            >
+              <Split>
+                <ParallaxScrollWrapper>
+                  <Image
+                    src="https://placehold.co/300x300"
+                    alt="Swap module preview on PintSwap app"
+                    width={300}
+                    height={400}
+                  />
+                </ParallaxScrollWrapper>
+                <ParallaxScrollWrapper
+                  reverse
+                  className="mt-4 flex flex-col gap-3 md:gap-4"
+                >
+                  <div className="flex flex-col">
+                    <span className="text-accent-light">
+                      Public and OTC Features
+                    </span>
+                    <h3 className="text-3xl font-medium">
+                      Peer-to-Peer Technology
+                    </h3>
+                  </div>
+                  <p>
+                    We have an orderbook like other exchanges, without the
+                    centralization.
+                  </p>
+                  <p>
+                    Our orderbook is made up of multiple user orderbooks
+                    empowering users to decide if they want everyone to see
+                    their trade or if they just want to privately share it with
+                    someone.
+                  </p>
+                  <Link
+                    href="https://app.pintswap.exchange/#/markets"
+                    target="_blank"
+                    className="sm:w-fit"
+                  >
+                    <Button className="sm:w-fit" type="outline">
+                      See Available Trades
+                    </Button>
                   </Link>
-                  , our{' '}
-                  <Link href="https://docs.pintswap.com/" className="underline">
-                    trading engine
-                  </Link>{' '}
-                  will instantly match to the appropriate offer at the best
-                  price with{' '}
-                  <span className="font-semibold">zero slippage</span> and{' '}
-                  <span className="font-semibold">
-                    avoiding any token taxes
-                  </span>
-                  .
-                </p>
-                <Link href="#" target="_blank">
-                  <Button className="sm:w-fit">Launch Telegram Bot</Button>
-                </Link>
-              </ParallaxScrollWrapper>
-            </Split>
+                </ParallaxScrollWrapper>
+              </Split>
+            </ParallaxScrollWrapper>
+            <ParallaxScrollWrapper
+              animation="opacity"
+              reverse
+              startValue={2}
+              endValue={0.2}
+            >
+              <Split>
+                <ParallaxScrollWrapper
+                  reverse
+                  className="mt-4 flex flex-col gap-3 md:gap-4 order-2 md:order-1"
+                >
+                  <div className="flex flex-col">
+                    <span className="text-accent-light">
+                      Automatic Matching
+                    </span>
+                    <h3 className="text-3xl font-medium">
+                      Seamless Trading Experience
+                    </h3>
+                  </div>
+                  <p>
+                    We find the best trade possible, even if it&apos;s not on
+                    our orderbook.
+                  </p>
+                  <p>
+                    With our{' '}
+                    <Link
+                      href="https://github.com/pintswap/pintswap-engine"
+                      className="underline"
+                    >
+                      trading engine
+                    </Link>
+                    , we&apos;ll quickly match your offer with another user. If
+                    that isn&apos;t available, the engine routes trades through
+                    exchange aggregator, so users still quickly execute trades
+                    at the best price and are not limited to PintSwap&apos;s
+                    orderbook.
+                  </p>
+                  <Link href="#" target="_blank">
+                    <Button className="sm:w-fit">Launch Telegram Bot</Button>
+                  </Link>
+                </ParallaxScrollWrapper>
+                <ParallaxScrollWrapper className="order-1 md:order-2">
+                  <Image
+                    src="https://placehold.co/300x300"
+                    alt="Swap module preview on PintSwap app"
+                    width={300}
+                    height={400}
+                  />
+                </ParallaxScrollWrapper>
+              </Split>
+            </ParallaxScrollWrapper>
           </div>
         </Section>
       </Base>
