@@ -19,7 +19,7 @@ const Footer = () => (
       <div className="flex gap-3 xl:gap-4 justify-self-end">
         <Link href="https://analytics.pintswap.exchange">
           <Button type="link" noIcon>
-            Stats
+            Analytics
           </Button>
         </Link>
         <Link href="https://docs.pintswap.exchange">
