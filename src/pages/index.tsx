@@ -350,9 +350,9 @@ const Index = () => {
                   <Link
                     href="https://app.pintswap.exchange/#/markets"
                     target="_blank"
-                    className="sm:w-fit"
+                    className="w-fit"
                   >
-                    <Button className="sm:w-fit" type="outline">
+                    <Button className="w-fit" type="outline">
                       See Available Trades
                     </Button>
                   </Link>
