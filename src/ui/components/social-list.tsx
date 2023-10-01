@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaDiscord, FaTwitter } from 'react-icons/fa';
+import { FaDiscord, FaMedium, FaTwitter } from 'react-icons/fa';
 import { SOCIAL_LINKS } from '../../utils/constants';
 
 export const SocialList = ({
@@ -44,7 +44,7 @@ export const SocialList = ({
         className={`flex ${directionClass} items-center justify-center gap-4 md:gap-6`}
       >
         <button className="transition duration-150 group relative z-10 cursor-pointer">
-          <Link href="" target="_blank">
+          <Link href={SOCIAL_LINKS.discord} target="_blank">
             <FaDiscord
               size={`${size}`}
               className="group-hover:fill-neutral-300 transition duration-150"
@@ -54,6 +54,14 @@ export const SocialList = ({
         <button className="transition duration-150 group relative z-10 cursor-pointer">
           <Link href={SOCIAL_LINKS.twitter} target="_blank">
             <FaTwitter
+              size={`${size}`}
+              className="group-hover:fill-neutral-300 transition duration-150"
+            />
+          </Link>
+        </button>
+        <button className="transition duration-150 group relative z-10 cursor-pointer">
+          <Link href={SOCIAL_LINKS.medium} target="_blank">
+            <FaMedium
               size={`${size}`}
               className="group-hover:fill-neutral-300 transition duration-150"
             />

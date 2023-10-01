@@ -3,6 +3,7 @@ export const IS_MINT_ENABLED = false;
 export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com/pintswap0x',
   medium: 'https://medium.com/feed/pintswap',
+  discord: 'https://discord.gg/pintswap',
 };
 
 export const NETWORK = process.env.NEXT_PUBLIC_NETWORK || 'mainnet';
