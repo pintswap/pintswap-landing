@@ -19,7 +19,7 @@ const Blog = () => {
   }, [foundPost]);
 
   return (
-    <Base nav>
+    <Base>
       <div className="max-w-6xl mx-auto">
         <Padding>
           {foundPost ? (

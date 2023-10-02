@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import { Skeleton } from './skeleton';
+import { Glow } from './glow';
+import CountUp from 'react-countup';
+import { useWindowSize } from '../../hooks';
 
 type IDataDisplay = {
   value: string | number;
@@ -8,6 +11,8 @@ type IDataDisplay = {
   link?: string;
   loading?: boolean;
   align?: 'center' | 'left' | 'right';
+  type?: 'fancy' | 'simple';
+  usd?: boolean;
 };
 
 export const DataDisplay = ({
@@ -17,9 +22,12 @@ export const DataDisplay = ({
   link,
   loading,
   align,
+  type = 'simple',
+  usd,
 }: IDataDisplay) => {
-  const determineAlign = () => {
-    switch (align) {
+  const { width, breakpoints } = useWindowSize();
+  const determineAlign = (_align?: 'center' | 'left' | 'right') => {
+    switch (_align || align) {
       case 'left':
         return 'items-start text-left';
       case 'right':
@@ -28,6 +36,33 @@ export const DataDisplay = ({
         'items-center text-center';
     }
   };
+  if (type === 'fancy') {
+    return (
+      <div className="flex flex-row gap-3">
+        <Glow>
+          <span className="h-full w-1.5 bg-primary rounded-l-xl block" />
+        </Glow>
+        <div
+          className={`flex flex-col justify-center ${determineAlign('left')}`}
+        >
+          <Skeleton
+            width={width < breakpoints.sm ? 'w-[48px]' : 'w-[60px]'}
+            height={width < breakpoints.sm ? 'h-[30px]' : 'h-[36px]'}
+            loading={loading}
+          >
+            <span
+              className={`text-3xl lg:text-4xl font-medium ${
+                color || ''
+              } leading-none`}
+            >
+              <CountUp prefix={usd ? '$' : ''} end={Number(value)} />
+            </span>
+          </Skeleton>
+          <span className="text-sm text-neutral-400 mt-1">{text}</span>
+        </div>
+      </div>
+    );
+  }
   const wrapperClass = `flex flex-col justify-center ${determineAlign()}`;
   return (
     <div className={wrapperClass}>

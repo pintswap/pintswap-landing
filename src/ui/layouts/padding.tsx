@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 type IPaddingProps = {
   children: ReactNode;
-  type?: 'x' | 'y' | 'full';
+  type?: 'x' | 'y' | 'full' | 'none';
 };
 
 export const Padding = ({ children, type = 'full' }: IPaddingProps) => {
@@ -15,6 +15,8 @@ export const Padding = ({ children, type = 'full' }: IPaddingProps) => {
         return xPadClass;
       case 'y':
         return yPadClass;
+      case 'none':
+        return '';
       default:
         return `${xPadClass} ${yPadClass}`;
     }
