@@ -355,10 +355,10 @@ const Index = () => {
                     centralization.
                   </p>
                   <p>
-                    Our orderbook is made up of multiple user orderbooks
+                    Our orderbook is made up of many individual orderbooks
                     empowering users to decide if they want everyone to see
-                    their trade or if they just want to privately share it with
-                    someone.
+                    their trade or if they just want to create an OTC offer to
+                    be shared with someone.
                   </p>
                   <Link
                     href="https://app.pintswap.exchange/#/markets"
