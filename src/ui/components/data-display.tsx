@@ -46,7 +46,7 @@ export const DataDisplay = ({
           className={`flex flex-col justify-center ${determineAlign('left')}`}
         >
           <Skeleton
-            width={width < breakpoints.sm ? 'w-[32px]' : 'w-[36px]'}
+            width={width < breakpoints.sm ? 'w-[48px]' : 'w-[60px]'}
             height={width < breakpoints.sm ? 'h-[30px]' : 'h-[36px]'}
             loading={loading}
           >

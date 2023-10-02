@@ -6,6 +6,7 @@ import {
   DataDisplay,
   ParallaxMouseChild,
   ParallaxScrollWrapper,
+  RenderLottie,
 } from '../ui/components';
 import { Section, Split } from '../ui/layouts';
 import { MouseParallaxContainer } from 'react-parallax-mouse';
@@ -18,6 +19,7 @@ import {
   MdAvTimer,
 } from 'react-icons/md';
 import { useSubgraphStore } from '../stores';
+import { useWindowSize } from '../hooks';
 
 const ParallaxItems: any = [
   {
@@ -77,27 +79,32 @@ const TabItems = [
     title: 'Zero Slippage',
     icon: MdOutlineWater,
     text: 'Trade with zero slippage, like how it should be. Swap large sums with confidence, without the risk of any surprising losses.',
+    animation: 'globalTransfer',
   },
   {
     title: 'Zero Taxes',
     icon: MdOutlineLocalOffer,
     text: "Trade with zero buy and sell taxes via PintSwap. Trading shouldn't involve any hidden fees, so we created a way to avoid them.",
+    animation: 'wallet',
   },
   {
     title: 'Peer-to-Peer',
     icon: MdSupervisorAccount,
     text: 'Engage in decentralized and permissionless trading directly with your peers using LibP2P, making OTC trades easy.',
+    animation: 'blockchainGlobal',
   },
   {
     title: 'Limit Orders',
     icon: MdAvTimer,
     text: 'Take control of your trades with the capability to place limit-orders for a CEX-like trading experience.',
+    animation: 'hashing',
   },
 ];
 
 const Partners = ['Pepe Analytics'];
 
 const Index = () => {
+  const { width, breakpoints } = useWindowSize();
   const { tokenStats, loading } = useSubgraphStore();
   const isLoading = tokenStats?.all?.transactions === 0 || loading;
   return (
@@ -252,12 +259,17 @@ const Index = () => {
                       <Tab.Panel key={`how-it-works-panel-${i}`}>
                         <h3 className="text-3xl font-medium">{x.title}</h3>
                         <p>{x.text}</p>
-                        <Image
+                        {/* <Image
                           src="https://placehold.co/500x250"
                           width={600}
                           height={400}
                           alt=""
                           className="p-2 mt-4"
+                        /> */}
+                        <RenderLottie
+                          animation={x.animation as any}
+                          height={width < breakpoints.sm ? 150 : 250}
+                          width={width < breakpoints.sm ? 300 : 500}
                         />
                       </Tab.Panel>
                     ))}
@@ -318,12 +330,13 @@ const Index = () => {
             >
               <Split>
                 <ParallaxScrollWrapper>
-                  <Image
+                  {/* <Image
                     src="https://placehold.co/300x300"
                     alt="Swap module preview on PintSwap app"
                     width={300}
-                    height={400}
-                  />
+                    height={300}
+                  /> */}
+                  <RenderLottie animation="blockchainNetwork" />
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper
                   reverse
@@ -401,12 +414,13 @@ const Index = () => {
                   </Link>
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper className="order-1 md:order-2">
-                  <Image
+                  {/* <Image
                     src="https://placehold.co/300x300"
                     alt="Swap module preview on PintSwap app"
                     width={300}
                     height={400}
-                  />
+                  /> */}
+                  <RenderLottie animation="blockchainWorks" />
                 </ParallaxScrollWrapper>
               </Split>
             </ParallaxScrollWrapper>
