@@ -410,7 +410,9 @@ const Index = () => {
                     orderbook.
                   </p>
                   <Link href="#" target="_blank">
-                    <Button className="sm:w-fit">Launch Telegram Bot</Button>
+                    <Button className="sm:w-fit">
+                      Telegram Bot Coming Soon
+                    </Button>
                   </Link>
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper className="order-1 md:order-2">
