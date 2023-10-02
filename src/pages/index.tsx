@@ -76,16 +76,16 @@ const ParallaxItems: any = [
 
 const TabItems = [
   {
-    title: 'Zero Slippage',
-    icon: MdOutlineWater,
-    text: 'Trade with zero slippage, like how it should be. Swap large sums with confidence, without the risk of any surprising losses.',
-    animation: 'globalTransfer',
-  },
-  {
     title: 'Zero Taxes',
     icon: MdOutlineLocalOffer,
     text: "Trade with zero buy and sell taxes via PintSwap. Trading shouldn't involve any hidden fees, so we created a way to avoid them.",
     animation: 'wallet',
+  },
+  {
+    title: 'Zero Slippage',
+    icon: MdOutlineWater,
+    text: 'Trade with zero slippage, like how it should be. Swap large sums with confidence, without the risk of any surprising losses.',
+    animation: 'globalTransfer',
   },
   {
     title: 'Peer-to-Peer',
