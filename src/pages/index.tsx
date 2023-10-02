@@ -103,6 +103,29 @@ const TabItems = [
 
 const Partners = ['Pepe Analytics'];
 
+const Features = [
+  {
+    text: 'Bloomberg Business',
+    img: '/assets/features/bloomberg.svg',
+    link: 'https://www.bloomberg.com/press-releases/2023-10-02/pintswap-telegram-bots-unveiled-the-days-of-taxes-and-slippage-are-over',
+  },
+  {
+    text: 'Yahoo Finance',
+    img: '/assets/features/yahoo-finance.svg',
+    link: 'https://finance.yahoo.com/news/pintswap-telegram-bots-unveiled-days-221000047.html',
+  },
+  {
+    text: 'AP News',
+    img: '/assets/features/associated-press.svg',
+    link: 'https://apnews.com/press-release/accesswire/pintswap-telegram-bots-unveiled-the-days-of-taxes-and-slippage-are-over-d29151c0968d292c8a0c380a5d6b49ea',
+  },
+  {
+    text: 'Tech Bullion',
+    img: '/assets/features/tech-bullion.png',
+    link: 'https://techbullion.com/pintswap-revolution-say-goodbye-to-taxes-and-slippage-with-pintswaps-telegram-bot/',
+  },
+];
+
 const Index = () => {
   const { width, breakpoints } = useWindowSize();
   const { tokenStats, loading } = useSubgraphStore();
@@ -280,33 +303,41 @@ const Index = () => {
           </ParallaxScrollWrapper>
         </Section>
 
-        {/* <Section
-          id="partners"
+        <Section
+          id="featured-in"
           padding="none"
           type="wide"
           background="bg-neutral-900"
           wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
         >
-          <div className="p-4">
-            <div className="text-center mb-2">
-              <h2 className="text-3xl md:text-4xl font-medium">Partners</h2>
+          <ParallaxScrollWrapper
+            animation="opacity"
+            reverse
+            startValue={2}
+            endValue={0.2}
+          >
+            <div className="p-4">
+              <div className="text-center mb-2">
+                <h2 className="text-3xl md:text-4xl font-medium">
+                  Featured In
+                </h2>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
+                {Features.map((x, i) => (
+                  <Link key={`featured-in-${i}`} target="_blank" href={x.link}>
+                    <Image
+                      src={`${x.img}`}
+                      alt={`PintSwap featured in ${x.text}`}
+                      width={i === 1 ? 180 : 240}
+                      height={60}
+                      className="rounded-xl px-4 py-2"
+                    />
+                  </Link>
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {Partners.map((x, i) => (
-                <Image
-                  key={`partner-${i}`}
-                  src={`/assets/partners/${x
-                    .toLowerCase()
-                    .replaceAll(' ', '-')}.png`}
-                  alt={`PintSwap partner with ${x.toLowerCase()}`}
-                  width={600}
-                  height={100}
-                  className="bg-black rounded-xl px-4 py-2"
-                />
-              ))}
-            </div>
-          </div>
-        </Section> */}
+          </ParallaxScrollWrapper>
+        </Section>
 
         <Section
           id="how-it-works"
