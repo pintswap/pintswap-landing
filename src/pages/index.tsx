@@ -281,7 +281,7 @@ const Index = () => {
                     {TabItems.map((x, i) => (
                       <Tab.Panel key={`how-it-works-panel-${i}`}>
                         <h3 className="text-3xl font-medium">{x.title}</h3>
-                        <p>{x.text}</p>
+                        <p className="mb-2 sm:mb-0">{x.text}</p>
                         {/* <Image
                           src="https://placehold.co/500x250"
                           width={600}
