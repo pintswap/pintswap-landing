@@ -352,7 +352,7 @@ const Index = () => {
               Think of us like a combination of Uniswap and Unibot, but better.
             </h4>
           </ParallaxScrollWrapper>
-          <div className="flex flex-col gap-24 md:gap-12 lg:gap-24 2xl:gap-32">
+          <div className="flex flex-col gap-20 md:gap-12 lg:gap-24 2xl:gap-32">
             <ParallaxScrollWrapper
               animation="opacity"
               reverse
@@ -371,7 +371,7 @@ const Index = () => {
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper
                   reverse
-                  className="mt-4 flex flex-col gap-3 md:gap-4"
+                  className="mt-2 md:mt-3 lg:mt-4 flex flex-col gap-3 md:gap-4"
                 >
                   <div className="flex flex-col">
                     <span className="text-accent-light">
@@ -412,7 +412,7 @@ const Index = () => {
               <Split>
                 <ParallaxScrollWrapper
                   reverse
-                  className="mt-4 flex flex-col gap-3 md:gap-4 order-2 md:order-1"
+                  className="mt-2 md:mt-3 lg:mt-4 flex flex-col gap-3 md:gap-4 order-2 md:order-1"
                 >
                   <div className="flex flex-col">
                     <span className="text-accent-light">
