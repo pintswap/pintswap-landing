@@ -1,19 +1,16 @@
-import { useState } from 'react';
 import { Base } from '../ui/base';
 import { Section } from '../ui/layouts';
 import { Button, DataDisplay } from '../ui/components';
+import { usePrices } from '../hooks';
+import { CONTRACT_ADDRESSES } from '../utils';
 
 const Token = () => {
-  const [tokenStats, setTokenStats] = useState<any>({
-    'Market Cap': '1000000',
-    Price: '0.001',
-    Liquidity: '150000',
-    Volume: '500',
-  });
+  const { data } = usePrices([CONTRACT_ADDRESSES.mainnet.pint]);
+
   return (
     <Base>
       <div className="absolute left-0 top-0 w-full h-[50vh] bg-gradient-to-b from-primary to-secondary-black opacity-25" />
-      <Section padding="y" wrapperClass={`!z-[99]`}>
+      <Section padding="y" wrapperClass={`!z-[99] mt-6 sm:mt-8`}>
         <h1 className="font-semibold flex items-center gap-0.5">
           <span className="text-2xl md:text-3xl">$</span>
           <span className="text-accent-light text-5xl">PINT</span>
@@ -45,23 +42,35 @@ const Token = () => {
               <li>TRIS: 100,000 tokens</li>
             </ul>
             <br />
-            <Button size="lg">Redeem</Button>
+            <Button disabled size="lg">
+              Redeem
+            </Button>
           </div>
           <div className="md:col-span-1">
             <h4 className="text-3xl mb-8">Token Stats</h4>
             <div className="text-lg grid grid-cols-1 gap-x-2 gap-y-6 px-4">
-              {Object.keys(tokenStats).map((stat, i) => (
-                <DataDisplay
-                  key={`token-stat-${i}`}
-                  text={stat}
-                  value={tokenStats[stat]}
-                  type="fancy"
-                />
-              ))}
+              <DataDisplay
+                text={'Launch Price'}
+                value={data?.length ? data[0]?.usdVolume || '-' : '-'}
+                type="fancy"
+                usd
+              />
+              <DataDisplay
+                text={'Circulating Supply'}
+                value={data?.length ? data[0]?.usdPrice || '-' : '-'}
+                type="fancy"
+                usd
+              />
+              <DataDisplay
+                text={'Total Supply'}
+                value={data?.length ? data[0]?.usdVolume || '-' : '-'}
+                type="fancy"
+                usd
+              />
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-2 mt-8">
-              <Button>Buy on PintSwap</Button>
-              <Button type="outline" className="!w-fit">
+              <Button disabled>Buy on PintSwap</Button>
+              <Button disabled type="outline" className="!w-fit">
                 Buy on Uniswap
               </Button>
             </div>

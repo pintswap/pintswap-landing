@@ -14,6 +14,7 @@ export const CONTRACT_ADDRESSES: any = {
   },
   mainnet: {
     tris: '0x0055485fCa054D165fc0C7D836459722436544c1',
+    pint: '0x8d008cac1a5cb08ac962b1e34e977b79abeee88d', // TODO: change
   },
 };
 

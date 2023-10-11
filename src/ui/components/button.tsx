@@ -40,7 +40,7 @@ const Button = (props: IButtonProps) => {
   };
   const btnClass = `inline-block font-semibold rounded-lg text-center ${sizeClass()} text-neutral-100 border border-1 ${
     props.borderColor || 'border-primary-dark'
-  } cursor-pointer`;
+  } cursor-pointer disabled:cursor-not-allowed disabled:!text-neutral-400`;
 
   switch (props.type) {
     case 'link': {
@@ -160,11 +160,12 @@ const Button = (props: IButtonProps) => {
     case 'outline': {
       return (
         <button
-          className={`btn-hover outline-click rounded-lg p-0.5 w-full ${
+          className={`btn-hover outline-click rounded-lg p-0.5 w-full disabled:cursor-not-allowed text-white hover:text-neutral-100 disabled:text-neutral-400 ${
             props.className || ''
           }`}
+          disabled={props.disabled}
         >
-          <div className="flex h-full w-full items-center justify-center transtion duration-150 bg-neutral-900 text-white hover:text-neutral-100 hover:bg-[rgb(18,18,18)] back rounded-lg">
+          <div className="flex h-full w-full items-center justify-center transtion duration-150 bg-neutral-900 hover:bg-[rgb(18,18,18)] back rounded-lg">
             <span className={`${sizeClass()} font-medium`}>
               {props.children}
             </span>
