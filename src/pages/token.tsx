@@ -17,6 +17,7 @@ const Token = () => {
         <h1 className="font-semibold flex items-center gap-0.5">
           <span className="text-2xl md:text-3xl">$</span>
           <span className="text-accent-light text-5xl">PINT</span>
+          <span className="text-5xl ml-3">Launch</span>
         </h1>
         <h3 className="text-2xl md:text-3xl font-medium">
           For degens. By degens.
