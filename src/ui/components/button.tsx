@@ -31,11 +31,11 @@ const Button = (props: IButtonProps) => {
   const sizeClass = () => {
     switch (props.size) {
       case 'lg':
-        return 'py-2 px-6 text-lg';
+        return 'py-1.5 px-5 text-lg';
       case 'sm':
         return 'py-1 px-2.5';
       default:
-        return 'py-1.5 px-4';
+        return 'py-[5px] px-4';
     }
   };
   const btnClass = `inline-block font-semibold rounded-lg text-center ${sizeClass()} text-neutral-100 border border-1 ${
@@ -159,7 +159,11 @@ const Button = (props: IButtonProps) => {
     }
     case 'outline': {
       return (
-        <button className="btn-hover outline-click rounded-lg p-0.5 w-full">
+        <button
+          className={`btn-hover outline-click rounded-lg p-0.5 w-full ${
+            props.className || ''
+          }`}
+        >
           <div className="flex h-full w-full items-center justify-center transtion duration-150 bg-neutral-900 text-white hover:text-neutral-100 hover:bg-[rgb(18,18,18)] back rounded-lg">
             <span className={`${sizeClass()} font-medium`}>
               {props.children}
