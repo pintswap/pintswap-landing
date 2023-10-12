@@ -3,7 +3,6 @@ import { Skeleton } from './skeleton';
 import { Glow } from './glow';
 import CountUp from 'react-countup';
 import { useWindowSize } from '../../hooks';
-import { SmartPrice } from './smart-price';
 
 type IDataDisplay = {
   value: string | number;
@@ -14,6 +13,7 @@ type IDataDisplay = {
   align?: 'center' | 'left' | 'right';
   type?: 'fancy' | 'simple';
   usd?: boolean;
+  decimals?: number;
 };
 
 export const DataDisplay = ({
@@ -25,6 +25,7 @@ export const DataDisplay = ({
   align,
   type = 'simple',
   usd,
+  decimals,
 }: IDataDisplay) => {
   const { width, breakpoints } = useWindowSize();
   const determineAlign = (_align?: 'center' | 'left' | 'right') => {
@@ -56,14 +57,11 @@ export const DataDisplay = ({
                 color || ''
               } leading-none`}
             >
-              {Number(value) < 1 ? (
-                <span>
-                  {usd && '$'}
-                  <SmartPrice price={value} />
-                </span>
-              ) : (
-                <CountUp prefix={usd ? '$' : ''} end={Number(value)} />
-              )}
+              <CountUp
+                prefix={usd ? '$' : ''}
+                end={Number(value)}
+                decimals={decimals || 0}
+              />
             </span>
           </Skeleton>
           <span className="text-sm text-neutral-400 mt-1">{text}</span>

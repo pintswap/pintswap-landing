@@ -1,11 +1,27 @@
 import { Base } from '../ui/base';
 import { Section } from '../ui/layouts';
 import { Button, DataDisplay } from '../ui/components';
-import { usePrices } from '../hooks';
-import { CONTRACT_ADDRESSES } from '../utils';
+import { useNftRedeem, usePrices } from '../hooks';
+import { CONTRACT_ADDRESSES, truncate } from '../utils';
+import { useAccount } from 'wagmi';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { Transition } from '@headlessui/react';
 
 const Token = () => {
   const { data } = usePrices([CONTRACT_ADDRESSES.mainnet.pint]);
+  const { address } = useAccount();
+  const { openConnectModal } = useConnectModal();
+  const { redeem, isLoading, txHash, error } = useNftRedeem();
+
+  const renderBtnText = () => {
+    if (!address) return 'Connect Wallet';
+    return 'Redeem';
+  };
+
+  const handleBtnClick = () => {
+    if (!address && openConnectModal) return openConnectModal();
+    return redeem();
+  };
 
   return (
     <Base>
@@ -25,47 +41,72 @@ const Token = () => {
           <div className="md:col-span-2">
             <h4 className="text-3xl mb-8">Redeem your NFT</h4>
             <p className="text-lg">
-              PintSwap NFTs are redeemable for $PINT tokens which enables
-              holders to benefit from the PintSwap system mechanisms. This
-              includes earning $PINT from the upside of MEV captured by the OPPS
-              smart contract, earning fees from swap emissions, governing the
-              DAO, and other exclusive benefits.
+              TRIS NFTs are redeemable for $PINT tokens which enables holders to
+              benefit from the PintSwap system mechanisms. This includes earning
+              $PINT from the upside of MEV captured by the OPPS smart contract,
+              earning fees from swap emissions, governing the DAO, and other
+              exclusive benefits.
             </p>
             <br />
-            <p className="text-lg">
-              With the launch of $PINT, the proprietary PintSwap P2P system can
-              make trading more equitable and permisionless for everyone.
-            </p>
+            <p className="text-lg font-medium mb-2">Steps to redeem:</p>
+            <ol className="pl-8 list-decimal">
+              <li>Connect your wallet that holds your TRIS</li>
+              <li>Click &quot;Redeem&quot; below</li>
+              <li>Sit back, relax, and take a sip</li>
+              <li>
+                Upon redemption, your TRIS will be{' '}
+                <span className="font-semibold">burned</span> for{' '}
+                <span className="font-semibold">100,000 tokens</span>
+              </li>
+            </ol>
             <br />
-            <ul className="list-disc pl-8">
-              <li>WOCK: 100,000 - 1,000,000 tokens</li>
-              <li>TRIS: 100,000 tokens</li>
-            </ul>
-            <br />
-            <Button disabled size="lg">
-              Redeem
-            </Button>
+            <div className="flex items-center">
+              <Button
+                disabled={address !== undefined}
+                size="lg"
+                onClick={handleBtnClick}
+                className={`${address ? '!rounded-r-none' : ''}`}
+              >
+                {renderBtnText()}
+              </Button>
+              <Transition
+                show={address !== undefined}
+                enter="transition-opacity ease-in-out duration-400 delay-50"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="transition-opacity ease-in-out duration-400"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+                className="flex flex-col px-4 py-0.5 rounded-r-lg border-l-0 border-2 border-primary-regular bg-neutral-900 cursor-default"
+              >
+                <span className="text-neutral-400 text-xs leading-snug">
+                  Wallet
+                </span>
+                <span className="leading-none font-medium">
+                  {truncate(address)}
+                </span>
+              </Transition>
+            </div>
           </div>
           <div className="md:col-span-1">
             <h4 className="text-3xl mb-8">Token Stats</h4>
             <div className="text-lg grid grid-cols-1 gap-x-2 gap-y-6 px-4">
               <DataDisplay
                 text={'Launch Price'}
-                value={data?.length ? data[0]?.usdVolume || '-' : '-'}
+                value={'0.0015'}
                 type="fancy"
                 usd
+                decimals={4}
               />
               <DataDisplay
                 text={'Circulating Supply'}
-                value={data?.length ? data[0]?.usdPrice || '-' : '-'}
+                value={'158000000'}
                 type="fancy"
-                usd
               />
               <DataDisplay
                 text={'Total Supply'}
-                value={data?.length ? data[0]?.usdVolume || '-' : '-'}
+                value={'1000000000'}
                 type="fancy"
-                usd
               />
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-2 mt-8">

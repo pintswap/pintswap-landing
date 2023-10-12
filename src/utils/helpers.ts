@@ -41,8 +41,8 @@ export function stringToBytes32(value: string) {
   return Array.from(Buffer.from(value.substr(2), 'hex')) as any;
 }
 
-export function truncate(s: string, amount?: number) {
-  if (!s) return s;
+export function truncate(s?: string, amount?: number) {
+  if (!s) return s || '';
   if (s.match(/\.drip$/)) return s;
   return `${s.slice(0, amount || 4)}...${s.slice(amount ? amount * -1 : -4)}`;
 }

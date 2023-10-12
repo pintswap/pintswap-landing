@@ -7,6 +7,7 @@ export const SOCIAL_LINKS = {
 };
 
 export const NETWORK = process.env.NEXT_PUBLIC_NETWORK || 'mainnet';
+export const DEV = !!process.env.NEXT_PUBLIC_DEV;
 
 export const CONTRACT_ADDRESSES: any = {
   sepolia: {
