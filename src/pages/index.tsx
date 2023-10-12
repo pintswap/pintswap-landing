@@ -171,9 +171,9 @@ const Index = () => {
                     Enter App
                   </Button>
                 </Link>
-                <Link href="#how-it-works" className="w-full sm:w-fit">
+                <Link href="/token" className="w-full sm:w-fit">
                   <Button type="outline" size="lg" className="w-full sm:w-fit">
-                    How it works
+                    Redeem TRIS
                   </Button>
                 </Link>
               </div>
