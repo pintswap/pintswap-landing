@@ -49,7 +49,7 @@ const Token = () => {
             </p>
             <br />
             <p className="text-lg font-medium mb-2">Steps to redeem:</p>
-            <ol className="pl-8 list-decimal">
+            <ol className="pl-6 sm:pl-8 list-decimal">
               <li>Connect your wallet that holds your TRIS</li>
               <li>Click &quot;Redeem&quot; below</li>
               <li>Sit back, relax, and take a sip</li>
@@ -109,8 +109,10 @@ const Token = () => {
                 type="fancy"
               />
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-2 mt-8">
-              <Button disabled>Buy on PintSwap</Button>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-8">
+              <Button disabled className="!w-fit">
+                Buy on PintSwap
+              </Button>
               <Button disabled type="outline" className="!w-fit">
                 Buy on Uniswap
               </Button>
