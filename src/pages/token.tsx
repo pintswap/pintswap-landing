@@ -41,74 +41,9 @@ const Token = () => {
 
   return (
     <>
-      <Modal
-        state={isLoading || !!trisRedeemTxHash || !!wockRedeemTxHash}
-        closeFx={() => reset(false)}
-        title="Transaction Details"
-        secondary={
-          isSuccess && (
-            <Button className="!w-fit" type="outline">
-              Add to wallet
-            </Button>
-          )
-        }
-      >
-        <div className="flex flex-col items-center justify-center">
-          {isLoading ? (
-            <>
-              <RenderLottie animation="loading" width={200} height={200} />
-              <span className="font-medium mt-2 text-lg">
-                Submitting transaction...
-              </span>
-            </>
-          ) : (
-            <>
-              <RenderLottie animation="success" height={140} width={140} />
-              <span className="font-medium mt-6 text-lg">
-                Redeemed your PINT
-              </span>
-            </>
-          )}
-          <Transition
-            show={!!wockRedeemTxHash}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-300"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <Link
-              target="_blank"
-              href={`${EXPLORER_URLS.mainnet}/tx/${wockRedeemTxHash}`}
-            >
-              WOCK Transaction:{' '}
-              <span className="underline">{truncate(wockRedeemTxHash)}</span>
-            </Link>
-          </Transition>
-          <Transition
-            show={!!trisRedeemTxHash}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-300"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <Link
-              target="_blank"
-              href={`${EXPLORER_URLS.mainnet}/tx/${trisRedeemTxHash}`}
-            >
-              TRIS Transaction:{' '}
-              <span className="underline">{truncate(trisRedeemTxHash)}</span>
-            </Link>
-          </Transition>
-        </div>
-      </Modal>
-
       <Base>
         <div className="absolute left-0 top-0 w-full h-[50vh] bg-gradient-to-b from-primary to-secondary-black opacity-25" />
-        <Section padding="y" wrapperClass={`!z-[99] mt-6 sm:mt-8`}>
+        <Section padding="y" wrapperClass={`!z-[99] mt-6`}>
           <h1 className="font-semibold flex items-center gap-0.5">
             <span className="text-2xl md:text-3xl">$</span>
             <span className="text-accent-light text-5xl">PINT</span>
@@ -208,6 +143,71 @@ const Token = () => {
           </div>
         </Section>
       </Base>
+
+      <Modal
+        state={isLoading || !!trisRedeemTxHash || !!wockRedeemTxHash}
+        closeFx={() => reset(false)}
+        title="Transaction Details"
+        secondary={
+          isSuccess && (
+            <Button className="!w-fit" type="outline">
+              Add to wallet
+            </Button>
+          )
+        }
+      >
+        <div className="flex flex-col items-center justify-center">
+          {isLoading ? (
+            <>
+              <RenderLottie animation="loading" width={200} height={200} />
+              <span className="font-medium mt-2 text-lg">
+                Submitting transaction...
+              </span>
+            </>
+          ) : (
+            <>
+              <RenderLottie animation="success" height={140} width={140} />
+              <span className="font-medium mt-6 text-lg">
+                Redeemed your PINT
+              </span>
+            </>
+          )}
+          <Transition
+            show={!!wockRedeemTxHash}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Link
+              target="_blank"
+              href={`${EXPLORER_URLS.mainnet}/tx/${wockRedeemTxHash}`}
+            >
+              WOCK Transaction:{' '}
+              <span className="underline">{truncate(wockRedeemTxHash)}</span>
+            </Link>
+          </Transition>
+          <Transition
+            show={!!trisRedeemTxHash}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Link
+              target="_blank"
+              href={`${EXPLORER_URLS.mainnet}/tx/${trisRedeemTxHash}`}
+            >
+              TRIS Transaction:{' '}
+              <span className="underline">{truncate(trisRedeemTxHash)}</span>
+            </Link>
+          </Transition>
+        </div>
+      </Modal>
     </>
   );
 };

@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import '../styles/global.css';
 import { MediumStore, SubgraphStore } from '../stores';
 import {
+  AllRoundGothic,
   chains,
   queryClient,
   QueryClientProvider,
@@ -21,7 +22,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             <MediumStore>
               <SubgraphStore>
                 <ParallaxProvider>
-                  <main>
+                  <main className={AllRoundGothic.className}>
                     <Component {...pageProps} />
                   </main>
                 </ParallaxProvider>

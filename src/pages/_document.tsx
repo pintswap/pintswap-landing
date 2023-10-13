@@ -16,7 +16,7 @@ class MyDocument extends Document {
         }}
       >
         <Head />
-        <body>
+        <body className={AllRoundGothic.className}>
           <Main />
           <NextScript />
         </body>
