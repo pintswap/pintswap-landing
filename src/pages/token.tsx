@@ -58,10 +58,10 @@ const Token = () => {
             <div className="md:col-span-2">
               <h4 className="text-3xl mb-8">Redeem your NFT</h4>
               <p className="text-lg">
-                TRIS NFTs are redeemable for $PINT tokens which enables holders
-                to benefit from the PintSwap system mechanisms. This includes
+                TRIS NFTs are redeemable for $PINT tokens enabling holders
+                to benefit from the protocol. This includes
                 earning $PINT from protocol trading fees, the upside of MEV
-                captured by the OPPS smart contract, tax revenue from token
+                captured by the <Link target="_blank" href="https://docs.pintswap.exchange" className="underline">OPPS contract</Link>, tax revenue from token
                 trading, governing the DAO, and market making profits.
               </p>
               <br />
