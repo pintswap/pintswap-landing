@@ -60,7 +60,7 @@ const Token = () => {
               <p className="text-lg">
                 TRIS NFTs are redeemable for $PINT tokens enabling holders
                 to benefit from the protocol. This includes
-                earning $PINT from protocol trading fees, the upside of MEV
+                earning $PINT from protocol trading fees, upside from MEV
                 captured by the <Link target="_blank" href="https://docs.pintswap.exchange" className="underline">OPPS contract</Link>, tax revenue from token
                 trading, governing the DAO, and market making profits.
               </p>
