@@ -56,7 +56,7 @@ const Token = () => {
         <Section padding="y">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 xl:gap-16">
             <div className="md:col-span-2">
-              <h4 className="text-3xl mb-8">Redeem your NFT</h4>
+              <h4 className="text-3xl mb-6 sm:mb-8">Redeem your NFT</h4>
               <p className="text-lg">
                 TRIS NFTs are redeemable for $PINT tokens enabling holders
                 to benefit from the protocol. This includes
@@ -111,7 +111,7 @@ const Token = () => {
               </div>
             </div>
             <div className="md:col-span-1">
-              <h4 className="text-3xl mb-8">Token Stats</h4>
+              <h4 className="text-3xl mb-6 sm:mb-8">Token Stats</h4>
               <div className="text-lg grid grid-cols-1 gap-x-2 gap-y-6 px-4">
                 <DataDisplay
                   text={'Launch Price'}
