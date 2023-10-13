@@ -151,8 +151,8 @@ export const useNftRedeem = () => {
 
   // Get TRIS and WOCK nfts
   useEffect(() => {
-    if (address) {
-      (async () => {
+    (async () => {
+      if (address) {
         setIsIdsLoading(true);
         const trisNfts: bigint[] = [];
         const wockNfts: bigint[] = [];
@@ -171,8 +171,8 @@ export const useNftRedeem = () => {
         setWockIds(wockNfts);
         setTrisIds(trisNfts);
         setIsIdsLoading(false);
-      })().catch((err) => console.error(err));
-    }
+      }
+    })().catch((err) => console.error(err));
   }, [address]);
 
   return {
