@@ -191,7 +191,7 @@ const Button = (props: IButtonProps) => {
               <span>
                 {props.loadingText ? props.loadingText : props.children}
               </span>
-              <SpinnerLoader height="min-h-0" color="text-slate-800" />
+              <SpinnerLoader height="min-h-0" />
             </span>
           ) : (
             <>{props.children}</>

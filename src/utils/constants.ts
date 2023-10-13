@@ -13,9 +13,20 @@ export const CONTRACT_ADDRESSES: any = {
   sepolia: {
     tris: '0x0bA5835F87BAB3d0D66e180ea58e3b4D87ef0f17',
   },
+  localhost: {
+    wock: '', // TODO:
+    tris: '', // TODO
+    wockRedeem: '', // TODO:
+    trisRedeem: '', // TODO:
+    pint: '', // TODO
+  },
   mainnet: {
+    wock: '0xcB72ed407Cdb97a7161a2b567b5f50B55585Ee6b',
+    wockRedeem: '0x...', // TODO: change
     tris: '0x0055485fCa054D165fc0C7D836459722436544c1',
-    pint: '0x8d008cac1a5cb08ac962b1e34e977b79abeee88d', // TODO: change
+    trisRedeem: '0x...', // TODO: change
+    pint: '0x14046EAa7374CdE165eD7218Ab2d8E2f42c0f23C', // TODO: change
+    opps: '0x5522c1B6dc4F533a798908430Af7a3f5bbED801a', // TODO: change
   },
 };
 

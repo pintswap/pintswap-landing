@@ -1,10 +1,15 @@
 import '@rainbow-me/rainbowkit/styles.css';
 
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+  darkTheme,
+} from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, hardhat, sepolia } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import { DEV } from './constants';
+import merge from 'lodash.merge';
 
 const { chains, publicClient } = configureChains(
   DEV ? [mainnet] : [mainnet, sepolia, hardhat],
@@ -22,5 +27,12 @@ const wagmiConfig = createConfig({
   connectors,
   publicClient,
 });
+
+export const walletTheme = merge(
+  darkTheme({
+    borderRadius: 'small',
+    accentColor: '#FF6FA9',
+  })
+);
 
 export { WagmiConfig, wagmiConfig, RainbowKitProvider, chains, publicClient };

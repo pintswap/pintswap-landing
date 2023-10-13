@@ -14,6 +14,9 @@ module.exports = {
       '6xl': '4rem',
     },
     extend: {
+      fontFamily: {
+        'round-gothic': ['var(--font-round-gothic)'],
+      },
       colors: {
         primary: {
           light: '#884bdd',

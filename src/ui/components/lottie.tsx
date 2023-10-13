@@ -6,6 +6,8 @@ import blockchainNetwork from '../../lotties/blockchain-network.json';
 import blockchainWorks from '../../lotties/blockchain-works.json';
 import globalTransfer from '../../lotties/global-transfer.json';
 import decentralize from '../../lotties/decentralize.json';
+import loading from '../../lotties/loading.json';
+import success from '../../lotties/success.json';
 
 type IRenderLottie = {
   animation:
@@ -15,7 +17,9 @@ type IRenderLottie = {
     | 'blockchainNetwork'
     | 'blockchainWorks'
     | 'globalTransfer'
-    | 'decentralize';
+    | 'decentralize'
+    | 'loading'
+    | 'success';
   height?: number;
   width?: number;
 };
@@ -37,6 +41,10 @@ export const RenderLottie = ({ animation, height, width }: IRenderLottie) => {
         return hashing;
       case 'wallet':
         return wallet;
+      case 'loading':
+        return loading;
+      case 'success':
+        return success;
       default:
         return wallet;
     }

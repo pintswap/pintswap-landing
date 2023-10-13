@@ -5,3 +5,4 @@ export * from './wallet';
 export * from './fonts';
 export * from './apollo';
 export * from './token-list';
+export * from './alchemy';

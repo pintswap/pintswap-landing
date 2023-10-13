@@ -1,4 +1,4 @@
-import { ImSpinner9 } from 'react-icons/im';
+import { MdOutlineMotionPhotosOn } from 'react-icons/md';
 
 type ISpinnerLoaderProps = {
   color?: `text-${string}`;
@@ -8,7 +8,7 @@ type ISpinnerLoaderProps = {
 };
 
 export const SpinnerLoader = ({
-  color = 'text-gray-400',
+  color = 'text-white',
   size = '20px',
   height = 'min-h-[50px]',
   className,
@@ -16,6 +16,6 @@ export const SpinnerLoader = ({
   <div
     className={`flex ${className || ''} justify-center items-center ${height}`}
   >
-    <ImSpinner9 className={`animate-spin ${color}`} size={size} />
+    <MdOutlineMotionPhotosOn className={`animate-spin ${color}`} size={size} />
   </div>
 );
