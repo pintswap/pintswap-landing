@@ -166,7 +166,12 @@ const Token = () => {
             </>
           ) : (
             <>
-              <RenderLottie animation="success" height={140} width={140} />
+              <RenderLottie
+                animation="success"
+                height={140}
+                width={140}
+                loop={false}
+              />
               <span className="font-medium mt-6 text-lg">
                 Redeemed your PINT
               </span>

@@ -22,9 +22,15 @@ type IRenderLottie = {
     | 'success';
   height?: number;
   width?: number;
+  loop?: boolean;
 };
 
-export const RenderLottie = ({ animation, height, width }: IRenderLottie) => {
+export const RenderLottie = ({
+  animation,
+  height,
+  width,
+  loop = true,
+}: IRenderLottie) => {
   const determineLottieFile = () => {
     switch (animation) {
       case 'blockchainGlobal':
@@ -50,7 +56,6 @@ export const RenderLottie = ({ animation, height, width }: IRenderLottie) => {
     }
   };
   const defaultOptions = {
-    loop: true,
     autoplay: true,
     animationData: determineLottieFile(),
     rendererSettings: {
@@ -61,7 +66,10 @@ export const RenderLottie = ({ animation, height, width }: IRenderLottie) => {
   return (
     <div className="w-full flex">
       <Lottie
-        options={defaultOptions}
+        options={{
+          ...defaultOptions,
+          loop,
+        }}
         height={height || 300}
         width={width || 300}
         isClickToPauseDisabled
