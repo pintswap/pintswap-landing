@@ -67,7 +67,7 @@ const Token = () => {
               <br />
               <p className="text-lg font-medium mb-2">Steps to redeem:</p>
               <ol className="pl-6 sm:pl-8 list-decimal">
-                <li>Connect your wallet that holds your TRIS</li>
+                <li>Connect the wallet that holds TRIS</li>
                 <li>Click &quot;Redeem&quot; below</li>
                 <li>Sit back, relax, and take a sip</li>
                 <li>
