@@ -113,13 +113,13 @@ const Token = () => {
             <div className="md:col-span-1">
               <h4 className="text-3xl mb-6 sm:mb-8">Token Stats</h4>
               <div className="text-lg grid grid-cols-1 gap-x-2 gap-y-6 px-4">
-                <DataDisplay
+                {/* <DataDisplay
                   text={'Launch Price'}
                   value={'0.0015'}
                   type="fancy"
                   usd
                   decimals={4}
-                />
+                /> */}
                 <DataDisplay
                   text={'Circulating Supply'}
                   value={'158000000'}
