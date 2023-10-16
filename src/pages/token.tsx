@@ -58,11 +58,26 @@ const Token = () => {
             <div className="md:col-span-2">
               <h4 className="text-3xl mb-6 sm:mb-8">Redeem your NFT</h4>
               <p className="text-lg">
-                TRIS NFTs are redeemable for $PINT tokens enabling holders
-                to benefit from the protocol. This includes
-                earning $PINT from protocol trading fees, upside from <Link target="_blank" className="underline" href="#">MEV</Link>
-                captured by the <Link target="_blank" href="https://docs.pintswap.exchange" className="underline">OPPS contract</Link>, tax revenue from token
-                trading, governing the DAO, and market making profits.
+                TRIS NFTs are redeemable for $PINT tokens enabling holders to
+                benefit from the protocol. This includes earning $PINT from
+                protocol trading fees, upside from{' '}
+                <Link
+                  target="_blank"
+                  className="underline"
+                  href="https://www.techopedia.com/definition/maximal-extractable-value-mev#:~:text=Maximal%20extractable%20value%20(MEV)%20is,of%20transactions%20in%20a%20block."
+                >
+                  MEV
+                </Link>{' '}
+                captured by the{' '}
+                <Link
+                  target="_blank"
+                  href="https://docs.pintswap.exchange/contracts"
+                  className="underline"
+                >
+                  OPPS contract
+                </Link>
+                , tax revenue from token trading, governing the DAO, and market
+                making profits.
               </p>
               <br />
               <p className="text-lg font-medium mb-2">Steps to redeem:</p>

@@ -1,30 +1,14 @@
 import { getContract } from 'viem';
-import { CONTRACT_ADDRESSES, NETWORK, alchemy, publicClient } from '../utils';
+import {
+  CONTRACT_ADDRESSES,
+  NETWORK,
+  NFT_ABI,
+  REDEEM_ABI,
+  alchemy,
+  getPublicClient,
+} from '../utils';
 import { useAccount, useWalletClient } from 'wagmi';
 import { useEffect, useState } from 'react';
-import { ZeroAddress } from 'ethers';
-
-const nftAbi = [
-  {
-    inputs: [{ internalType: 'address', name: 'owner', type: 'address' }],
-    name: 'balanceOf',
-    outputs: [{ internalType: 'uint256', name: 'balance', type: 'uint256' }],
-    stateMutability: 'view',
-    type: 'function',
-  },
-] as const;
-
-const redeemAbi = [
-  {
-    inputs: [
-      { internalType: 'uint256[]', name: 'tokenIds', type: 'uint256[]' },
-    ],
-    name: 'redeem',
-    outputs: [{ internalType: 'uint256', name: 'output', type: 'uint256' }],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-] as const;
 
 export const useNftRedeem = () => {
   const [trisIds, setTrisIds] = useState<bigint[]>([]);
@@ -42,14 +26,14 @@ export const useNftRedeem = () => {
 
   const tris = getContract({
     address: CONTRACT_ADDRESSES[NETWORK].tris,
-    abi: nftAbi,
-    publicClient: publicClient({}),
+    abi: NFT_ABI,
+    publicClient: getPublicClient(),
   });
 
   const wock = getContract({
     address: CONTRACT_ADDRESSES[NETWORK].wock,
-    abi: nftAbi,
-    publicClient: publicClient({}),
+    abi: NFT_ABI,
+    publicClient: getPublicClient(),
   });
 
   // Wallet holds NFTs
@@ -82,63 +66,86 @@ export const useNftRedeem = () => {
     }
     setIsLoading(true);
 
-    // MOCK - START
-    setTimeout(() => {
-      setIsSuccess(true);
-      setTrisRedeemTxHash(ZeroAddress);
+    try {
+      console.log('Network:', NETWORK);
+      console.log('Contracts:', CONTRACT_ADDRESSES[NETWORK]);
+      console.log('Signer:', signer);
+
+      if (trisIds?.length) {
+        // TRIS: approve all
+        const { request: approveReq } =
+          await getPublicClient().simulateContract({
+            account: address,
+            address: CONTRACT_ADDRESSES[NETWORK].tris,
+            abi: NFT_ABI,
+            functionName: 'setApprovalForAll',
+            args: [CONTRACT_ADDRESSES[NETWORK].trisRedeem, true],
+          });
+        const approveAllTx = await signer.writeContract(approveReq);
+        console.log('TRIS: approveAllTx', approveAllTx);
+        // TRIS: redeem
+        const { request: redeemReq } = await getPublicClient().simulateContract(
+          {
+            account: address,
+            address: CONTRACT_ADDRESSES[NETWORK].trisRedeem,
+            abi: REDEEM_ABI,
+            functionName: 'redeem',
+            args: [trisIds],
+          }
+        );
+        const tx = await signer.writeContract(redeemReq);
+        setTrisRedeemTxHash(tx);
+      }
+      if (wockIds?.length) {
+        // WOCK: approve all
+        const { request: approveReq } =
+          await getPublicClient().simulateContract({
+            account: address,
+            address: CONTRACT_ADDRESSES[NETWORK].wock,
+            abi: NFT_ABI,
+            functionName: 'setApprovalForAll',
+            args: [CONTRACT_ADDRESSES[NETWORK].trisRedeem, true],
+          });
+        const approveAllTx = await signer.writeContract(approveReq);
+        console.log('WOCK: approveAllTx', approveAllTx);
+        // WOCK: redeem
+        const { request: redeemReq } = await getPublicClient().simulateContract(
+          {
+            account: address,
+            address: CONTRACT_ADDRESSES[NETWORK].wockRedeem,
+            abi: REDEEM_ABI,
+            functionName: 'redeem',
+            args: [wockIds],
+          }
+        );
+        const tx = await signer.writeContract(redeemReq);
+        setWockRedeemTxHash(tx);
+      }
       setIsLoading(false);
-    }, 5000);
-
-    // MOCK - END
-
-    // try {
-    //   if(trisIds?.length) {
-    //     const { request } = await publicClient({}).simulateContract({
-    //       account: address,
-    //       address: CONTRACT_ADDRESSES[NETWORK].trisRedeem,
-    //       abi: redeemAbi,
-    //       functionName: 'redeem',
-    //       args: [trisIds],
-    //     });
-    //     const tx = await signer.writeContract(request);
-    //     setTrisRedeemTxHash(tx);
-    //   }
-    //   if(wockIds?.length) {
-    //     const { request } = await publicClient({}).simulateContract({
-    //       account: address,
-    //       address: CONTRACT_ADDRESSES[NETWORK].wockRedeem,
-    //       abi: redeemAbi,
-    //       functionName: 'redeem',
-    //       args: [wockIds],
-    //     });
-    //     const tx = await signer.writeContract(request);
-    //     setWockRedeemTxHash(tx);
-    //   }
-    //   setIsLoading(false);
-    // } catch (err) {
-    //   setIsLoading(false);
-    //   const errorMsg =
-    //     String(err).includes(`reverted`) ||
-    //     String(err).includes('exceeds the balance')
-    //       ? String(err)
-    //       : '';
-    //   if (errorMsg) {
-    //     if (errorMsg.includes('Minting is not enabled'))
-    //       setError('Minting not enabled');
-    //     else if (
-    //       errorMsg.includes('Not enough ETH sent') ||
-    //       errorMsg.includes('exceeds the balance of the account')
-    //     )
-    //       setError('Not enough ETH');
-    //     else if (errorMsg.includes('Exceeds token supply'))
-    //       setError('TRIS is sold out');
-    //     else if (errorMsg.includes('User already claimed'))
-    //       setError('Already claimed');
-    //     else if (errorMsg.includes('Invalid merkle proof'))
-    //       setError('Not on whitelist');
-    //   }
-    //   console.error(err);
-    // }
+    } catch (err) {
+      setIsLoading(false);
+      const errorMsg =
+        String(err).includes(`reverted`) ||
+        String(err).includes('exceeds the balance')
+          ? String(err)
+          : '';
+      if (errorMsg) {
+        if (errorMsg.includes('Minting is not enabled'))
+          setError('Minting not enabled');
+        else if (
+          errorMsg.includes('Not enough ETH sent') ||
+          errorMsg.includes('exceeds the balance of the account')
+        )
+          setError('Not enough ETH');
+        else if (errorMsg.includes('Exceeds token supply'))
+          setError('TRIS is sold out');
+        else if (errorMsg.includes('User already claimed'))
+          setError('Already claimed');
+        else if (errorMsg.includes('Invalid merkle proof'))
+          setError('Not on whitelist');
+      }
+      console.error(err);
+    }
   };
 
   // Reset error

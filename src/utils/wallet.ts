@@ -6,13 +6,13 @@ import {
   darkTheme,
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { mainnet, hardhat, sepolia } from 'wagmi/chains';
+import { mainnet, localhost, hardhat, sepolia } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
-import { DEV } from './constants';
+import { DEV, NETWORK } from './constants';
 import merge from 'lodash.merge';
 
 const { chains, publicClient } = configureChains(
-  DEV ? [mainnet] : [mainnet, sepolia, hardhat],
+  DEV ? [mainnet, sepolia, hardhat, localhost] : [mainnet],
   [publicProvider()]
 );
 
@@ -35,4 +35,19 @@ export const walletTheme = merge(
   })
 );
 
-export { WagmiConfig, wagmiConfig, RainbowKitProvider, chains, publicClient };
+const getPublicClient = () => {
+  let chainId;
+  if (NETWORK === 'hardhat') chainId = 31337;
+  else if (NETWORK === 'localhost') chainId = 1337;
+  else if (NETWORK === 'sepolia') chainId = 11155111;
+  else chainId = 1;
+  return publicClient({ chainId });
+};
+
+export {
+  WagmiConfig,
+  wagmiConfig,
+  RainbowKitProvider,
+  chains,
+  getPublicClient,
+};

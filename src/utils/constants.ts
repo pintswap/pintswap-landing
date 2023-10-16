@@ -13,12 +13,21 @@ export const CONTRACT_ADDRESSES: any = {
   sepolia: {
     tris: '0x0bA5835F87BAB3d0D66e180ea58e3b4D87ef0f17',
   },
+  hardhat: {
+    wock: '0xcB72ed407Cdb97a7161a2b567b5f50B55585Ee6b',
+    wockRedeem: '0x...', // TODO: change
+    tris: '0x0055485fCa054D165fc0C7D836459722436544c1',
+    trisRedeem: '0x5522c1b6dc4f533a798908430af7a3f5bbed801a', // 0xf89c975369e5bf6ce158772b3e1175d2ba7bd84a
+    pint: '0x14046EAa7374CdE165eD7218Ab2d8E2f42c0f23C', // TODO: change
+    opps: '0x5522c1B6dc4F533a798908430Af7a3f5bbED801a', // TODO: change
+  },
   localhost: {
-    wock: '', // TODO:
-    tris: '', // TODO
-    wockRedeem: '', // TODO:
-    trisRedeem: '', // TODO:
-    pint: '', // TODO
+    wock: '0xcB72ed407Cdb97a7161a2b567b5f50B55585Ee6b',
+    wockRedeem: '0x...', // TODO: change
+    tris: '0x0055485fCa054D165fc0C7D836459722436544c1',
+    trisRedeem: '0x5522c1b6dc4f533a798908430af7a3f5bbed801a', // 0xf89c975369e5bf6ce158772b3e1175d2ba7bd84a
+    pint: '0x14046EAa7374CdE165eD7218Ab2d8E2f42c0f23C', // TODO: change
+    opps: '0x5522c1B6dc4F533a798908430Af7a3f5bbED801a', // TODO: change
   },
   mainnet: {
     wock: '0xcB72ed407Cdb97a7161a2b567b5f50B55585Ee6b',
