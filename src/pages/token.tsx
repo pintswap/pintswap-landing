@@ -22,6 +22,7 @@ const Token = () => {
     holdsNfts,
     isSuccess,
     reset,
+    step,
   } = useNftRedeem();
 
   const renderBtnText = () => {
@@ -37,6 +38,25 @@ const Token = () => {
     if (!holdsNfts())
       return console.error('Wallet does not hold any PintSwap NFTs');
     return redeem();
+  };
+
+  const renderModalText = () => {
+    switch (step) {
+      case 'start':
+        return 'Initiating redemption...';
+      case 'wock:approve':
+        return 'Approving WOCK spend...';
+      case 'wock:redeem':
+        return 'Redeeming WOCK...';
+      case 'tris:approve':
+        return 'Approving TRIS spend...';
+      case 'tris:redeem':
+        return 'Redeeming TRIS...';
+      case 'complete':
+        return 'Successfully redeemed PINT!';
+      default:
+        'Submitting transaction...';
+    }
   };
 
   return (
@@ -124,6 +144,20 @@ const Token = () => {
                   </span>
                 </Transition>
               </div>
+              <Transition
+                show={!!error}
+                enter="transition-opacity ease-in-out duration-200"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="transition-opacity ease-in-out duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+                className="absolute pl-1 pt-1"
+              >
+                <p className="font-medium text-red-400 text-sm !leading-tight">
+                  {error}
+                </p>
+              </Transition>
             </div>
             <div className="md:col-span-1">
               <h4 className="text-3xl mb-6 sm:mb-8">Token Stats</h4>
@@ -176,7 +210,7 @@ const Token = () => {
             <>
               <RenderLottie animation="loading" width={200} height={200} />
               <span className="font-medium mt-2 text-lg">
-                Submitting transaction...
+                {renderModalText()}
               </span>
             </>
           ) : (

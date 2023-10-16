@@ -8,6 +8,7 @@ import {
   getPublicClient,
 } from '../utils';
 import { useAccount, useWalletClient } from 'wagmi';
+import { waitForTransaction, prepareWriteContract } from '@wagmi/core';
 import { useEffect, useState } from 'react';
 
 export const useNftRedeem = () => {
@@ -20,6 +21,14 @@ export const useNftRedeem = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [step, setStep] = useState<
+    | 'start'
+    | 'wock:approve'
+    | 'wock:redeem'
+    | 'tris:approve'
+    | 'tris:redeem'
+    | 'complete'
+  >('start');
 
   const { address } = useAccount();
   const { data: signer } = useWalletClient();
@@ -29,12 +38,26 @@ export const useNftRedeem = () => {
     abi: NFT_ABI,
     publicClient: getPublicClient(),
   });
+  const isTrisApproved = async () =>
+    address
+      ? tris.read.isApprovedForAll([
+          address,
+          CONTRACT_ADDRESSES[NETWORK].trisRedeem,
+        ])
+      : false;
 
   const wock = getContract({
     address: CONTRACT_ADDRESSES[NETWORK].wock,
     abi: NFT_ABI,
     publicClient: getPublicClient(),
   });
+  const isWockApproved = async () =>
+    address
+      ? tris.read.isApprovedForAll([
+          address,
+          CONTRACT_ADDRESSES[NETWORK].wockRedeem,
+        ])
+      : false;
 
   // Wallet holds NFTs
   const holdsNfts = () => {
@@ -71,62 +94,78 @@ export const useNftRedeem = () => {
       console.log('Contracts:', CONTRACT_ADDRESSES[NETWORK]);
       console.log('Signer:', signer);
 
+      if (wockIds?.length) {
+        // WOCK: approve all
+        if (!(await isWockApproved())) {
+          setStep('wock:approve');
+          const { request } = await prepareWriteContract({
+            account: address,
+            address: CONTRACT_ADDRESSES[NETWORK].wock,
+            abi: NFT_ABI,
+            functionName: 'setApprovalForAll',
+            args: [CONTRACT_ADDRESSES[NETWORK].wockRedeem, true],
+          });
+          const approveTxHash = await signer.writeContract(request);
+          const approveWaitTx = await waitForTransaction({
+            hash: approveTxHash,
+          });
+          console.log('WOCK: setApprovalForAll(): Success', approveWaitTx);
+        }
+        // WOCK: redeem
+        setStep('wock:redeem');
+        const { request: redeemReq } = await prepareWriteContract({
+          account: address,
+          address: CONTRACT_ADDRESSES[NETWORK].wockRedeem,
+          abi: REDEEM_ABI,
+          functionName: 'redeem',
+          args: [wockIds],
+        });
+        const redeemTxHash = await signer.writeContract(redeemReq);
+        const redeemWaitTx = await waitForTransaction({ hash: redeemTxHash });
+        console.log('WOCKRedemption: redeem(): Success', redeemWaitTx);
+        setTrisRedeemTxHash(redeemTxHash);
+      }
       if (trisIds?.length) {
         // TRIS: approve all
-        const { request: approveReq } =
-          await getPublicClient().simulateContract({
+        if (!(await isTrisApproved())) {
+          setStep('tris:approve');
+          const { request } = await prepareWriteContract({
             account: address,
             address: CONTRACT_ADDRESSES[NETWORK].tris,
             abi: NFT_ABI,
             functionName: 'setApprovalForAll',
             args: [CONTRACT_ADDRESSES[NETWORK].trisRedeem, true],
           });
-        const approveAllTx = await signer.writeContract(approveReq);
-        console.log('TRIS: approveAllTx', approveAllTx);
-        // TRIS: redeem
-        const { request: redeemReq } = await getPublicClient().simulateContract(
-          {
-            account: address,
-            address: CONTRACT_ADDRESSES[NETWORK].trisRedeem,
-            abi: REDEEM_ABI,
-            functionName: 'redeem',
-            args: [trisIds],
-          }
-        );
-        const tx = await signer.writeContract(redeemReq);
-        setTrisRedeemTxHash(tx);
-      }
-      if (wockIds?.length) {
-        // WOCK: approve all
-        const { request: approveReq } =
-          await getPublicClient().simulateContract({
-            account: address,
-            address: CONTRACT_ADDRESSES[NETWORK].wock,
-            abi: NFT_ABI,
-            functionName: 'setApprovalForAll',
-            args: [CONTRACT_ADDRESSES[NETWORK].trisRedeem, true],
+          const approveTxHash = await signer.writeContract(request);
+          const approveWaitTx = await waitForTransaction({
+            hash: approveTxHash,
           });
-        const approveAllTx = await signer.writeContract(approveReq);
-        console.log('WOCK: approveAllTx', approveAllTx);
-        // WOCK: redeem
-        const { request: redeemReq } = await getPublicClient().simulateContract(
-          {
-            account: address,
-            address: CONTRACT_ADDRESSES[NETWORK].wockRedeem,
-            abi: REDEEM_ABI,
-            functionName: 'redeem',
-            args: [wockIds],
-          }
-        );
-        const tx = await signer.writeContract(redeemReq);
-        setWockRedeemTxHash(tx);
+          console.log('TRIS: setApprovalForAll(): Success', approveWaitTx);
+        }
+        // TRIS: redeem
+        setStep('tris:redeem');
+        const { request: redeemReq } = await prepareWriteContract({
+          account: address,
+          address: CONTRACT_ADDRESSES[NETWORK].trisRedeem,
+          abi: REDEEM_ABI,
+          functionName: 'redeem',
+          args: [trisIds],
+        });
+        const redeemTxHash = await signer.writeContract(redeemReq);
+        const redeemWaitTx = await waitForTransaction({ hash: redeemTxHash });
+        console.log('TRISRedemption: redeem(): Success', redeemWaitTx);
+        setTrisRedeemTxHash(redeemTxHash);
       }
+      setStep('complete');
       setIsLoading(false);
     } catch (err) {
+      setStep('start');
       setIsLoading(false);
+      console.log(String(err).includes('insufficient allowance'));
       const errorMsg =
         String(err).includes(`reverted`) ||
-        String(err).includes('exceeds the balance')
+        String(err).includes('exceeds the balance') ||
+        String(err).includes('insufficient allowance')
           ? String(err)
           : '';
       if (errorMsg) {
@@ -144,6 +183,11 @@ export const useNftRedeem = () => {
         else if (errorMsg.includes('Invalid merkle proof'))
           setError('Not on whitelist');
       }
+      if (String(err).includes('insufficient allowance')) {
+        setError(
+          'PINT Deployer has not yet transferred tokens to PINT Treasury'
+        );
+      }
       console.error(err);
     }
   };
@@ -151,7 +195,7 @@ export const useNftRedeem = () => {
   // Reset error
   useEffect(() => {
     if (error) {
-      const timeout = setTimeout(() => setError(''), 3000);
+      const timeout = setTimeout(() => setError(''), 5000);
       return () => clearTimeout(timeout);
     }
   }, [error]);
@@ -194,5 +238,6 @@ export const useNftRedeem = () => {
     holdsNfts,
     isSuccess,
     reset,
+    step,
   };
 };

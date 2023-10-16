@@ -54,7 +54,8 @@
         "import/no-cycle": "off",
         "prefer-destructuring": "off",
         "no-return-assign": "off",
-        "no-restricted-syntax": "warn"
+        "no-restricted-syntax": "warn",
+        "import/no-extraneous-dependencies": "warn"
       }
     }
   ]
