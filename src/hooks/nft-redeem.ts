@@ -97,14 +97,15 @@ export const useNftRedeem = () => {
       if (wockIds?.length) {
         // WOCK: approve all
         if (!(await isWockApproved())) {
-          setStep('wock:approve');
           const { request } = await prepareWriteContract({
             account: address,
             address: CONTRACT_ADDRESSES[NETWORK].wock,
             abi: NFT_ABI,
             functionName: 'setApprovalForAll',
             args: [CONTRACT_ADDRESSES[NETWORK].wockRedeem, true],
+            gas: BigInt(100000), // TODO: is this needed
           });
+          setStep('wock:approve');
           const approveTxHash = await signer.writeContract(request);
           const approveWaitTx = await waitForTransaction({
             hash: approveTxHash,
@@ -112,7 +113,6 @@ export const useNftRedeem = () => {
           console.log('WOCK: setApprovalForAll(): Success', approveWaitTx);
         }
         // WOCK: redeem
-        setStep('wock:redeem');
         const { request: redeemReq } = await prepareWriteContract({
           account: address,
           address: CONTRACT_ADDRESSES[NETWORK].wockRedeem,
@@ -120,30 +120,36 @@ export const useNftRedeem = () => {
           functionName: 'redeem',
           args: [wockIds],
         });
+        setStep('wock:redeem');
         const redeemTxHash = await signer.writeContract(redeemReq);
-        const redeemWaitTx = await waitForTransaction({ hash: redeemTxHash });
+        const redeemWaitTx = await waitForTransaction({
+          hash: redeemTxHash,
+          timeout: 10 * 60 * 1000, // 10 minute timeout
+        });
         console.log('WOCKRedemption: redeem(): Success', redeemWaitTx);
         setTrisRedeemTxHash(redeemTxHash);
       }
       if (trisIds?.length) {
         // TRIS: approve all
         if (!(await isTrisApproved())) {
-          setStep('tris:approve');
           const { request } = await prepareWriteContract({
             account: address,
             address: CONTRACT_ADDRESSES[NETWORK].tris,
             abi: NFT_ABI,
             functionName: 'setApprovalForAll',
             args: [CONTRACT_ADDRESSES[NETWORK].trisRedeem, true],
+            gas: BigInt(100000),
           });
+          setStep('tris:approve');
           const approveTxHash = await signer.writeContract(request);
+          console.log('TRIS: setApprovalForAll(): Submitted', approveTxHash);
           const approveWaitTx = await waitForTransaction({
             hash: approveTxHash,
+            timeout: 10 * 60 * 1000, // 10 minute timeout
           });
           console.log('TRIS: setApprovalForAll(): Success', approveWaitTx);
         }
         // TRIS: redeem
-        setStep('tris:redeem');
         const { request: redeemReq } = await prepareWriteContract({
           account: address,
           address: CONTRACT_ADDRESSES[NETWORK].trisRedeem,
@@ -151,7 +157,9 @@ export const useNftRedeem = () => {
           functionName: 'redeem',
           args: [trisIds],
         });
+        setStep('tris:redeem');
         const redeemTxHash = await signer.writeContract(redeemReq);
+        console.log('TRISRedemption: redeem(): Submitted', redeemTxHash);
         const redeemWaitTx = await waitForTransaction({ hash: redeemTxHash });
         console.log('TRISRedemption: redeem(): Success', redeemWaitTx);
         setTrisRedeemTxHash(redeemTxHash);
@@ -188,6 +196,9 @@ export const useNftRedeem = () => {
           'PINT Deployer has not yet transferred tokens to PINT Treasury'
         );
       }
+      if (String(err).includes('Timed out')) {
+        setError('Transaction timed out. Please try again.');
+      }
       console.error(err);
     }
   };
@@ -195,7 +206,7 @@ export const useNftRedeem = () => {
   // Reset error
   useEffect(() => {
     if (error) {
-      const timeout = setTimeout(() => setError(''), 5000);
+      const timeout = setTimeout(() => setError(''), 6000);
       return () => clearTimeout(timeout);
     }
   }, [error]);
