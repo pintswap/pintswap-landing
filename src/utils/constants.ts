@@ -8,7 +8,7 @@ export const SOCIAL_LINKS = {
 
 export const NETWORK = process.env.NEXT_PUBLIC_NETWORK || 'mainnet';
 export const DEV = !!process.env.NEXT_PUBLIC_DEV;
-export const REDEMPTION_ENABLED = false;
+export const REDEMPTION_ENABLED = true;
 
 export const CONTRACT_ADDRESSES: any = {
   sepolia: {
@@ -32,11 +32,11 @@ export const CONTRACT_ADDRESSES: any = {
   },
   mainnet: {
     wock: '0xcB72ed407Cdb97a7161a2b567b5f50B55585Ee6b',
-    wockRedeem: '0x...', // TODO: change
+    wockRedeem: '0x8a20b541aacc05f824f67532de995e3687431499',
     tris: '0x0055485fCa054D165fc0C7D836459722436544c1',
-    trisRedeem: '0x...', // TODO: change
-    pint: '0...', // TODO: change
-    opps: '0x...', // TODO: change
+    trisRedeem: '0xfef8205d4c472fe0442fc1026acc34e6d88e438c',
+    pint: '0x58fB30A61C218A3607e9273D52995a49fF2697Ee',
+    opps: '0xd665F1153599e8F799b2514069dF4481d3bcb043', // TODO
   },
 };
 

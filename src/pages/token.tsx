@@ -1,9 +1,10 @@
 import { Base } from '../ui/base';
 import { Section } from '../ui/layouts';
 import { Button, DataDisplay, Modal, RenderLottie } from '../ui/components';
-import { useNftRedeem } from '../hooks';
+import { useNftRedeem, usePrices } from '../hooks';
 import {
   CONTRACT_ADDRESSES,
+  DEV,
   EXPLORER_URLS,
   NETWORK,
   REDEMPTION_ENABLED,
@@ -13,9 +14,12 @@ import { useAccount, useNetwork } from 'wagmi';
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit';
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
+import React, { useRef } from 'react';
 
 const Token = () => {
-  // const { data } = usePrices([CONTRACT_ADDRESSES.mainnet.pint]);
+  const { data } = usePrices([CONTRACT_ADDRESSES.mainnet.pint]);
+  if (DEV) console.log('PINT Data:', data);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const { address } = useAccount();
   const { chain } = useNetwork();
   const { openChainModal } = useChainModal();
@@ -31,11 +35,11 @@ const Token = () => {
     isSuccess,
     reset,
     step,
-    // addPintToWallet
+    addPintToWallet,
   } = useNftRedeem();
 
   const renderBtnText = () => {
-if (!REDEMPTION_ENABLED) return 'Coming soon';
+    if (!REDEMPTION_ENABLED) return 'Coming soon';
     if (!address) return 'Connect Wallet';
     if (isIdsLoading) return 'Connecting';
     if (isSuccess) return 'Redeemed';
@@ -63,6 +67,8 @@ if (!REDEMPTION_ENABLED) return 'Coming soon';
     switch (step) {
       case 'start':
         return 'Initiating redemption...';
+      case 'signature':
+        return 'Waiting for signature...';
       case 'wock:approve':
         return 'Approving WOCK spend...';
       case 'wock:redeem':
@@ -180,8 +186,8 @@ if (!REDEMPTION_ENABLED) return 'Coming soon';
               <h4 className="text-3xl mb-6 sm:mb-8">Token Stats</h4>
               <div className="text-lg grid grid-cols-1 gap-x-2 gap-y-6 px-4">
                 {/* <DataDisplay
-                  text={'Launch Price'}
-                  value={'0.0015'}
+                  text={'Price'}
+                  value={data?.length ? data[0]?.usdPrice || '0' : '0'}
                   type="fancy"
                   usd
                   decimals={4}
@@ -201,9 +207,14 @@ if (!REDEMPTION_ENABLED) return 'Coming soon';
                 <Button disabled className="!w-fit">
                   Buy on PintSwap
                 </Button>
-                <Button disabled type="outline" className="!w-fit">
-                  Buy on Uniswap
-                </Button>
+                <Link
+                  href="https://app.uniswap.org/swap?chain=mainnet&inputCurrency=ETH&outputCurrency=0x58fB30A61C218A3607e9273D52995a49fF2697Ee"
+                  target="_blank"
+                >
+                  <Button type="outline" className="!w-fit">
+                    Buy on Uniswap
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -215,11 +226,15 @@ if (!REDEMPTION_ENABLED) return 'Coming soon';
         closeFx={() => reset(false)}
         title="Transaction Details"
         secondary={
-          // isSuccess ? (
-          //   <Button className="!w-fit" type="outline" onClick={() => console.log("bang")}>
-          //     Add to wallet
-          //   </Button>
-          <div></div>
+          isSuccess ? (
+            <div ref={buttonRef} onClick={addPintToWallet}>
+              <Button className="!w-fit" type="outline">
+                Add to wallet
+              </Button>
+            </div>
+          ) : (
+            <div></div>
+          )
         }
       >
         <div className="flex flex-col items-center justify-center">
@@ -242,10 +257,13 @@ if (!REDEMPTION_ENABLED) return 'Coming soon';
                 Redeemed your PINT
               </span>
               <Link
-                className="underline transition duration-150 hover:text-neutral-200"
+                className=""
                 href={`${EXPLORER_URLS[NETWORK]}/token/${CONTRACT_ADDRESSES[NETWORK].pint}`}
               >
-                {CONTRACT_ADDRESSES[NETWORK].pint}
+                PINT Contract:{' '}
+                <span className="underline transition duration-150 hover:text-neutral-200">
+                  {truncate(CONTRACT_ADDRESSES[NETWORK].pint)}
+                </span>
               </Link>
             </>
           )}
@@ -263,7 +281,9 @@ if (!REDEMPTION_ENABLED) return 'Coming soon';
               href={`${EXPLORER_URLS.mainnet}/tx/${wockRedeemTxHash}`}
             >
               WOCK Transaction:{' '}
-              <span className="underline">{truncate(wockRedeemTxHash)}</span>
+              <span className="underline transition duration-150 hover:text-neutral-200">
+                {truncate(wockRedeemTxHash)}
+              </span>
             </Link>
           </Transition>
           <Transition
@@ -280,7 +300,9 @@ if (!REDEMPTION_ENABLED) return 'Coming soon';
               href={`${EXPLORER_URLS.mainnet}/tx/${trisRedeemTxHash}`}
             >
               TRIS Transaction:{' '}
-              <span className="underline">{truncate(trisRedeemTxHash)}</span>
+              <span className="underline transition duration-150 hover:text-neutral-200">
+                {truncate(trisRedeemTxHash)}
+              </span>
             </Link>
           </Transition>
         </div>

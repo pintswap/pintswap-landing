@@ -21,9 +21,10 @@ export const useNftRedeem = () => {
   const [wockRedeemTxHash, setWockRedeemTxHash] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [isSuccess, setIsSuccess] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [step, setStep] = useState<
     | 'start'
+    | 'signature'
     | 'wock:approve'
     | 'wock:redeem'
     | 'tris:approve'
@@ -99,14 +100,16 @@ export const useNftRedeem = () => {
       if (wockIds?.length) {
         // WOCK: approve all
         if (!(await isWockApproved())) {
-          const { request } = await prepareWriteContract({
+          const config: any = {
             account: address,
             address: CONTRACT_ADDRESSES[NETWORK].wock,
             abi: NFT_ABI,
             functionName: 'setApprovalForAll',
             args: [CONTRACT_ADDRESSES[NETWORK].wockRedeem, true],
-            // gas: BigInt(100000), // TODO: is this needed
-          });
+          };
+          if (NETWORK === 'localhost') config.gas = BigInt(100000);
+          const { request } = await prepareWriteContract(config);
+          setStep('signature');
           const approveTxHash = await signer.writeContract(request);
           setStep('wock:approve');
           const approveWaitTx = await waitForTransaction({
@@ -122,6 +125,7 @@ export const useNftRedeem = () => {
           functionName: 'redeem',
           args: [wockIds],
         });
+        setStep('signature');
         const redeemTxHash = await signer.writeContract(redeemReq);
         setStep('wock:redeem');
         const redeemWaitTx = await waitForTransaction({
@@ -140,10 +144,11 @@ export const useNftRedeem = () => {
             abi: NFT_ABI,
             functionName: 'setApprovalForAll',
             args: [CONTRACT_ADDRESSES[NETWORK].trisRedeem, true],
-            // gas: BigInt(100000),
           };
           if (NETWORK === 'localhost') config.gas = BigInt(100000);
+          if (DEV) console.log('TRIS: config:', config);
           const { request } = await prepareWriteContract(config);
+          setStep('signature');
           const approveTxHash = await signer.writeContract(request);
           setStep('tris:approve');
           console.log('TRIS: setApprovalForAll(): Submitted', approveTxHash);
@@ -161,6 +166,7 @@ export const useNftRedeem = () => {
           functionName: 'redeem',
           args: [trisIds],
         });
+        setStep('signature');
         const redeemTxHash = await signer.writeContract(redeemReq);
         setStep('tris:redeem');
         console.log('TRISRedemption: redeem(): Submitted', redeemTxHash);
@@ -174,7 +180,6 @@ export const useNftRedeem = () => {
     } catch (err) {
       setStep('start');
       setIsLoading(false);
-      console.log(String(err).includes('insufficient allowance'));
       const errorMsg =
         String(err).includes(`reverted`) ||
         String(err).includes('exceeds the balance') ||
@@ -208,37 +213,37 @@ export const useNftRedeem = () => {
     }
   };
 
-  // const addPintToWallet = async (e: any) => {
-  //   console.log("e", e)
-  //   const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
-  //   const tokenSymbol = 'TUT';
-  //   const tokenDecimals = 18;
-  //   const tokenImage = 'http://placekitten.com/200/300';
+  const addPintToWallet = async (e: any) => {
+    e.preventDefault();
+    const tokenAddress = CONTRACT_ADDRESSES[NETWORK].pint;
+    const tokenSymbol = 'PINT';
+    const tokenDecimals = 18;
+    const tokenImage = 'https://i.ibb.co/VmhyTxM/PINT.png';
 
-  //   try {
-  //     // wasAdded is a boolean. Like any RPC method, an error may be thrown.
-  //     const wasAdded = await (window as any).ethereum.request({
-  //       method: 'wallet_watchAsset',
-  //       params: {
-  //         type: 'ERC20', // Initially only supports ERC20, but eventually more!
-  //         options: {
-  //           address: tokenAddress, // The address that the token is at.
-  //           symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
-  //           decimals: tokenDecimals, // The number of decimals in the token
-  //           image: tokenImage, // A string url of the token logo
-  //         },
-  //       },
-  //     });
+    try {
+      // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+      const wasAdded = await (window as any).ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20', // Initially only supports ERC20, but eventually more!
+          options: {
+            address: tokenAddress, // The address that the token is at.
+            symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+            decimals: tokenDecimals, // The number of decimals in the token
+            image: tokenImage, // A string url of the token logo
+          },
+        },
+      });
 
-  //     if (wasAdded) {
-  //       console.log('Thanks for your interest!');
-  //     } else {
-  //       console.log('Your loss!');
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+      if (wasAdded) {
+        console.log('#addPintToWallet: Added PINT');
+      } else {
+        console.log('#addPintToWallet: User rejected');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Reset error
   useEffect(() => {
@@ -287,6 +292,6 @@ export const useNftRedeem = () => {
     isSuccess,
     reset,
     step,
-    // addPintToWallet
+    addPintToWallet,
   };
 };
