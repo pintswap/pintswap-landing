@@ -35,8 +35,8 @@ export const CONTRACT_ADDRESSES: any = {
     wockRedeem: '0x...', // TODO: change
     tris: '0x0055485fCa054D165fc0C7D836459722436544c1',
     trisRedeem: '0x...', // TODO: change
-    pint: '0x14046EAa7374CdE165eD7218Ab2d8E2f42c0f23C', // TODO: change
-    opps: '0x5522c1B6dc4F533a798908430Af7a3f5bbED801a', // TODO: change
+    pint: '0x...', // TODO: change
+    opps: '0x...', // TODO: change
   },
 };
 
