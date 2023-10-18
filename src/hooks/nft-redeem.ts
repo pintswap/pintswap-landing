@@ -105,7 +105,7 @@ export const useNftRedeem = () => {
             abi: NFT_ABI,
             functionName: 'setApprovalForAll',
             args: [CONTRACT_ADDRESSES[NETWORK].wockRedeem, true],
-            gas: BigInt(100000), // TODO: is this needed
+            // gas: BigInt(100000), // TODO: is this needed
           });
           const approveTxHash = await signer.writeContract(request);
           setStep('wock:approve');
@@ -140,7 +140,7 @@ export const useNftRedeem = () => {
             abi: NFT_ABI,
             functionName: 'setApprovalForAll',
             args: [CONTRACT_ADDRESSES[NETWORK].trisRedeem, true],
-            gas: BigInt(100000),
+            // gas: BigInt(100000),
           });
           const approveTxHash = await signer.writeContract(request);
           setStep('tris:approve');
