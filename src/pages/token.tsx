@@ -4,6 +4,7 @@ import { Button, DataDisplay, Modal, RenderLottie } from '../ui/components';
 import { useNftRedeem, usePrices } from '../hooks';
 import {
   CONTRACT_ADDRESSES,
+  DEV,
   EXPLORER_URLS,
   NETWORK,
   REDEMPTION_ENABLED,
@@ -17,7 +18,7 @@ import React, { useRef } from 'react';
 
 const Token = () => {
   const { data } = usePrices([CONTRACT_ADDRESSES.mainnet.pint]);
-  console.log('pint', data);
+  if (DEV) console.log('PINT Data:', data);
   const buttonRef = useRef<HTMLDivElement>(null);
   const { address } = useAccount();
   const { chain } = useNetwork();
