@@ -31,16 +31,16 @@ const Button = (props: IButtonProps) => {
   const sizeClass = () => {
     switch (props.size) {
       case 'lg':
-        return 'py-2 px-6 text-lg';
+        return 'py-1.5 px-5 text-lg';
       case 'sm':
         return 'py-1 px-2.5';
       default:
-        return 'py-1.5 px-4';
+        return 'py-[5px] px-4';
     }
   };
   const btnClass = `inline-block font-semibold rounded-lg text-center ${sizeClass()} text-neutral-100 border border-1 ${
     props.borderColor || 'border-primary-dark'
-  } cursor-pointer`;
+  } cursor-pointer disabled:cursor-not-allowed disabled:!text-neutral-400`;
 
   switch (props.type) {
     case 'link': {
@@ -159,8 +159,13 @@ const Button = (props: IButtonProps) => {
     }
     case 'outline': {
       return (
-        <button className="btn-hover outline-click rounded-lg p-0.5 w-full">
-          <div className="flex h-full w-full items-center justify-center transtion duration-150 bg-neutral-900 text-white hover:text-neutral-100 hover:bg-[rgb(18,18,18)] back rounded-lg">
+        <button
+          className={`btn-hover outline-click rounded-lg p-0.5 w-full disabled:cursor-not-allowed text-white hover:text-neutral-100 disabled:text-neutral-400 ${
+            props.className || ''
+          }`}
+          disabled={props.disabled}
+        >
+          <div className="flex h-full w-full items-center justify-center transtion duration-150 bg-neutral-900 hover:bg-[rgb(18,18,18)] back rounded-lg">
             <span className={`${sizeClass()} font-medium`}>
               {props.children}
             </span>
@@ -186,7 +191,7 @@ const Button = (props: IButtonProps) => {
               <span>
                 {props.loadingText ? props.loadingText : props.children}
               </span>
-              <SpinnerLoader height="min-h-0" color="text-slate-800" />
+              <SpinnerLoader height="min-h-0" />
             </span>
           ) : (
             <>{props.children}</>

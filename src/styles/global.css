@@ -17,7 +17,6 @@
 
   .btn-hover {
     color: #fff;
-    cursor: pointer;
 
     moz-transition: all .15s ease-in-out;
     -o-transition: all .15s ease-in-out;

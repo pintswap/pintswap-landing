@@ -8,12 +8,15 @@ export type IUniswapToken = {
   ethPrice: string;
   symbol: string;
   decimals: string;
+  usdVolume: string;
+  usdPrice: string;
 };
 
 export function usePrices(tokens?: string[]) {
   const [data, setData] = useState<IUniswapToken[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [eth, setEth] = useState('');
 
   async function getEthPrice() {
     const ethQuery = await getApolloClient(SUBGRAPH_ENDPOINTS.uniswapv3).query({
@@ -40,6 +43,7 @@ export function usePrices(tokens?: string[]) {
             derivedETH
             symbol
             decimals
+            tradeVolumeUSD
           }
         }
       `,
@@ -47,15 +51,39 @@ export function usePrices(tokens?: string[]) {
     });
 
     if (uniQuery.data?.token) {
-      const { id, derivedETH, symbol, decimals } = uniQuery.data.token;
-      return { address: id, ethPrice: derivedETH, symbol, decimals };
+      const {
+        id,
+        derivedETH,
+        symbol,
+        decimals,
+        tradeVolumeUSD,
+        totalLiquidity,
+      } = uniQuery.data.token;
+      let shallowEth = eth;
+      if (!shallowEth) shallowEth = await getEthPrice();
+      const calculateUsdPrice = String(Number(derivedETH) * Number(shallowEth));
+      return {
+        address: id,
+        ethPrice: derivedETH,
+        symbol,
+        decimals,
+        usdVolume: tradeVolumeUSD,
+        usdPrice: calculateUsdPrice,
+      };
     }
 
     console.error(
       '#getUniswapV2Token:',
       uniQuery.error || uniQuery.errors || 'Token not found.'
     );
-    return { address: '', ethPrice: '', symbol: '', decimals: '' };
+    return {
+      address: '',
+      ethPrice: '',
+      symbol: '',
+      decimals: '',
+      usdPrice: '',
+      usdVolume: '',
+    };
   }
 
   async function getManyUniswapV2Tokens(
@@ -82,7 +110,14 @@ export function usePrices(tokens?: string[]) {
       setError(true);
       setLoading(false);
     });
-  }, [tokens?.length, tokens, data.length]);
+  }, [tokens?.length, tokens, data.length, eth]);
+
+  useEffect(() => {
+    (async () => {
+      const ethPrice = await getEthPrice();
+      setEth(ethPrice);
+    })().catch((err) => console.error(err));
+  }, []);
 
   return {
     data,

@@ -53,7 +53,9 @@
         "@typescript-eslint/no-unused-expressions": "warn",
         "import/no-cycle": "off",
         "prefer-destructuring": "off",
-        "no-return-assign": "off"
+        "no-return-assign": "off",
+        "no-restricted-syntax": "warn",
+        "import/no-extraneous-dependencies": "warn"
       }
     }
   ]

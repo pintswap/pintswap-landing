@@ -1,6 +1,7 @@
 import localFont from 'next/font/local';
 
 export const AllRoundGothic = localFont({
+  variable: '--font-round-gothic',
   src: [
     {
       path: '../fonts/AllRoundGothic-Bold.ttf',

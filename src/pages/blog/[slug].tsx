@@ -20,7 +20,9 @@ const Blog = () => {
 
   return (
     <Base>
-      <div className="max-w-6xl mx-auto">
+      <div className="absolute left-0 top-0 w-full h-[50vh] bg-gradient-to-b from-primary to-secondary-black opacity-25" />
+
+      <div className="max-w-6xl mx-auto !z-[99] relative">
         <Padding>
           {foundPost ? (
             <PostArticle post={foundPost} />

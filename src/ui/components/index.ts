@@ -10,3 +10,4 @@ export * from './parallax-mouse-child';
 export * from './animated-hamburger';
 export * from './parallax-scroll-wrapper';
 export * from './lottie';
+export * from './modal';

@@ -1,35 +1,53 @@
-// import '@rainbow-me/rainbowkit/styles.css';
+import '@rainbow-me/rainbowkit/styles.css';
 
-// import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
-// import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-// import { mainnet, sepolia } from 'wagmi/chains';
-// import { publicProvider } from 'wagmi/providers/public';
-// import { NETWORK } from './constants';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+  darkTheme,
+} from '@rainbow-me/rainbowkit';
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { mainnet, localhost, hardhat, sepolia } from 'wagmi/chains';
+import { publicProvider } from 'wagmi/providers/public';
+import { DEV, NETWORK } from './constants';
+import merge from 'lodash.merge';
 
-// const ACTIVE_CHAIN = NETWORK === 'sepolia' ? sepolia : mainnet;
+const { chains, publicClient } = configureChains(
+  DEV ? [mainnet, sepolia, hardhat, localhost] : [mainnet],
+  [publicProvider()]
+);
 
-// const { chains, publicClient } = configureChains(
-//   [ACTIVE_CHAIN],
-//   [publicProvider()]
-// );
+const { connectors } = getDefaultWallets({
+  appName: 'PintSwap',
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '',
+  chains,
+});
 
-// const { connectors } = getDefaultWallets({
-//   appName: 'PintSwap',
-//   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '',
-//   chains,
-// });
+const wagmiConfig = createConfig({
+  autoConnect: false,
+  connectors,
+  publicClient,
+});
 
-// const wagmiConfig = createConfig({
-//   autoConnect: true,
-//   connectors,
-//   publicClient,
-// });
+export const walletTheme = merge(
+  darkTheme({
+    borderRadius: 'small',
+    accentColor: '#FF6FA9',
+  })
+);
 
-// export {
-//   WagmiConfig,
-//   wagmiConfig,
-//   RainbowKitProvider,
-//   chains,
-//   publicClient,
-//   ACTIVE_CHAIN,
-// };
+const getPublicClient = () => {
+  let chainId;
+  if (NETWORK === 'hardhat') chainId = 31337;
+  else if (NETWORK === 'localhost') chainId = 1337;
+  else if (NETWORK === 'sepolia') chainId = 11155111;
+  else chainId = 1;
+  return publicClient({ chainId });
+};
+
+export {
+  WagmiConfig,
+  wagmiConfig,
+  RainbowKitProvider,
+  chains,
+  getPublicClient,
+};

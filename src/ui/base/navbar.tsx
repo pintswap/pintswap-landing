@@ -54,20 +54,24 @@ const Navbar = () => {
                 </li>
               ))}
               <li>
-                {/* <Button wallet>Connect</Button> */}
-                <Link href="https://app.pintswap.exchange" target="_blank">
-                  <Button>Enter{width > breakpoints.md ? ' App' : ''}</Button>
+                <Link href="/token">
+                  <Button>Buy $PINT</Button>
                 </Link>
               </li>
             </ul>
 
-            {/* Mobile Menu */}
-            <button
-              onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="px-0.5 sm:hidden"
-            >
-              <AnimatedHamburger state={isMobileOpen} />
-            </button>
+            <div className="sm:hidden flex items-center gap-1">
+              <Link href="/token">
+                <Button>Buy $PINT</Button>
+              </Link>
+              {/* Mobile Menu */}
+              <button
+                onClick={() => setIsMobileOpen(!isMobileOpen)}
+                className="px-0.5 sm:hidden"
+              >
+                <AnimatedHamburger state={isMobileOpen} />
+              </button>
+            </div>
           </nav>
         </div>
       </Section>

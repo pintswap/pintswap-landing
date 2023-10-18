@@ -7,13 +7,36 @@ export const SOCIAL_LINKS = {
 };
 
 export const NETWORK = process.env.NEXT_PUBLIC_NETWORK || 'mainnet';
+export const DEV = !!process.env.NEXT_PUBLIC_DEV;
+export const REDEMPTION_ENABLED = false;
 
 export const CONTRACT_ADDRESSES: any = {
   sepolia: {
     tris: '0x0bA5835F87BAB3d0D66e180ea58e3b4D87ef0f17',
   },
-  mainnet: {
+  hardhat: {
+    wock: '0xcB72ed407Cdb97a7161a2b567b5f50B55585Ee6b',
+    wockRedeem: '0x...',
     tris: '0x0055485fCa054D165fc0C7D836459722436544c1',
+    trisRedeem: '0xB00cAA9aCE48Ad8AcDF8EC77ef1CE77bf879D91C',
+    pint: '0x14046EAa7374CdE165eD7218Ab2d8E2f42c0f23C',
+    opps: '0x5522c1B6dc4F533a798908430Af7a3f5bbED801a',
+  },
+  localhost: {
+    wock: '0xcB72ed407Cdb97a7161a2b567b5f50B55585Ee6b',
+    wockRedeem: '0x...',
+    tris: '0x0055485fCa054D165fc0C7D836459722436544c1',
+    trisRedeem: '0xB00cAA9aCE48Ad8AcDF8EC77ef1CE77bf879D91C',
+    pint: '0x14046EAa7374CdE165eD7218Ab2d8E2f42c0f23C',
+    opps: '0x5522c1B6dc4F533a798908430Af7a3f5bbED801a',
+  },
+  mainnet: {
+    wock: '0xcB72ed407Cdb97a7161a2b567b5f50B55585Ee6b',
+    wockRedeem: '0x...', // TODO: change
+    tris: '0x0055485fCa054D165fc0C7D836459722436544c1',
+    trisRedeem: '0x...', // TODO: change
+    pint: '0x14046EAa7374CdE165eD7218Ab2d8E2f42c0f23C', // TODO: change
+    opps: '0x5522c1B6dc4F533a798908430Af7a3f5bbED801a', // TODO: change
   },
 };
 

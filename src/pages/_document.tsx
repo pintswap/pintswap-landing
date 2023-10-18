@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { AllRoundGothic } from '../utils';
 
 import { AppConfig } from '../utils/app-config';
 
@@ -9,10 +10,13 @@ class MyDocument extends Document {
       <Html
         lang={AppConfig.locale}
         className="scroll-smooth"
-        style={{ scrollBehavior: 'smooth' }}
+        style={{
+          scrollBehavior: 'smooth',
+          fontFamily: AllRoundGothic.style.fontFamily,
+        }}
       >
         <Head />
-        <body>
+        <body className={AllRoundGothic.className}>
           <Main />
           <NextScript />
         </body>
