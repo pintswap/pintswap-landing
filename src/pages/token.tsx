@@ -1,7 +1,7 @@
 import { Base } from '../ui/base';
 import { Section } from '../ui/layouts';
 import { Button, DataDisplay, Modal, RenderLottie } from '../ui/components';
-import { useNftRedeem } from '../hooks';
+import { useNftRedeem, usePrices } from '../hooks';
 import {
   CONTRACT_ADDRESSES,
   EXPLORER_URLS,
@@ -16,7 +16,8 @@ import Link from 'next/link';
 import React, { useRef } from 'react';
 
 const Token = () => {
-  // const { data } = usePrices([CONTRACT_ADDRESSES.mainnet.pint]);
+  const { data } = usePrices([CONTRACT_ADDRESSES.mainnet.pint]);
+  console.log('pint', data);
   const buttonRef = useRef<HTMLDivElement>(null);
   const { address } = useAccount();
   const { chain } = useNetwork();
@@ -37,7 +38,7 @@ const Token = () => {
   } = useNftRedeem();
 
   const renderBtnText = () => {
-if (!REDEMPTION_ENABLED) return 'Coming soon';
+    if (!REDEMPTION_ENABLED) return 'Coming soon';
     if (!address) return 'Connect Wallet';
     if (isIdsLoading) return 'Connecting';
     if (isSuccess) return 'Redeemed';
@@ -184,8 +185,8 @@ if (!REDEMPTION_ENABLED) return 'Coming soon';
               <h4 className="text-3xl mb-6 sm:mb-8">Token Stats</h4>
               <div className="text-lg grid grid-cols-1 gap-x-2 gap-y-6 px-4">
                 {/* <DataDisplay
-                  text={'Launch Price'}
-                  value={'0.0015'}
+                  text={'Price'}
+                  value={data?.length ? data[0]?.usdPrice || '0' : '0'}
                   type="fancy"
                   usd
                   decimals={4}
@@ -205,9 +206,14 @@ if (!REDEMPTION_ENABLED) return 'Coming soon';
                 <Button disabled className="!w-fit">
                   Buy on PintSwap
                 </Button>
-                <Button disabled type="outline" className="!w-fit">
-                  Buy on Uniswap
-                </Button>
+                <Link
+                  href="https://app.uniswap.org/swap?chain=mainnet&inputCurrency=ETH&outputCurrency=0x58fB30A61C218A3607e9273D52995a49fF2697Ee"
+                  target="_blank"
+                >
+                  <Button type="outline" className="!w-fit">
+                    Buy on Uniswap
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
