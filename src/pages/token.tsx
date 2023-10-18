@@ -3,14 +3,16 @@ import { Section } from '../ui/layouts';
 import { Button, DataDisplay, Modal, RenderLottie } from '../ui/components';
 import { useNftRedeem } from '../hooks';
 import { EXPLORER_URLS, truncate } from '../utils';
-import { useAccount } from 'wagmi';
-import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { useAccount, useNetwork } from 'wagmi';
+import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit';
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
 
 const Token = () => {
   // const { data } = usePrices([CONTRACT_ADDRESSES.mainnet.pint]);
   const { address } = useAccount();
+  const { chain } = useNetwork();
+  const { openChainModal } = useChainModal();
   const { openConnectModal } = useConnectModal();
   const {
     redeem,
@@ -29,15 +31,23 @@ const Token = () => {
     if (!address) return 'Connect Wallet';
     if (isIdsLoading) return 'Connecting';
     if (isSuccess) return 'Redeemed';
+    if (chain?.unsupported) return 'Switch Networks';
     if (!holdsNfts()) return 'No NFTs to Redeem';
     return 'Redeem';
   };
 
   const handleBtnClick = () => {
     if (!address && openConnectModal) return openConnectModal();
+    if (chain?.unsupported && openChainModal) return openChainModal();
     if (!holdsNfts())
       return console.error('Wallet does not hold any PintSwap NFTs');
     return redeem();
+  };
+
+  const determineDisabled = () => {
+    if (chain?.unsupported) return false;
+    if ((!holdsNfts() && address !== undefined) || isLoading) return true;
+    return false;
   };
 
   const renderModalText = () => {
@@ -114,9 +124,7 @@ const Token = () => {
               <br />
               <div className="flex items-center">
                 <Button
-                  disabled={
-                    (!holdsNfts() && address !== undefined) || isLoading
-                  }
+                  disabled={determineDisabled()}
                   size="lg"
                   onClick={handleBtnClick}
                   className={`${
@@ -198,11 +206,12 @@ const Token = () => {
         closeFx={() => reset(false)}
         title="Transaction Details"
         secondary={
-          isSuccess && (
-            <Button className="!w-fit" type="outline">
-              Add to wallet
-            </Button>
-          )
+          <></>
+          // isSuccess && (
+          //   <Button className="!w-fit" type="outline">
+          //     Add to wallet
+          //   </Button>
+          // )
         }
       >
         <div className="flex flex-col items-center justify-center">
