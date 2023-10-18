@@ -2,7 +2,13 @@ import { Base } from '../ui/base';
 import { Section } from '../ui/layouts';
 import { Button, DataDisplay, Modal, RenderLottie } from '../ui/components';
 import { useNftRedeem } from '../hooks';
-import { EXPLORER_URLS, REDEMPTION_ENABLED, truncate } from '../utils';
+import {
+  CONTRACT_ADDRESSES,
+  EXPLORER_URLS,
+  NETWORK,
+  REDEMPTION_ENABLED,
+  truncate,
+} from '../utils';
 import { useAccount, useNetwork } from 'wagmi';
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit';
 import { Transition } from '@headlessui/react';
@@ -25,6 +31,7 @@ const Token = () => {
     isSuccess,
     reset,
     step,
+    // addPintToWallet
   } = useNftRedeem();
 
   const renderBtnText = () => {
@@ -207,12 +214,11 @@ const Token = () => {
         closeFx={() => reset(false)}
         title="Transaction Details"
         secondary={
-          <></>
-          // isSuccess && (
-          //   <Button className="!w-fit" type="outline">
+          // isSuccess ? (
+          //   <Button className="!w-fit" type="outline" onClick={() => console.log("bang")}>
           //     Add to wallet
           //   </Button>
-          // )
+          <div></div>
         }
       >
         <div className="flex flex-col items-center justify-center">
@@ -234,6 +240,12 @@ const Token = () => {
               <span className="font-medium mt-6 text-lg">
                 Redeemed your PINT
               </span>
+              <Link
+                className="underline transition duration-150 hover:text-neutral-200"
+                href={`${EXPLORER_URLS[NETWORK]}/token/${CONTRACT_ADDRESSES[NETWORK].pint}`}
+              >
+                {CONTRACT_ADDRESSES[NETWORK].pint}
+              </Link>
             </>
           )}
           <Transition
