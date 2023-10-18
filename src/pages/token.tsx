@@ -37,6 +37,7 @@ const Token = () => {
   } = useNftRedeem();
 
   const renderBtnText = () => {
+if (!REDEMPTION_ENABLED) return 'Coming soon';
     if (!address) return 'Connect Wallet';
     if (isIdsLoading) return 'Connecting';
     if (isSuccess) return 'Redeemed';
