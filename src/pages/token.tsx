@@ -204,9 +204,12 @@ const Token = () => {
                 />
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-8">
-                <Button disabled className="!w-fit">
-                  Buy on PintSwap
-                </Button>
+                <Link
+                  href="https://app.pintswap.exchange/#/markets/pint-usdc"
+                  target="_blank"
+                >
+                  <Button className="!w-fit">Buy on PintSwap</Button>
+                </Link>
                 <Link
                   href="https://app.uniswap.org/swap?chain=mainnet&inputCurrency=ETH&outputCurrency=0x58fB30A61C218A3607e9273D52995a49fF2697Ee"
                   target="_blank"
