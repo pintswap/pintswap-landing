@@ -55,7 +55,8 @@
         "prefer-destructuring": "off",
         "no-return-assign": "off",
         "no-restricted-syntax": "warn",
-        "import/no-extraneous-dependencies": "warn"
+        "import/no-extraneous-dependencies": "warn",
+        "@typescript-eslint/no-shadow": "warn"
       }
     }
   ]

@@ -13,9 +13,11 @@ import { useAccount, useNetwork } from 'wagmi';
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit';
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
+import React, { useRef } from 'react';
 
 const Token = () => {
   // const { data } = usePrices([CONTRACT_ADDRESSES.mainnet.pint]);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const { address } = useAccount();
   const { chain } = useNetwork();
   const { openChainModal } = useChainModal();
@@ -31,7 +33,7 @@ const Token = () => {
     isSuccess,
     reset,
     step,
-    // addPintToWallet
+    addPintToWallet,
   } = useNftRedeem();
 
   const renderBtnText = () => {
@@ -62,6 +64,8 @@ const Token = () => {
     switch (step) {
       case 'start':
         return 'Initiating redemption...';
+      case 'signature':
+        return 'Waiting for signature...';
       case 'wock:approve':
         return 'Approving WOCK spend...';
       case 'wock:redeem':
@@ -214,11 +218,15 @@ const Token = () => {
         closeFx={() => reset(false)}
         title="Transaction Details"
         secondary={
-          // isSuccess ? (
-          //   <Button className="!w-fit" type="outline" onClick={() => console.log("bang")}>
-          //     Add to wallet
-          //   </Button>
-          <div></div>
+          isSuccess ? (
+            <div ref={buttonRef} onClick={addPintToWallet}>
+              <Button className="!w-fit" type="outline">
+                Add to wallet
+              </Button>
+            </div>
+          ) : (
+            <div></div>
+          )
         }
       >
         <div className="flex flex-col items-center justify-center">
@@ -241,10 +249,13 @@ const Token = () => {
                 Redeemed your PINT
               </span>
               <Link
-                className="underline transition duration-150 hover:text-neutral-200"
+                className=""
                 href={`${EXPLORER_URLS[NETWORK]}/token/${CONTRACT_ADDRESSES[NETWORK].pint}`}
               >
-                {CONTRACT_ADDRESSES[NETWORK].pint}
+                PINT Contract:{' '}
+                <span className="underline transition duration-150 hover:text-neutral-200">
+                  {truncate(CONTRACT_ADDRESSES[NETWORK].pint)}
+                </span>
               </Link>
             </>
           )}
@@ -262,7 +273,9 @@ const Token = () => {
               href={`${EXPLORER_URLS.mainnet}/tx/${wockRedeemTxHash}`}
             >
               WOCK Transaction:{' '}
-              <span className="underline">{truncate(wockRedeemTxHash)}</span>
+              <span className="underline transition duration-150 hover:text-neutral-200">
+                {truncate(wockRedeemTxHash)}
+              </span>
             </Link>
           </Transition>
           <Transition
@@ -279,7 +292,9 @@ const Token = () => {
               href={`${EXPLORER_URLS.mainnet}/tx/${trisRedeemTxHash}`}
             >
               TRIS Transaction:{' '}
-              <span className="underline">{truncate(trisRedeemTxHash)}</span>
+              <span className="underline transition duration-150 hover:text-neutral-200">
+                {truncate(trisRedeemTxHash)}
+              </span>
             </Link>
           </Transition>
         </div>
