@@ -2,7 +2,7 @@ export const IS_MINT_ENABLED = false;
 
 export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com/pintswap0x',
-  medium: 'https://medium.com/feed/pintswap',
+  medium: 'https://medium.com/pintswap',
   discord: 'https://discord.gg/pintswap',
 };
 
