@@ -2,7 +2,7 @@ import { Base } from '../ui/base';
 import { Section } from '../ui/layouts';
 import { Button, DataDisplay, Modal, RenderLottie } from '../ui/components';
 import { useNftRedeem } from '../hooks';
-import { EXPLORER_URLS, truncate } from '../utils';
+import { EXPLORER_URLS, REDEMPTION_ENABLED, truncate } from '../utils';
 import { useAccount, useNetwork } from 'wagmi';
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit';
 import { Transition } from '@headlessui/react';
@@ -45,6 +45,7 @@ const Token = () => {
   };
 
   const determineDisabled = () => {
+    if (!REDEMPTION_ENABLED) return true;
     if (chain?.unsupported) return false;
     if ((!holdsNfts() && address !== undefined) || isLoading) return true;
     return false;
