@@ -2,8 +2,6 @@ import { NextSeo } from 'next-seo';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { AppConfig } from '../../utils/app-config';
-
 type IMetaProps = {
   title: string;
   description: string;
@@ -47,18 +45,7 @@ const Meta = (props: IMetaProps) => {
           key="favicon"
         />
       </Head>
-      <NextSeo
-        title={props.title}
-        description={props.description}
-        canonical={props.canonical}
-        openGraph={{
-          title: props.title,
-          description: props.description,
-          url: props.canonical,
-          locale: AppConfig.locale,
-          site_name: AppConfig.site_name,
-        }}
-      />
+      <NextSeo {...props} />
     </>
   );
 };

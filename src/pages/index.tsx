@@ -214,7 +214,7 @@ const Index = () => {
             {/* TODO: connect */}
             <DataDisplay
               loading={isLoading}
-              value="8"
+              value={Math.floor(Math.random() * 10)}
               text="Peers"
               type="fancy"
             />
@@ -361,12 +361,6 @@ const Index = () => {
             >
               <Split>
                 <ParallaxScrollWrapper>
-                  {/* <Image
-                    src="https://placehold.co/300x300"
-                    alt="Swap module preview on PintSwap app"
-                    width={300}
-                    height={300}
-                  /> */}
                   <RenderLottie animation="blockchainNetwork" />
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper
@@ -447,12 +441,6 @@ const Index = () => {
                   </Link>
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper className="order-1 md:order-2">
-                  {/* <Image
-                    src="https://placehold.co/300x300"
-                    alt="Swap module preview on PintSwap app"
-                    width={300}
-                    height={400}
-                  /> */}
                   <RenderLottie animation="blockchainWorks" />
                 </ParallaxScrollWrapper>
               </Split>

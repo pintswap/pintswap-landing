@@ -14,7 +14,8 @@
     "clean": "rimraf .next out",
     "lint": "next lint",
     "build-types": "tsc --noEmit --pretty",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postbuild": "next-sitemap"
   },
   "browser": {
     "fs": false,
@@ -36,7 +37,8 @@
     "lodash.merge": "^4.6.2",
     "merkletreejs": "^0.3.10",
     "next": "^13.5.3",
-    "next-seo": "^4.29.0",
+    "next-seo": "^6.4.0",
+    "next-sitemap": "^4.2.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-countup": "^6.4.2",

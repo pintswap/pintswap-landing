@@ -12,7 +12,7 @@ type IBaseProps = {
 const Base = (props: IBaseProps) => {
   return (
     <>
-      <Meta title={AppConfig.title} description={AppConfig.description} />
+      <Meta {...AppConfig} />
       <Navbar />
       {props.children}
       <Footer />
