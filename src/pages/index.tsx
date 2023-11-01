@@ -171,9 +171,13 @@ const Index = () => {
                     Enter App
                   </Button>
                 </Link>
-                <Link href="/token" className="w-full sm:w-fit">
+                <Link
+                  href="https://t.me/pintswap_bot"
+                  target="_blank"
+                  className="w-full sm:w-fit"
+                >
                   <Button type="outline" size="lg" className="w-full sm:w-fit">
-                    Redeem TRIS
+                    Launch Telegram Bot
                   </Button>
                 </Link>
               </div>
@@ -282,13 +286,6 @@ const Index = () => {
                       <Tab.Panel key={`how-it-works-panel-${i}`}>
                         <h3 className="text-3xl font-medium">{x.title}</h3>
                         <p className="mb-2 sm:mb-0">{x.text}</p>
-                        {/* <Image
-                          src="https://placehold.co/500x250"
-                          width={600}
-                          height={400}
-                          alt=""
-                          className="p-2 mt-4"
-                        /> */}
                         <RenderLottie
                           animation={x.animation as any}
                           height={width < breakpoints.sm ? 150 : 250}
@@ -434,10 +431,8 @@ const Index = () => {
                     at the best price and are not limited to PintSwap&apos;s
                     orderbook.
                   </p>
-                  <Link href="#" target="_blank">
-                    <Button className="sm:w-fit">
-                      Telegram Bot Coming Soon
-                    </Button>
+                  <Link href="https://t.me/pintswap_bot" target="_blank">
+                    <Button className="sm:w-fit">Launch Telegram Bot</Button>
                   </Link>
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper className="order-1 md:order-2">
