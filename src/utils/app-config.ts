@@ -31,7 +31,7 @@ const AppConfig = {
   },
   locale: 'en',
   legalName: 'PintSwap LLC',
-  image: 'link to image',
+  image: 'https://pintswap.exchange/assets/logo/pintswap-logo.svg',
 };
 
 export { QueryClientProvider, queryClient, AppConfig };
