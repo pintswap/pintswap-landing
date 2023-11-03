@@ -98,49 +98,48 @@ export const useNftRedeem = () => {
 
     try {
       if (DEV) console.log('Network:', NETWORK);
-      if (DEV) console.log('Contracts:', CONTRACT_ADDRESSES[NETWORK]);
-      if (DEV) console.log('Signer:', signer);
+      if (DEV) console.log('Signer:', (await signer.getAddresses())[0]);
 
       if (wockIds?.length) {
         // WOCK: approve all
 
-        // if (!(await isWockApproved())) {
-        const config = {
-          account: address,
-          address: CONTRACT_ADDRESSES[NETWORK].wock,
-          abi: [
-            {
-              inputs: [
-                {
-                  internalType: 'address',
-                  name: 'operator',
-                  type: 'address',
-                },
-                {
-                  internalType: 'bool',
-                  name: 'approved',
-                  type: 'bool',
-                },
-              ],
-              name: 'setApprovalForAll',
-              outputs: [],
-              stateMutability: 'nonpayable',
-              type: 'function',
-            },
-          ],
-          functionName: 'setApprovalForAll',
-          args: [CONTRACT_ADDRESSES[NETWORK].wockRedeem, true],
-        };
-        // if (NETWORK === 'localhost') config.gas = BigInt(100000);
-        const { request } = await prepareWriteContract(config);
-        setStep('signature');
-        const approveTxHash = await writeContract(request);
-        setStep('wock:approve');
-        const approveWaitTx = await waitForTransaction({
-          hash: approveTxHash.hash,
-        });
-        console.log('WOCK: setApprovalForAll(): Success', approveWaitTx);
-        // }
+        if (!(await isWockApproved())) {
+          const config = {
+            account: address,
+            address: CONTRACT_ADDRESSES[NETWORK].wock,
+            abi: [
+              {
+                inputs: [
+                  {
+                    internalType: 'address',
+                    name: 'operator',
+                    type: 'address',
+                  },
+                  {
+                    internalType: 'bool',
+                    name: 'approved',
+                    type: 'bool',
+                  },
+                ],
+                name: 'setApprovalForAll',
+                outputs: [],
+                stateMutability: 'nonpayable',
+                type: 'function',
+              },
+            ],
+            functionName: 'setApprovalForAll',
+            args: [CONTRACT_ADDRESSES[NETWORK].wockRedeem, true],
+          };
+          // if (NETWORK === 'localhost') config.gas = BigInt(100000);
+          const { request } = await prepareWriteContract(config);
+          setStep('signature');
+          const approveTxHash = await writeContract(request);
+          setStep('wock:approve');
+          const approveWaitTx = await waitForTransaction({
+            hash: approveTxHash.hash,
+          });
+          console.log('WOCK: setApprovalForAll(): Success', approveWaitTx);
+        }
 
         // WOCK: redeem
         const { request: redeemReq } = await prepareWriteContract({
@@ -163,46 +162,46 @@ export const useNftRedeem = () => {
       if (trisIds?.length) {
         // TRIS: approve all
 
-        // if (!(await isTrisApproved())) {
-        const config = {
-          account: address,
-          address: CONTRACT_ADDRESSES[NETWORK].tris,
-          abi: [
-            {
-              inputs: [
-                {
-                  internalType: 'address',
-                  name: 'operator',
-                  type: 'address',
-                },
-                {
-                  internalType: 'bool',
-                  name: 'approved',
-                  type: 'bool',
-                },
-              ],
-              name: 'setApprovalForAll',
-              outputs: [],
-              stateMutability: 'nonpayable',
-              type: 'function',
-            },
-          ],
-          functionName: 'setApprovalForAll',
-          args: [CONTRACT_ADDRESSES[NETWORK].trisRedeem, true],
-        };
-        // if (NETWORK === 'localhost') config.gas = BigInt(100000);
-        if (DEV) console.log('TRIS: config:', config);
-        const { request } = await prepareWriteContract(config);
-        setStep('signature');
-        const approveTxHash = await writeContract(request);
-        setStep('tris:approve');
-        console.log('TRIS: setApprovalForAll(): Submitted', approveTxHash);
-        const approveWaitTx = await waitForTransaction({
-          hash: approveTxHash.hash,
-          timeout: 10 * 60 * 1000, // 10 minute timeout
-        });
-        console.log('TRIS: setApprovalForAll(): Success', approveWaitTx);
-        // }
+        if (!(await isTrisApproved())) {
+          const config = {
+            account: address,
+            address: CONTRACT_ADDRESSES[NETWORK].tris,
+            abi: [
+              {
+                inputs: [
+                  {
+                    internalType: 'address',
+                    name: 'operator',
+                    type: 'address',
+                  },
+                  {
+                    internalType: 'bool',
+                    name: 'approved',
+                    type: 'bool',
+                  },
+                ],
+                name: 'setApprovalForAll',
+                outputs: [],
+                stateMutability: 'nonpayable',
+                type: 'function',
+              },
+            ],
+            functionName: 'setApprovalForAll',
+            args: [CONTRACT_ADDRESSES[NETWORK].trisRedeem, true],
+          };
+          // if (NETWORK === 'localhost') config.gas = BigInt(100000);
+          if (DEV) console.log('TRIS: config:', config);
+          const { request } = await prepareWriteContract(config);
+          setStep('signature');
+          const approveTxHash = await writeContract(request);
+          setStep('tris:approve');
+          console.log('TRIS: setApprovalForAll(): Submitted', approveTxHash);
+          const approveWaitTx = await waitForTransaction({
+            hash: approveTxHash.hash,
+            timeout: 10 * 60 * 1000, // 10 minute timeout
+          });
+          console.log('TRIS: setApprovalForAll(): Success', approveWaitTx);
+        }
 
         // TRIS: redeem
         const { request: redeemReq } = await prepareWriteContract({

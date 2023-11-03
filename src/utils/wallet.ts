@@ -7,13 +7,26 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, localhost, hardhat, sepolia } from 'wagmi/chains';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { publicProvider } from 'wagmi/providers/public';
 import { DEV, NETWORK } from './constants';
 import merge from 'lodash.merge';
 
 const { chains, publicClient } = configureChains(
   DEV ? [mainnet, sepolia, hardhat, localhost] : [mainnet],
-  [publicProvider()]
+  [
+    jsonRpcProvider({
+      rpc: () => ({
+        http: `https://eth.llamarpc.com/rpc/${process.env.NEXT_PUBLIC_LLAMA_NODES_KEY}`,
+        webSocket: `wss://eth.llamarpc.com/rpc/${process.env.NEXT_PUBLIC_LLAMA_NODES_KEY}`,
+      }),
+    }),
+    alchemyProvider({
+      apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '',
+    }),
+    publicProvider(),
+  ]
 );
 
 const { connectors } = getDefaultWallets({
