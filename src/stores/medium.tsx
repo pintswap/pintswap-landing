@@ -57,7 +57,7 @@ export function MediumStore(props: { children: ReactNode }) {
       if (!posts.length) await getPosts();
       setIsLoading(false);
     })().catch((err) => console.error(err));
-  });
+  }, []);
 
   const sharedState: IStoreProps = {
     posts,

@@ -60,7 +60,7 @@ export const useNftRedeem = () => {
   });
   const isWockApproved = async () =>
     address
-      ? tris.read.isApprovedForAll([
+      ? wock.read.isApprovedForAll([
           address,
           CONTRACT_ADDRESSES[NETWORK].wockRedeem,
         ])
