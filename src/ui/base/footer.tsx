@@ -32,10 +32,7 @@ const Footer = () => (
             Blog
           </Button>
         </Link>
-        <Link
-          href="https://iron.pyrosec.gg/pintswap-litepaper.pdf"
-          target="_blank"
-        >
+        <Link href="/litepaper.pdf">
           <Button type="link" noIcon>
             Litepaper
           </Button>
