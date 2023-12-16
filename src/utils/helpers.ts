@@ -1,13 +1,12 @@
-import {
-  Contract,
-  InfuraProvider,
-  JsonRpcProvider,
-  formatUnits,
-  getAddress,
-} from 'ethers';
+import { Contract, formatUnits, getAddress } from 'ethers';
 import { IReadablePSTrade, ISubgraphPSTrade, ITokenStats } from '../stores';
-import { CHAINS_BY_ID, SYMBOL_CACHE } from './constants';
-import { TOKENS } from './token-list';
+import {
+  CHAINS_BY_ID,
+  DECIMAL_CACHE,
+  SYMBOL_CACHE,
+  getTokenList,
+} from './constants';
+import { providerFromChainId } from './provider';
 import { IUniswapToken } from '../hooks';
 
 export const convertToUrl = (str: string) => {
@@ -53,48 +52,21 @@ export function getAvgOfObjArr(arr: any[], key: string) {
   return sum / arr.length;
 }
 
-export function providerFromChainId(chainId: number | string) {
-  switch (Number(chainId)) {
-    case 1:
-      return new InfuraProvider(
-        'mainnet',
-        process.env.NEXT_PUBLIC_INFURA_PROJECT_ID
-      );
-    case 137:
-      return new InfuraProvider(
-        'polygon',
-        process.env.NEXT_PUBLIC_INFURA_PROJECT_ID
-      );
-    case 42161:
-      return new InfuraProvider(
-        'arbitrum',
-        process.env.NEXT_PUBLIC_INFURA_PROJECT_ID
-      );
-    case 43114:
-      return new JsonRpcProvider('https://api.avax.network/ext/bc/C/rpc');
-    case 10:
-      return new JsonRpcProvider('https://mainnet.optimism.io');
-    default:
-      return new InfuraProvider(
-        'mainnet',
-        process.env.NEXT_PUBLIC_INFURA_PROJECT_ID
-      );
-  }
-}
-
 export async function getSymbol(address: string, chainId = '1') {
   if (!address) return '';
 
   const cleanAddress = getAddress(address);
   if (SYMBOL_CACHE[cleanAddress]) return SYMBOL_CACHE[cleanAddress];
 
-  const found = TOKENS.find((el) => getAddress(el.address) === cleanAddress);
+  const found = getTokenList(Number(chainId)).find(
+    (el) => getAddress(el.address) === cleanAddress
+  );
   if (found) return found.symbol;
 
   const contract: any = new Contract(
     cleanAddress,
     ['function symbol() view returns (string)'],
-    providerFromChainId(chainId)
+    providerFromChainId(Number(chainId))
   );
   try {
     const symbol = await contract.symbol();
@@ -102,6 +74,32 @@ export async function getSymbol(address: string, chainId = '1') {
     return symbol;
   } catch (e) {
     console.error(`#getSymbol: ${e}`);
+    return '';
+  }
+}
+
+export async function getDecimals(address: string, chainId = '1') {
+  if (!address) return '';
+
+  const cleanAddress = getAddress(address);
+  if (DECIMAL_CACHE[cleanAddress]) return DECIMAL_CACHE[cleanAddress];
+
+  const found = getTokenList(Number(chainId)).find(
+    (el) => getAddress(el.address) === cleanAddress
+  );
+  if (found?.decimals) return found.decimals;
+
+  const contract: any = new Contract(
+    cleanAddress,
+    ['function decimals() view returns (uint8)'],
+    providerFromChainId(Number(chainId))
+  );
+  try {
+    const decimals = await contract.decimals();
+    DECIMAL_CACHE[cleanAddress] = decimals;
+    return decimals;
+  } catch (e) {
+    console.error(`#getDecimals: ${e}`);
     return '';
   }
 }
@@ -131,7 +129,7 @@ export async function psTradeToReadable(
       amount: formatUnits(
         psTrade.gets.amount,
         getsSymbol === 'USDC' ? 6 : 18
-        // await getDecimals(psTrade.gets.token),
+        // await getDecimals(psTrade.gets.token, psTrade.chainId),
       ),
       symbol: getsSymbol,
       address: getAddress(psTrade.gets.token),
@@ -140,7 +138,7 @@ export async function psTradeToReadable(
       amount: formatUnits(
         psTrade.gives.amount,
         givesSymbol === 'USDC' ? 6 : 18
-        // await getDecimals(psTrade.gets.token),
+        // await getDecimals(psTrade.gets.token, psTrade.chainId),
       ),
       symbol: givesSymbol,
       address: getAddress(psTrade.gives.token),

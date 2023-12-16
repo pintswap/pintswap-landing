@@ -8,6 +8,8 @@ import globalTransfer from '../../lotties/global-transfer.json';
 import decentralize from '../../lotties/decentralize.json';
 import loading from '../../lotties/loading.json';
 import success from '../../lotties/success.json';
+import telegram from '../../lotties/telegram.json';
+import discord from '../../lotties/discord.json';
 
 type IRenderLottie = {
   animation:
@@ -19,10 +21,13 @@ type IRenderLottie = {
     | 'globalTransfer'
     | 'decentralize'
     | 'loading'
-    | 'success';
+    | 'success'
+    | 'discord'
+    | 'telegram';
   height?: number;
   width?: number;
   loop?: boolean;
+  cursor?: 'pointer' | 'default';
 };
 
 export const RenderLottie = ({
@@ -30,6 +35,7 @@ export const RenderLottie = ({
   height,
   width,
   loop = true,
+  cursor = 'default',
 }: IRenderLottie) => {
   const determineLottieFile = () => {
     switch (animation) {
@@ -51,6 +57,10 @@ export const RenderLottie = ({
         return loading;
       case 'success':
         return success;
+      case 'discord':
+        return discord;
+      case 'telegram':
+        return telegram;
       default:
         return wallet;
     }
@@ -73,7 +83,7 @@ export const RenderLottie = ({
         height={height || 300}
         width={width || 300}
         isClickToPauseDisabled
-        style={{ cursor: 'default' }}
+        style={{ cursor }}
       />
     </div>
   );

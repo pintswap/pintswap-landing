@@ -4,6 +4,6 @@ export * from './helpers';
 export * from './wallet';
 export * from './fonts';
 export * from './apollo';
-export * from './token-list';
 export * from './alchemy';
 export * from './abis';
+export * from './provider';

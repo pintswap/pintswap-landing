@@ -4,6 +4,7 @@ export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com/pintswap0x',
   medium: 'https://medium.com/pintswap',
   discord: 'https://discord.gg/pintswap',
+  telegram: 'https://t.me/+5VAv5bRfXdU3NzM0',
 };
 
 export const NETWORK = process.env.NEXT_PUBLIC_NETWORK || 'mainnet';
@@ -46,8 +47,11 @@ export const EXPLORER_URLS: any = {
 };
 
 export const SUBGRAPH_ENDPOINTS = {
-  pintswap:
-    'https://api.thegraph.com/subgraphs/name/pintswap/token-transfers-eth',
+  pintswap: {
+    eth: 'https://api.thegraph.com/subgraphs/name/pintswap/token-transfers-eth',
+    arb: 'https://api.thegraph.com/subgraphs/name/pintswap/token-transfers-arb',
+    avax: 'https://api.thegraph.com/subgraphs/name/pintswap/token-transfers-avax',
+  },
   uniswapv2: 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v2-dev',
   uniswapv3: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',
 };
@@ -59,3 +63,19 @@ export const CHAINS_BY_ID: Record<string, string> = {
 // Cache
 export const SYMBOL_CACHE: Record<string, string> = {};
 export const DECIMAL_CACHE: Record<string, number> = {};
+
+// Tokens
+export type ITokenProps = {
+  asset: string;
+  type: string;
+  address: string;
+  name: string;
+  symbol: string;
+  decimals: number;
+  logoURI: string;
+  chainId: number;
+};
+const TOKENS: ITokenProps[] = require('./token-list.json').tokens;
+
+export const getTokenList = (chainId: number) =>
+  TOKENS.filter((el) => el.chainId === chainId);

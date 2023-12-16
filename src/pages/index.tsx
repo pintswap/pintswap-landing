@@ -20,6 +20,7 @@ import {
 } from 'react-icons/md';
 import { useSubgraphStore } from '../stores';
 import { useWindowSize } from '../hooks';
+import { SOCIAL_LINKS } from '../utils';
 
 const ParallaxItems: any = [
   {
@@ -177,7 +178,7 @@ const Index = () => {
                   className="w-full sm:w-fit"
                 >
                   <Button type="outline" size="lg" className="w-full sm:w-fit">
-                    Launch Telegram Bot
+                    Launch TG Bot
                   </Button>
                 </Link>
               </div>
@@ -218,7 +219,7 @@ const Index = () => {
             {/* TODO: connect */}
             <DataDisplay
               loading={isLoading}
-              value={Math.floor(Math.random() * 10)}
+              value={Math.floor(Math.random() * 50)}
               text="Peers"
               type="fancy"
             />
@@ -441,6 +442,54 @@ const Index = () => {
               </Split>
             </ParallaxScrollWrapper>
           </div>
+        </Section>
+
+        <Section
+          padding="y"
+          id="features"
+          wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
+        >
+          <ParallaxScrollWrapper
+            animation="opacity"
+            reverse
+            startValue={2}
+            endValue={0.2}
+          >
+            <div className="bg-gradient-to-b to-black from-neutral-900 rounded-3xl pt-12">
+              <ParallaxScrollWrapper className="text-center mb-10 sm:mb-12 2xl:mb-20">
+                <h2 className="text-3xl md:text-4xl font-medium">
+                  Join the <span className="text-accent-light">Community</span>
+                </h2>
+                <h4 className="text-neutral-300">
+                  Be a part of the protocol, see new OTC offers, and get updates
+                  before the public knows.
+                </h4>
+              </ParallaxScrollWrapper>
+              <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 gap-6 px-4">
+                <Link
+                  href={SOCIAL_LINKS.telegram}
+                  target="_blank"
+                  className="w-fit mx-auto"
+                >
+                  <div className="text-center cursor-pointer">
+                    <h3 className="text-3xl font-medium">Telegram</h3>
+                    <RenderLottie animation="telegram" cursor="pointer" />
+                  </div>
+                </Link>
+
+                <Link
+                  href={SOCIAL_LINKS.discord}
+                  target="_blank"
+                  className="w-fit mx-auto"
+                >
+                  <div className="text-center cursor-pointer">
+                    <h3 className="text-3xl font-medium">Discord</h3>
+                    <RenderLottie animation="discord" cursor="pointer" />
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </ParallaxScrollWrapper>
         </Section>
       </Base>
     </MouseParallaxContainer>
