@@ -13,6 +13,11 @@ const NAV_ITEMS = [
     link: 'https://analytics.pintswap.exchange',
     target: '_blank',
   },
+  {
+    text: 'Litepaper',
+    link: 'https://pintswap.exchange/litepaper.pdf',
+    target: '_blank',
+  },
   { text: 'Docs', link: 'https://docs.pintswap.exchange', target: '_blank' },
   { text: 'Blog', link: '/blog', target: '_self' },
 ];

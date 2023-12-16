@@ -12,8 +12,12 @@ export function useTrades() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  async function getPintswapTrades(): Promise<ISubgraphPSTrade[]> {
-    const psQuery = await getApolloClient(SUBGRAPH_ENDPOINTS.pintswap).query({
+  async function getPintswapTrades(
+    chain: 'eth' | 'arb' | 'avax' = 'eth'
+  ): Promise<ISubgraphPSTrade[]> {
+    const psQuery = await getApolloClient(
+      SUBGRAPH_ENDPOINTS.pintswap[chain]
+    ).query({
       query: gql`
         query PSTrades {
           pintswapTrades(orderBy: timestamp, orderDirection: asc, first: 999) {
@@ -39,14 +43,21 @@ export function useTrades() {
       return psQuery.data.pintswapTrades;
     }
 
-    console.error('#getPintswapTrades:', psQuery.error || psQuery.errors);
+    console.error(
+      '#getPintswapTrades:',
+      psQuery.error || psQuery.errors || psQuery
+    );
     return [];
   }
 
   async function getPintswapTradesAndFormat() {
-    const result = await getPintswapTrades();
+    const [eth, arb, avax] = await Promise.all([
+      getPintswapTrades('eth'),
+      getPintswapTrades('arb'),
+      getPintswapTrades('avax'),
+    ]);
     const returnData = await Promise.all(
-      result.map(async (el) => psTradeToReadable(el))
+      [...eth, ...arb, ...avax].map(async (el) => psTradeToReadable(el))
     );
     return returnData;
   }

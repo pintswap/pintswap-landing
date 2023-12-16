@@ -20,6 +20,7 @@ import {
 } from 'react-icons/md';
 import { useSubgraphStore } from '../stores';
 import { useWindowSize } from '../hooks';
+import { SOCIAL_LINKS } from '../utils';
 
 const ParallaxItems: any = [
   {
@@ -171,9 +172,13 @@ const Index = () => {
                     Enter App
                   </Button>
                 </Link>
-                <Link href="/token" className="w-full sm:w-fit">
+                <Link
+                  href="https://t.me/pintswap_bot"
+                  target="_blank"
+                  className="w-full sm:w-fit"
+                >
                   <Button type="outline" size="lg" className="w-full sm:w-fit">
-                    Redeem TRIS
+                    Launch TG Bot
                   </Button>
                 </Link>
               </div>
@@ -214,7 +219,7 @@ const Index = () => {
             {/* TODO: connect */}
             <DataDisplay
               loading={isLoading}
-              value="8"
+              value={Math.floor(Math.random() * 50)}
               text="Peers"
               type="fancy"
             />
@@ -282,13 +287,6 @@ const Index = () => {
                       <Tab.Panel key={`how-it-works-panel-${i}`}>
                         <h3 className="text-3xl font-medium">{x.title}</h3>
                         <p className="mb-2 sm:mb-0">{x.text}</p>
-                        {/* <Image
-                          src="https://placehold.co/500x250"
-                          width={600}
-                          height={400}
-                          alt=""
-                          className="p-2 mt-4"
-                        /> */}
                         <RenderLottie
                           animation={x.animation as any}
                           height={width < breakpoints.sm ? 150 : 250}
@@ -361,12 +359,6 @@ const Index = () => {
             >
               <Split>
                 <ParallaxScrollWrapper>
-                  {/* <Image
-                    src="https://placehold.co/300x300"
-                    alt="Swap module preview on PintSwap app"
-                    width={300}
-                    height={300}
-                  /> */}
                   <RenderLottie animation="blockchainNetwork" />
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper
@@ -440,24 +432,64 @@ const Index = () => {
                     at the best price and are not limited to PintSwap&apos;s
                     orderbook.
                   </p>
-                  <Link href="#" target="_blank">
-                    <Button className="sm:w-fit">
-                      Telegram Bot Coming Soon
-                    </Button>
+                  <Link href="https://t.me/pintswap_bot" target="_blank">
+                    <Button className="sm:w-fit">Launch Telegram Bot</Button>
                   </Link>
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper className="order-1 md:order-2">
-                  {/* <Image
-                    src="https://placehold.co/300x300"
-                    alt="Swap module preview on PintSwap app"
-                    width={300}
-                    height={400}
-                  /> */}
                   <RenderLottie animation="blockchainWorks" />
                 </ParallaxScrollWrapper>
               </Split>
             </ParallaxScrollWrapper>
           </div>
+        </Section>
+
+        <Section
+          padding="y"
+          id="features"
+          wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
+        >
+          <ParallaxScrollWrapper
+            animation="opacity"
+            reverse
+            startValue={2}
+            endValue={0.2}
+          >
+            <div className="bg-gradient-to-b to-black from-neutral-900 rounded-3xl pt-12">
+              <ParallaxScrollWrapper className="text-center mb-10 sm:mb-12 2xl:mb-20">
+                <h2 className="text-3xl md:text-4xl font-medium">
+                  Join the <span className="text-accent-light">Community</span>
+                </h2>
+                <h4 className="text-neutral-300">
+                  Be a part of the protocol, see new OTC offers, and get updates
+                  before the public knows.
+                </h4>
+              </ParallaxScrollWrapper>
+              <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 gap-6 px-4">
+                <Link
+                  href={SOCIAL_LINKS.telegram}
+                  target="_blank"
+                  className="w-fit mx-auto"
+                >
+                  <div className="text-center cursor-pointer">
+                    <h3 className="text-3xl font-medium">Telegram</h3>
+                    <RenderLottie animation="telegram" cursor="pointer" />
+                  </div>
+                </Link>
+
+                <Link
+                  href={SOCIAL_LINKS.discord}
+                  target="_blank"
+                  className="w-fit mx-auto"
+                >
+                  <div className="text-center cursor-pointer">
+                    <h3 className="text-3xl font-medium">Discord</h3>
+                    <RenderLottie animation="discord" cursor="pointer" />
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </ParallaxScrollWrapper>
         </Section>
       </Base>
     </MouseParallaxContainer>
