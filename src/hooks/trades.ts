@@ -16,7 +16,7 @@ export function useTrades() {
     const psQuery = await getApolloClient(SUBGRAPH_ENDPOINTS.pintswap).query({
       query: gql`
         query PSTrades {
-          pintswapTrades(orderBy: timestamp, orderDirection: asc) {
+          pintswapTrades(orderBy: timestamp, orderDirection: asc, first: 999) {
             id
             timestamp
             chainId
