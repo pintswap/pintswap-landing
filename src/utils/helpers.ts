@@ -113,6 +113,20 @@ export function chainIdToName(chainId: string) {
   return cleanedUp;
 }
 
+const shallowDecimals = (symbol: string) => {
+  switch (symbol) {
+    case 'USDC':
+    case 'USDT':
+      return 6;
+    case 'BITCOIN':
+      return 8;
+    case 'LP':
+      return 9;
+    default:
+      return 18;
+  }
+};
+
 export async function psTradeToReadable(
   psTrade: ISubgraphPSTrade
 ): Promise<IReadablePSTrade> {
@@ -128,7 +142,7 @@ export async function psTradeToReadable(
     gets: {
       amount: formatUnits(
         psTrade.gets.amount,
-        getsSymbol === 'USDC' ? 6 : 18
+        shallowDecimals(getsSymbol)
         // await getDecimals(psTrade.gets.token, psTrade.chainId),
       ),
       symbol: getsSymbol,
@@ -137,7 +151,7 @@ export async function psTradeToReadable(
     gives: {
       amount: formatUnits(
         psTrade.gives.amount,
-        givesSymbol === 'USDC' ? 6 : 18
+        shallowDecimals(givesSymbol)
         // await getDecimals(psTrade.gets.token, psTrade.chainId),
       ),
       symbol: givesSymbol,
