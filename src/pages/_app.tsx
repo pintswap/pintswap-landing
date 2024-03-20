@@ -2,7 +2,6 @@ import { AppProps } from 'next/app';
 import '../styles/global.css';
 import { MediumStore, SubgraphStore } from '../stores';
 import {
-  AllRoundGothic,
   chains,
   queryClient,
   QueryClientProvider,
@@ -10,6 +9,7 @@ import {
   wagmiConfig,
   WagmiConfig,
   walletTheme,
+  AvantGarde,
 } from '../utils';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
@@ -22,7 +22,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             <MediumStore>
               <SubgraphStore>
                 <ParallaxProvider>
-                  <main className={AllRoundGothic.className}>
+                  <main className={AvantGarde.className}>
                     <Component {...pageProps} />
                   </main>
                 </ParallaxProvider>

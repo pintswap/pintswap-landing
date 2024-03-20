@@ -34,11 +34,11 @@ const Navbar = () => {
         type="wide"
         padding="y"
       >
-        <div className="flex flex-wrap justify-between items-center mx-auto">
+        <div className="flex flex-wrap justify-between items-center mx-auto max-w-5xl">
           <Link href="/">
             <div className="max-w-[160px] max-h-[30px]">
               <Image
-                src={'/assets/logo/pintswap-logo.svg'}
+                src={'/assets/logo/pintswap-blue.svg'}
                 alt="PintSwap is a decentralized, P2P OTC crypto exchange"
                 width={790}
                 height={149}

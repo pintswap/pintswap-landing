@@ -16,6 +16,13 @@ module.exports = {
     extend: {
       fontFamily: {
         'round-gothic': ['var(--font-round-gothic)'],
+        'suisse-intl': ['var(--font-suisse-intl)'],
+        'halyard-display': ['var(--font-halyard-display)'],
+        linotype: ['var(--font-linotype)'],
+        'suisse-mono': ['var(--font-suisse-mono)'],
+        'sb-sans': ['var(--font-sb-sans-display)'],
+        'source-code-pro': ['var(--font-source-code-pro)'],
+        'untitled-sans': ['var(--font-untitled-sans)'],
       },
       colors: {
         primary: {
@@ -35,6 +42,12 @@ module.exports = {
           light: '#FF6FA9',
           regular: '#ff3869',
           DEFAULT: '#FF4878',
+        },
+        rebrand: {
+          blue: '#6052FF',
+          indigo: '#4F46E5',
+          purple: '#A638DA',
+          secondary: '#7e1dac',
         },
       },
       lineHeight: {
