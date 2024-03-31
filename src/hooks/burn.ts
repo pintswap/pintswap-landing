@@ -89,10 +89,10 @@ export const useBurn = () => {
       try {
         setLoading(true);
         const result = await writeContract({
-          address: CONTRACT_ADDRESSES[NETWORK].pintv2,
+          address: CONTRACT_ADDRESSES[NETWORK].pintv1,
           abi: PINT_ABI,
           functionName: 'approve',
-          args: [CONTRACT_ADDRESSES[NETWORK].pintv1, v1Balance?.value],
+          args: [CONTRACT_ADDRESSES[NETWORK].pintv2, v1Balance?.value],
         });
         console.log('approval return', result);
         await waitForTransaction({
