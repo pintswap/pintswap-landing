@@ -14,7 +14,7 @@ import { DEV, NETWORK } from './constants';
 import merge from 'lodash.merge';
 
 const { chains, publicClient } = configureChains(
-  DEV ? [mainnet, sepolia, hardhat, localhost] : [mainnet],
+  DEV ? [sepolia, mainnet, hardhat, localhost] : [mainnet],
   [
     jsonRpcProvider({
       rpc: () => ({
