@@ -42,8 +42,6 @@ export const useBurn = () => {
     watch: true,
   });
 
-  console.log('v1 balance:', v1Balance?.formatted);
-
   const reset = (clearSuccess: boolean) => {
     clearSuccess && setIsSuccess(false);
     modal && setModal(false);
@@ -51,41 +49,16 @@ export const useBurn = () => {
     error && setError('');
     loading && setLoading(false);
   };
-  console.log('chain', ACTIVE_CHAIN_ID, NETWORK);
-  // const getBalance = async () => {
-  //   try {
-  //     if (address && chain) {
-  //       setStep('fetching');
-  //       setModal(true);
-  //       console.log('Fetch Balance::', v1Balance);
-  //       // return (balance ? balance.value : BigInt(1000000))
-  //       if (v1Balance?.value === BigInt(0)) {
-  //         setStep('error');
-  //         setLoading(false);
-  //         return;
-  //       }
-  //       return v1Balance?.value;
-  //     }
-  //     console.log('Address is not provided.');
-  //     return null;
-  //   } catch (e) {
-  //     setStep('fail');
-  //     setLoading(false);
-  //     console.error('Failed to fetch balance:', e);
-  //   }
-  // };
 
   const approveV1 = async () => {
     if (!signer) {
       console.log('no signer');
       return;
     }
-    console.log('WHAT THE FUCK');
     setModal(true);
     // const balance = await getBalance();
     if (v1Balance?.value && v1Balance?.value !== BigInt(0)) {
-      console.log('NEVER COMING IN');
-      setStep('approving');
+      setStep('approve');
       try {
         setLoading(true);
         const result = await writeContract({
@@ -94,21 +67,22 @@ export const useBurn = () => {
           functionName: 'approve',
           args: [CONTRACT_ADDRESSES[NETWORK].pintv2, v1Balance?.value],
         });
-        console.log('approval return', result);
+        setStep('approving');
         await waitForTransaction({
           chainId: CHAIN_ID,
           hash: result.hash,
         });
         setStep('burn');
-        setLoading(false);
       } catch (e) {
         console.log('user Rejected approval');
         reset(false);
         console.log(e);
+        setLoading(false);
       }
     }
     if (v1Balance?.value && v1Balance?.value === BigInt(0)) {
       setStep('error');
+      setLoading(false);
     }
   };
 
@@ -125,15 +99,13 @@ export const useBurn = () => {
         abi: PINT2_ABI,
         functionName: 'migrate',
       });
-      console.log('prepare migrate?:', request);
-      const data = await writeContract(request);
-      console.log('migrate', data);
-      // const approveWaitTx = await waitForTransaction({
-      //   hash: data
-      // });
-      // console.log('approve wait TX', approveWaitTx)
-      setLoading(false);
+      console.log('Prepare Migration:', request);
+      const writeRes = await writeContract(request);
+      await waitForTransaction({
+        hash: writeRes.hash,
+      });
       setStep('complete');
+      setLoading(false);
     } catch (e) {
       console.log('migrate failure');
       console.log(e);

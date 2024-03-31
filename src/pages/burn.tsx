@@ -42,7 +42,7 @@ export default function Burn() {
     if ((address && step === 'approve') || step === 'error' || step === 'fail')
       return 'Approve';
     if (address && step === 'burn') return 'Burning...';
-    // if(address && step === 'error') return 'No Pint'
+    // if(address && step === 'error') return 'No Pint' // TODO: have a different message if not PINTV1
     if (loading) return 'Loading...';
     return 'Burn';
   };
@@ -53,12 +53,10 @@ export default function Burn() {
       return openConnectModal();
     }
     if (chain?.unsupported && openChainModal) return openChainModal();
-    if (address && step !== 'burn') {
+    if (address) {
+      console.log('attempting migrate function');
       setLoading(true);
       await approveV1();
-    }
-    if (address && step === 'burn') {
-      console.log('attempting migrate function');
       await migrate();
     }
   };
@@ -66,17 +64,19 @@ export default function Burn() {
   const renderModalText: () => string = () => {
     switch (step) {
       case 'start':
-        return 'Initiating redemption...';
+        return 'Initiating burn';
       case 'fetching':
-        return 'Fetching Balance';
+        return 'Fetching balance';
       case 'fail':
-        return 'Failed To Fetch Balance';
+        return 'Failed to fetch balance';
+      case 'approve':
+        return 'Approve transaction in Wallet';
       case 'approving':
-        return 'Approve Transaction in Wallet';
+        return 'Approving transaction';
       case 'burn':
-        return 'burning and minting';
+        return 'Burning and minting';
       case 'complete':
-        return 'Successfull burn and mint';
+        return 'Successfully burned old PINT for PWAP';
       case 'error':
         return 'No Pint to burn';
       default:
