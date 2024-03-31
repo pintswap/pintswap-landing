@@ -81,6 +81,7 @@ export const useBurn = () => {
     }
     // const balance = await getBalance();
     if (v1Balance?.value && v1Balance?.value !== BigInt(0)) {
+      setModal(true);
       setStep('approving');
       try {
         setLoading(true);
