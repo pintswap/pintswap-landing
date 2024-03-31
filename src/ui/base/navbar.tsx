@@ -63,6 +63,11 @@ const Navbar = () => {
                   <Button>Buy $PINT</Button>
                 </Link>
               </li>
+              <li>
+                <Link href="/burn">
+                  <Button type="outline">Burn</Button>
+                </Link>
+              </li>
             </ul>
 
             <div className="sm:hidden flex items-center gap-1">

@@ -147,7 +147,7 @@ const Index = () => {
               <div className="flex flex-col gap-2 relative z-100">
                 <h1 className="leading-tight">
                   <span className="text-4xl md:text-4xl font-medium">
-                    P2P CRYPTO TRADING
+                    P2P Crypto Trading
                   </span>
                   <br />
                   <span className="text-indigo-600 text-2xl md:text-3xl font-semibold">
@@ -166,7 +166,7 @@ const Index = () => {
                   <p className="text-accent-default ">Accent default</p>
                   <p className='text-indigo-500'>New Regular</p> */}
                 </h1>
-                <p className="sm:text-lg text-neutral-300">
+                <p className="sm:text-lg ">
                   Trade{' '}
                   <span className="font-semibold text-rebrand-indigo">
                     low-liquidity
@@ -288,25 +288,23 @@ const Index = () => {
               <h2 className="text-3xl md:text-4xl font-medium">
                 Trading Made <span className="text-rebrand-indigo">Easy</span>
               </h2>
-              <h4 className="text-neutral-300">
+              <h4 className="">
                 We simplify the technical complexities, allowing you to focus on
                 trading.
               </h4>
             </ParallaxScrollWrapper>
-            <div className="bg-gradient-to-b from-black to-neutral-800 rounded-3xl">
+            <div className="bg-gradient-to-b from-black to-neutral-800 rounded-md">
               <Tab.Group>
                 <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 gap-6 px-4 pb-8">
                   <Tab.List className="grid grid-cols-2 lg:flex lg:flex-col lg:px-4 gap-2 lg:gap-4 lg:mt-10">
                     {TabItems.map((x, i) => (
                       <Tab
                         key={`how-it-works-tab-${i}`}
-                        className={
-                          'ring-0 focus-visible:ring-0 focus:outline-0 focus:ring-0 focus-visible:outline-0'
-                        }
+                        className={'ring-0 focus:ring-0 focus:outline-none'}
                       >
                         {({ selected }) => (
                           <div
-                            className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between text-center ${
+                            className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-md border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between text-center ${
                               selected
                                 ? 'bg-neutral-800 hover:bg-neutral-800 !border-neutral-300'
                                 : 'hover:bg-neutral-900'
@@ -393,7 +391,7 @@ const Index = () => {
             <h2 className="text-3xl md:text-4xl font-medium">
               <span className="text-rebrand-indigo">How</span> It Works
             </h2>
-            <h4 className="text-neutral-300">
+            <h4 className="">
               Think of us like a combination of Uniswap and Unibot, but better.
             </h4>
           </ParallaxScrollWrapper>
@@ -500,7 +498,7 @@ const Index = () => {
             startValue={2}
             endValue={0.2}
           >
-            <div className="bg-gradient-to-b to-black from-neutral-900 rounded-3xl pt-12 pb-4">
+            <div className="bg-gradient-to-b to-black from-neutral-900 rounded-md pt-12 pb-4">
               <ParallaxScrollWrapper className="text-center mb-10 sm:mb-12 2xl:mb-20">
                 <h2 className="text-3xl md:text-4xl font-medium">
                   Join the{' '}

@@ -9,7 +9,7 @@ import {
   wagmiConfig,
   WagmiConfig,
   walletTheme,
-  AvantGarde,
+  GTWalsheim,
 } from '../utils';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
@@ -22,7 +22,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             <MediumStore>
               <SubgraphStore>
                 <ParallaxProvider>
-                  <main className={AvantGarde.className}>
+                  <main className={GTWalsheim.className}>
                     <Component {...pageProps} />
                   </main>
                 </ParallaxProvider>

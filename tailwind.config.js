@@ -46,8 +46,10 @@ module.exports = {
         rebrand: {
           blue: '#6052FF',
           indigo: '#4F46E5',
-          purple: '#A638DA',
+          purple: '#5D10C9',
           secondary: '#7e1dac',
+          gray: '#B8BAC8',
+          night: '#121212',
         },
       },
       lineHeight: {

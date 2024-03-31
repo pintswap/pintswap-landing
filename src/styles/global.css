@@ -8,7 +8,7 @@
     padding: 0;
     margin: 0;
     color: #fff;
-    background: rgb(0,0,0);
+    background: black;
     font-family: var(--font-suisse-mono);
   }
 
@@ -49,7 +49,7 @@
 
 .btn-hover.outline-click {
   background-size: 200% 100%;
-    background-image: linear-gradient(to right, #A638DA, #7e1dac);
+    background-image: linear-gradient(to right, #5D10C9, #7e1dac);
     /* box-shadow: 0 2px 6px 0 rgba(116, 79, 168, 0.3);  */
 }
 
@@ -137,8 +137,6 @@
 
 .tunnel-vision{
   background: radial-gradient(circle at center, transparent 60%, black);
-
-
 }
 
 }
