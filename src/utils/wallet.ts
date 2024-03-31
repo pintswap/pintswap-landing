@@ -16,16 +16,16 @@ import merge from 'lodash.merge';
 const { chains, publicClient } = configureChains(
   DEV ? [sepolia, mainnet, hardhat, localhost] : [mainnet],
   [
+    alchemyProvider({
+      apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '',
+    }),
+    publicProvider(),
     jsonRpcProvider({
       rpc: () => ({
         http: `https://eth.llamarpc.com/rpc/${process.env.NEXT_PUBLIC_LLAMA_NODES_KEY}`,
         webSocket: `wss://eth.llamarpc.com/rpc/${process.env.NEXT_PUBLIC_LLAMA_NODES_KEY}`,
       }),
     }),
-    alchemyProvider({
-      apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '',
-    }),
-    publicProvider(),
   ]
 );
 

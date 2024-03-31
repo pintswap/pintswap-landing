@@ -38,6 +38,7 @@ export const useBurn = () => {
   const { data: v1Balance } = useBalance({
     address: CONTRACT_ADDRESSES[NETWORK].pintv1,
     chainId: CHAIN_ID,
+    watch: true,
   });
 
   console.log('v1 balance:', v1Balance?.formatted);
@@ -49,7 +50,7 @@ export const useBurn = () => {
     error && setError('');
     loading && setLoading(false);
   };
-  console.log('chain', chain, NETWORK);
+  console.log('chain', ACTIVE_CHAIN_ID, NETWORK);
   // const getBalance = async () => {
   //   try {
   //     if (address && chain) {
