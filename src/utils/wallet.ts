@@ -31,7 +31,7 @@ const { chains, publicClient } = configureChains(
 
 const { connectors } = getDefaultWallets({
   appName: 'PintSwap',
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '',
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '1',
   chains,
 });
 

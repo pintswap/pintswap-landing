@@ -42,7 +42,7 @@ export const DataDisplay = ({
     return (
       <div className="flex flex-row gap-3">
         <Glow>
-          <span className="h-full w-1.5 bg-primary rounded-l-xl block" />
+          <span className="h-full w-1.5 bg-rebrand-indigo rounded-l-xl block" />
         </Glow>
         <div
           className={`flex flex-col justify-center ${determineAlign('left')}`}
@@ -61,6 +61,7 @@ export const DataDisplay = ({
                 prefix={usd ? '$' : ''}
                 end={Number(value)}
                 decimals={decimals || 0}
+                className="text-3xl md:text-4xl"
               />
             </span>
           </Skeleton>

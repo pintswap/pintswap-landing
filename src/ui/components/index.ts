@@ -11,3 +11,4 @@ export * from './animated-hamburger';
 export * from './parallax-scroll-wrapper';
 export * from './lottie';
 export * from './modal';
+export * from './droplets';
