@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import { useAccount, useNetwork, useWalletClient } from 'wagmi';
+import { useAccount, useBalance, useNetwork, useWalletClient } from 'wagmi';
 import {
   writeContract,
-  fetchTransaction,
   prepareWriteContract,
-  fetchBalance,
+  waitForTransaction,
 } from '@wagmi/core';
-import { CONTRACT_ADDRESSES, NETWORK, PINT2_ABI, PINT_ABI } from '../utils';
-import { getAddress } from 'ethers';
+import {
+  ACTIVE_CHAIN_ID,
+  CONTRACT_ADDRESSES,
+  NETWORK,
+  PINT2_ABI,
+  PINT_ABI,
+} from '../utils';
 
 export const useBurn = () => {
   const [step, setStep] = useState<
@@ -29,8 +33,14 @@ export const useBurn = () => {
   const { chain } = useNetwork();
   const { data: signer } = useWalletClient();
 
-  const pintv1 = '0x0401CFe25e3A1E43EA706124e2d0a8557a6538dd';
-  const pintv2 = '0x436382754092aDD64b69417703d02F97b89a1be6';
+  const CHAIN_ID = chain?.id || ACTIVE_CHAIN_ID;
+
+  const { data: v1Balance } = useBalance({
+    address: CONTRACT_ADDRESSES[NETWORK].pintv1,
+    chainId: CHAIN_ID,
+  });
+
+  console.log('v1 balance:', v1Balance?.formatted);
 
   const reset = (clearSuccess: boolean) => {
     clearSuccess && setIsSuccess(false);
@@ -39,74 +49,60 @@ export const useBurn = () => {
     error && setError('');
     loading && setLoading(false);
   };
-  console.log('chain', chain);
-  const getBalance = async () => {
-    try {
-      if (address && chain) {
-        setStep('fetching');
-        setModal(true);
-        const balance = await fetchBalance({
-          address,
-          token: getAddress(
-            CONTRACT_ADDRESSES[NETWORK].pintv1
-          ) as `0x${string}`,
-          chainId: chain.id,
-        });
-        console.log('Fetch Balance::', balance);
-        // return (balance ? balance.value : BigInt(1000000))
-        if (balance.value === BigInt(0)) {
-          setStep('error');
-          setLoading(false);
-          return;
-        }
-        return balance.value;
-      }
-      console.log('Address is not provided.');
-      return null;
-    } catch (e) {
-      setStep('fail');
-      setLoading(false);
-      console.error('Failed to fetch balance:', e);
-    }
-  };
+  console.log('chain', chain, NETWORK);
+  // const getBalance = async () => {
+  //   try {
+  //     if (address && chain) {
+  //       setStep('fetching');
+  //       setModal(true);
+  //       console.log('Fetch Balance::', v1Balance);
+  //       // return (balance ? balance.value : BigInt(1000000))
+  //       if (v1Balance?.value === BigInt(0)) {
+  //         setStep('error');
+  //         setLoading(false);
+  //         return;
+  //       }
+  //       return v1Balance?.value;
+  //     }
+  //     console.log('Address is not provided.');
+  //     return null;
+  //   } catch (e) {
+  //     setStep('fail');
+  //     setLoading(false);
+  //     console.error('Failed to fetch balance:', e);
+  //   }
+  // };
 
   const approveV1 = async () => {
     if (!signer) {
       console.log('no signer');
       return;
     }
-    const balance = await getBalance();
-    if (balance && balance !== BigInt(0)) {
+    // const balance = await getBalance();
+    if (v1Balance?.value && v1Balance?.value !== BigInt(0)) {
       setStep('approving');
       try {
         setLoading(true);
         const result = await writeContract({
-          address: pintv1,
+          address: CONTRACT_ADDRESSES[NETWORK].pintv2,
           abi: PINT_ABI,
           functionName: 'approve',
-          args: [pintv2, balance],
+          args: [CONTRACT_ADDRESSES[NETWORK].pintv1, v1Balance?.value],
         });
         console.log('approval return', result);
+        await waitForTransaction({
+          chainId: CHAIN_ID,
+          hash: result.hash,
+        });
         setStep('burn');
-        if (result) {
-          try {
-            const transaction = await fetchTransaction({
-              hash: result.hash,
-            });
-            console.log('transaction result', transaction);
-            setStep('burn');
-            setLoading(false);
-          } catch (e) {
-            console.log('FetchTransaction cant find transaction');
-          }
-        }
+        setLoading(false);
       } catch (e) {
         console.log('user Rejected approval');
         reset(false);
         console.log(e);
       }
     }
-    if (balance && balance === BigInt(0)) {
+    if (v1Balance?.value && v1Balance?.value === BigInt(0)) {
       setStep('error');
     }
   };
@@ -120,7 +116,7 @@ export const useBurn = () => {
     try {
       const { request } = await prepareWriteContract({
         account: address,
-        address: pintv2,
+        address: CONTRACT_ADDRESSES[NETWORK].pintv2,
         abi: PINT2_ABI,
         functionName: 'migrate',
       });
@@ -153,7 +149,6 @@ export const useBurn = () => {
     error,
     isSuccess,
     addPintv2ToWallet,
-    getBalance,
     reset,
     migrate,
     approveV1,

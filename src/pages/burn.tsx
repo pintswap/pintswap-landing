@@ -13,7 +13,7 @@ import { useAccount, useNetwork } from 'wagmi';
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit';
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 export default function Burn() {
   const buttonRef = useRef<HTMLDivElement>(null);
@@ -29,19 +29,12 @@ export default function Burn() {
     error,
     addPintv2ToWallet,
     isSuccess,
-    getBalance,
     migrate,
     approveV1,
     reset,
   } = useBurn();
   const { openConnectModal } = useConnectModal();
   const { openChainModal } = useChainModal();
-
-  useEffect(() => {
-    async () => {
-      await getBalance;
-    };
-  }, [address]);
 
   const renderBtnText = () => {
     if (!REDEMPTION_ENABLED) return 'Coming soon';
