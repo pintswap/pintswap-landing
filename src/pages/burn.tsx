@@ -46,7 +46,7 @@ export default function Burn() {
     if (loading) return 'Loading...';
     return 'Burn';
   };
-  const approved: boolean = false;
+
   const handleBtnClick = async () => {
     if (!address && openConnectModal) {
       setStep('approve');
@@ -55,7 +55,7 @@ export default function Burn() {
     if (chain?.unsupported && openChainModal) return openChainModal();
     if (address && step !== 'burn') {
       setLoading(true);
-      return approveV1();
+      await approveV1();
     }
     if (address && step === 'burn') {
       console.log('attempting migrate function');

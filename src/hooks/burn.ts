@@ -36,7 +36,8 @@ export const useBurn = () => {
   const CHAIN_ID = chain?.id || ACTIVE_CHAIN_ID;
 
   const { data: v1Balance } = useBalance({
-    address: CONTRACT_ADDRESSES[NETWORK].pintv1,
+    address,
+    token: CONTRACT_ADDRESSES[NETWORK].pintv1,
     chainId: CHAIN_ID,
     watch: true,
   });
@@ -79,9 +80,11 @@ export const useBurn = () => {
       console.log('no signer');
       return;
     }
+    console.log('WHAT THE FUCK');
+    setModal(true);
     // const balance = await getBalance();
     if (v1Balance?.value && v1Balance?.value !== BigInt(0)) {
-      setModal(true);
+      console.log('NEVER COMING IN');
       setStep('approving');
       try {
         setLoading(true);
