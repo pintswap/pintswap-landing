@@ -141,7 +141,7 @@ const Index = () => {
         <div className="absolute left-0 top-0 w-full h-[50vh] bg-gradient-to-t from-black to-neutral-800 opacity-25" />
 
         <Section id="home" padding="y" wrapperClass={`!z-[99]`}>
-          <div className="flex flex-col md:flex-row md:items-center justify-between max-w-5xl mx-auto relative">
+          <div className="flex flex-col md:flex-row md:items-center justify-between max-w-5xl mx-auto relative mt-4 md:mt-8 lg:mt-12 xl:mt-16">
             {/* <Droplets type={"fill"}></Droplets> */}
             <div className="flex flex-col gap-4 md:gap-6 ">
               <div className="flex flex-col gap-2 relative z-100">

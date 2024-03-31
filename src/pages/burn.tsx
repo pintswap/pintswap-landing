@@ -51,6 +51,7 @@ export default function Burn() {
     if (address && step === 'burn') return 'Burning...';
     // if(address && step === 'error') return 'No Pint'
     if (loading) return 'Loading...';
+    return 'Burn';
   };
   const approved: boolean = false;
   const handleBtnClick = async () => {

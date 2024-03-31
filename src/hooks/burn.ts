@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useAccount, useNetwork, useWalletClient } from 'wagmi';
 import {
+  writeContract,
   fetchTransaction,
   prepareWriteContract,
   fetchBalance,
 } from '@wagmi/core';
-import { PINT2_ABI, PINT_ABI } from '../utils';
+import { CONTRACT_ADDRESSES, NETWORK, PINT2_ABI, PINT_ABI } from '../utils';
+import { getAddress } from 'ethers';
 
 export const useBurn = () => {
   const [step, setStep] = useState<
@@ -37,7 +39,7 @@ export const useBurn = () => {
     error && setError('');
     loading && setLoading(false);
   };
-
+  console.log('chain', chain);
   const getBalance = async () => {
     try {
       if (address && chain) {
@@ -45,7 +47,9 @@ export const useBurn = () => {
         setModal(true);
         const balance = await fetchBalance({
           address,
-          token: '0x0401CFe25e3A1E43EA706124e2d0a8557a6538dd',
+          token: getAddress(
+            CONTRACT_ADDRESSES[NETWORK].pintv1
+          ) as `0x${string}`,
           chainId: chain.id,
         });
         console.log('Fetch Balance::', balance);
@@ -76,7 +80,7 @@ export const useBurn = () => {
       setStep('approving');
       try {
         setLoading(true);
-        const result = await signer.writeContract({
+        const result = await writeContract({
           address: pintv1,
           abi: PINT_ABI,
           functionName: 'approve',
@@ -87,7 +91,7 @@ export const useBurn = () => {
         if (result) {
           try {
             const transaction = await fetchTransaction({
-              hash: result,
+              hash: result.hash,
             });
             console.log('transaction result', transaction);
             setStep('burn');
@@ -121,7 +125,7 @@ export const useBurn = () => {
         functionName: 'migrate',
       });
       console.log('prepare migrate?:', request);
-      const data = await signer.writeContract(request);
+      const data = await writeContract(request);
       console.log('migrate', data);
       // const approveWaitTx = await waitForTransaction({
       //   hash: data
