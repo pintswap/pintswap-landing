@@ -41,6 +41,7 @@ export const CONTRACT_ADDRESSES: any = {
     trisRedeem: '0xfef8205d4c472fe0442fc1026acc34e6d88e438c',
     pint: '0x58fB30A61C218A3607e9273D52995a49fF2697Ee',
     opps: '0xd665F1153599e8F799b2514069dF4481d3bcb043', // TODO
+    pwap: '',
   },
 };
 
