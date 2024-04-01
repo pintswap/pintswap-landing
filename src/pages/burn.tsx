@@ -27,6 +27,7 @@ export default function Burn() {
     setLoading,
     modal,
     CHAIN_ID,
+    isSuccess,
     error,
     migrate,
     approveV1,
@@ -245,7 +246,7 @@ export default function Burn() {
                 {renderModalText()}
               </span>
             </>
-          ) : step === 'complete' ? (
+          ) : isSuccess ? (
             <>
               <RenderLottie
                 animation={`success`}

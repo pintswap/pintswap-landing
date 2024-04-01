@@ -131,6 +131,7 @@ export const useBurn = () => {
           hash: writeRes.hash,
         });
         setStep('complete');
+        setIsSuccess(true);
         setLoading(false);
       } catch (e: any) {
         setLoading(false);
@@ -169,7 +170,7 @@ export const useBurn = () => {
         }
       }
     })().catch((e) => console.error(e));
-  }, [address, chain?.id, v1Balance?.formatted, step]);
+  }, [address, chain?.id, v1Balance?.formatted]);
 
   return {
     step,
