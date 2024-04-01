@@ -25,10 +25,8 @@ export default function Burn() {
     loading,
     setLoading,
     modal,
-    setModal,
+    CHAIN_ID,
     error,
-    addPintv2ToWallet,
-    isSuccess,
     migrate,
     approveV1,
     reset,
@@ -39,12 +37,15 @@ export default function Burn() {
   const renderBtnText = () => {
     if (!REDEMPTION_ENABLED) return 'Coming soon';
     if (!address && step === 'start') return 'Connect Wallet';
-    if ((address && step === 'approve') || step === 'error' || step === 'fail')
-      return 'Approve';
+    if (address && step === 'approve') return 'Approve';
+    if (address && step === 'allowance') return 'Approve';
+    if (address && step === 'error') return 'Error';
+    if (address && step === 'complete') return 'Complete';
+    if (address && step === 'approving') return 'Approving...';
     if (address && step === 'burn') return 'Burning...';
     // if(address && step === 'error') return 'No Pint' // TODO: have a different message if not PINTV1
     if (loading) return 'Loading...';
-    return 'Burn';
+    return 'Approve';
   };
 
   const handleBtnClick = async () => {
@@ -65,16 +66,17 @@ export default function Burn() {
     switch (step) {
       case 'start':
         return 'Initiating burn';
-      case 'fetching':
-        return 'Fetching balance';
-      case 'fail':
-        return 'Failed to fetch balance';
+      case 'allowance':
+        return 'Migrate failed: must approve max tokens';
+      case 'reject':
+        return 'User rejected allowance';
       case 'approve':
         return 'Approve transaction in Wallet';
+
       case 'approving':
         return 'Approving transaction';
       case 'burn':
-        return 'Burning and minting';
+        return 'Burning...';
       case 'complete':
         return 'Successfully burned old PINT for PWAP';
       case 'error':
@@ -92,40 +94,31 @@ export default function Burn() {
           <h1 className="font-semibold flex items-center gap-0.5">
             <span className="text-2xl md:text-3xl">$</span>
             <span className="text-rebrand-indigo text-5xl">PINT</span>
-            <span className="text-5xl ml-3">ReLaunch</span>
+            <span className="text-5xl ml-3">Relaunch</span>
           </h1>
         </Section>
         <Section padding="y">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 xl:gap-16">
             <div className="md:col-span-2">
-              <h4 className="text-3xl mb-6 sm:mb-8">
-                Burn your old tokens for new ones
-              </h4>
               <p className="text-lg">
-                Paragraph explaining Burning and minting new tokens{' '}
-                <Link
-                  target="_blank"
-                  className="underline"
-                  href="https://www.techopedia.com/definition/maximal-extractable-value-mev#:~:text=Maximal%20extractable%20value%20(MEV)%20is,of%20transactions%20in%20a%20block."
-                >
-                  WOORD
-                </Link>{' '}
-                more Woords{' '}
-                <Link
-                  target="_blank"
-                  href="https://docs.pintswap.exchange/contracts"
-                  className="underline"
-                >
-                  Contract blah blah blah
-                </Link>
-                , More important text
+                Welcome to the PINT Relaunch! Burn old PINT tokens for our new
+                PWAP token. With a 10 to 1 ratio you will recive 1 new token for
+                ten of your old tokens. It is important to note that the value
+                of your new tokens will be equivelant to the value of your old
+                ones.
+              </p>
+              <p className="mt-4">
+                NOTE: You must approve all PINT tokens to be burned for
+                migration to complete
               </p>
               <br />
-              <p className="text-lg font-medium mb-2">Steps to Burn:</p>
+              <p className="text-lg font-medium mb-2">
+                Steps to Burn and Mint:
+              </p>
               <ol className="pl-6 sm:pl-8 list-decimal">
                 <li>Connect your wallet that holds PINT</li>
-                <li>Approve Transaction through your selected wallet</li>
-                <li>Burn all tokens</li>
+                <li>Initiate Approval</li>
+                <li>Approve max amount of tokens held</li>
                 <li>
                   Upon redemption, 10 of your old Tokens will be{' '}
                   <span className="font-semibold">burned</span> for{' '}
@@ -171,7 +164,7 @@ export default function Burn() {
                 className="absolute pl-1 pt-1"
               >
                 <p className="font-medium text-red-400 text-sm !leading-tight">
-                  {error}
+                  {/* {error} */}
                 </p>
               </Transition>
             </div>
@@ -183,17 +176,7 @@ export default function Burn() {
         state={modal}
         closeFx={() => reset(false)}
         title="Transaction Details"
-        secondary={
-          step === 'burn' ? (
-            <div ref={buttonRef} onClick={handleBtnClick}>
-              <Button className="!w-fit" type="outline">
-                Burn
-              </Button>
-            </div>
-          ) : (
-            <div></div>
-          )
-        }
+        secondary={<div></div>}
       >
         <div className="flex flex-col items-center justify-center">
           {loading ? (
@@ -211,14 +194,17 @@ export default function Burn() {
                 width={140}
                 loop={false}
               />
-              <span className="font-medium mt-6 text-lg">Burn baby! Burn</span>
+              <span className="font-medium mt-6 text-lg">
+                Successfully burned old PINT for PWAP
+              </span>
               <Link
+                target="_blank"
                 className=""
-                href={`${EXPLORER_URLS[NETWORK]}/token/${CONTRACT_ADDRESSES[NETWORK].pint}`}
+                href={`${EXPLORER_URLS[NETWORK]}/token/${CONTRACT_ADDRESSES[NETWORK].pintv2}`}
               >
                 PINT Contract:{' '}
                 <span className="underline transition duration-150 hover:text-neutral-200">
-                  {truncate(CONTRACT_ADDRESSES[NETWORK].pint)}
+                  {truncate(CONTRACT_ADDRESSES[NETWORK].pintv2)}
                 </span>
               </Link>
             </>
@@ -235,35 +221,6 @@ export default function Burn() {
               </span>
             </>
           )}
-
-          <Transition
-            show={false}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-300"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            WOCK Transaction:{' '}
-            <span className="underline transition duration-150 hover:text-neutral-200">
-              was the wock tx hash link goes to /burn
-            </span>
-          </Transition>
-          <Transition
-            show={false}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-300"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            TRIS Transaction:{' '}
-            <span className="underline transition duration-150 hover:text-neutral-200">
-              was the tris hash
-            </span>
-          </Transition>
         </div>
       </Modal>
     </>

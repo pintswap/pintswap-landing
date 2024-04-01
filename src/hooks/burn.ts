@@ -17,7 +17,8 @@ export const useBurn = () => {
   const [step, setStep] = useState<
     | 'start'
     | 'approve'
-    | 'fetching'
+    | 'allowance'
+    | 'reject'
     | 'fail'
     | 'approving'
     | 'error'
@@ -41,6 +42,18 @@ export const useBurn = () => {
     chainId: CHAIN_ID,
     watch: true,
   });
+  console.log('address:', address, 'signer:', signer);
+  console.log(
+    'chainID:',
+    CHAIN_ID,
+    'NETWORK:',
+    NETWORK,
+    'ACTIVE_CHAIN_ID:',
+    ACTIVE_CHAIN_ID,
+    'regularchain:',
+    chain
+  );
+  console.log('v1Balance:', v1Balance?.value, 'bigInt', BigInt(0));
 
   const reset = (clearSuccess: boolean) => {
     clearSuccess && setIsSuccess(false);
@@ -56,11 +69,11 @@ export const useBurn = () => {
       return;
     }
     setModal(true);
-    // const balance = await getBalance();
     if (v1Balance?.value && v1Balance?.value !== BigInt(0)) {
       setStep('approve');
       try {
         setLoading(true);
+        console.log('attempting approval');
         const result = await writeContract({
           address: CONTRACT_ADDRESSES[NETWORK].pintv1,
           abi: PINT_ABI,
@@ -73,47 +86,70 @@ export const useBurn = () => {
           hash: result.hash,
         });
         setStep('burn');
-      } catch (e) {
+      } catch (e: any) {
+        const errorMessage = e.message;
+        if (errorMessage.includes('User rejected')) {
+          console.log('user rejected');
+          setStep('reject');
+          setLoading(false);
+          setError(errorMessage);
+          console.log(errorMessage);
+          return;
+        }
         console.log('user Rejected approval');
         reset(false);
-        console.log(e);
         setLoading(false);
       }
     }
     if (v1Balance?.value && v1Balance?.value === BigInt(0)) {
+      console.log('no balance to approve');
       setStep('error');
       setLoading(false);
     }
   };
 
   const migrate = async () => {
+    console.log('step', step);
     if (!address || !signer) {
       console.log('no address yet or signer');
       return;
     }
     setLoading(true);
-    try {
-      const { request } = await prepareWriteContract({
-        account: address,
-        address: CONTRACT_ADDRESSES[NETWORK].pintv2,
-        abi: PINT2_ABI,
-        functionName: 'migrate',
-      });
-      console.log('Prepare Migration:', request);
-      const writeRes = await writeContract(request);
-      await waitForTransaction({
-        hash: writeRes.hash,
-      });
-      setStep('complete');
+    if (v1Balance?.value && v1Balance?.value !== BigInt(0)) {
+      try {
+        const { request } = await prepareWriteContract({
+          account: address,
+          address: CONTRACT_ADDRESSES[NETWORK].pintv2,
+          abi: PINT2_ABI,
+          functionName: 'migrate',
+        });
+        console.log('Prepare Migration:', request);
+        const writeRes = await writeContract(request);
+        await waitForTransaction({
+          hash: writeRes.hash,
+        });
+        setStep('complete');
+        setLoading(false);
+      } catch (e: any) {
+        setLoading(false);
+        const errorMessage = e.message;
+        console.log(errorMessage);
+        if (errorMessage.includes('insufficient allowance')) {
+          console.log('insufficent allowance');
+          setStep('allowance');
+        } else if (errorMessage.includes('User rejected')) {
+          console.log('user rejected');
+          setStep('reject');
+        } else {
+          console.log('migrate failure');
+          setStep('fail');
+        }
+      }
+    } else {
+      console.log('no balance to migrate');
+      setStep('error');
       setLoading(false);
-    } catch (e) {
-      console.log('migrate failure');
-      console.log(e);
     }
-  };
-
-  const addPintv2ToWallet = async () => {
-    console.log('adding Pintv2 to Wallet');
   };
 
   return {
@@ -123,9 +159,9 @@ export const useBurn = () => {
     modal,
     setModal,
     setLoading,
+    CHAIN_ID,
     error,
     isSuccess,
-    addPintv2ToWallet,
     reset,
     migrate,
     approveV1,
