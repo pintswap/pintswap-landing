@@ -85,7 +85,7 @@ const Token = () => {
   return (
     <>
       <Base>
-        <div className="absolute left-0 top-0 w-full h-[50vh] bg-gradient-to-b from-primary to-secondary-black opacity-25" />
+        <div className="absolute left-0 top-0 w-full h-[50vh] bg-gradient-to-b from-primary to-secondary-black opacity-25 !font-walsheim" />
         <Section padding="y" wrapperClass={`!z-[99] mt-5 2xl:mt-6`}>
           <h1 className="font-semibold flex items-center gap-0.5">
             <span className="text-2xl md:text-3xl">$</span>

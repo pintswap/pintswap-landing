@@ -109,7 +109,7 @@ export default function Burn() {
         </Section>
         <Section padding="y">
           <div
-            className={`grid grid-cols-1 md:grid-cols-3 gap-12 xl:gap-16 ${GTWalsheim.className}`}
+            className={`grid grid-cols-1 md:grid-cols-3 gap-12 xl:gap-16 !font-walsheim`}
           >
             <div className="md:col-span-2">
               <p className="text-lg">

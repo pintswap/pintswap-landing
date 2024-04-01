@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=GT+Walsheim:wght@400;500;600;700&display=swap');
+
 @layer base {
   html,
   body {
@@ -9,7 +11,7 @@
     margin: 0;
     color: #fff;
     background: black;
-    font-family: var(--font-suisse-mono);
+    font-family:'GT Walsheim', sans-serif;
   }
 
   img {
