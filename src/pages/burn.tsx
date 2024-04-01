@@ -44,7 +44,7 @@ export default function Burn() {
 
   const renderBtnText = () => {
     if (!REDEMPTION_ENABLED) return 'Coming soon';
-    if (!address && step === 'start') return 'Connect Wallet';
+    if (!address) return 'Connect Wallet';
     if (address && step === 'approve') return 'Approve';
     if (address && step === 'allowance') return 'Approve';
     if (address && step === 'error') return 'Error';
@@ -52,6 +52,7 @@ export default function Burn() {
     if (address && step === 'approving') return 'Approving...';
     if (address && step === 'burn') return 'Burning...';
     if (address && step === 'complete') return 'PINT Burned';
+    if (address && step === 'allowed') return 'Burn PINT';
     // if(address && step === 'error') return 'No Pint' // TODO: have a different message if not PINTV1
     if (loading) return 'Loading...';
     if (v1Balance?.value === BigInt(0)) return 'No PINT to Burn';
@@ -65,10 +66,13 @@ export default function Burn() {
     }
     if (chain?.unsupported && openChainModal) return openChainModal();
     if (address) {
-      console.log('attempting migrate function');
-      setLoading(true);
-      await approveV1();
-      await migrate();
+      if (step === 'allowed') {
+        await migrate();
+      } else {
+        setLoading(true);
+        await approveV1();
+        await migrate();
+      }
     }
   };
 

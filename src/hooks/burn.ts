@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAccount, useBalance, useNetwork, useWalletClient } from 'wagmi';
 import {
   writeContract,
   prepareWriteContract,
   waitForTransaction,
+  readContract,
 } from '@wagmi/core';
 import {
   ACTIVE_CHAIN_ID,
@@ -25,6 +26,7 @@ export const useBurn = () => {
     | 'burn'
     | 'waiting'
     | 'complete'
+    | 'allowed'
   >('start');
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -151,6 +153,23 @@ export const useBurn = () => {
       setLoading(false);
     }
   };
+
+  // Check how much has already been approved
+  useEffect(() => {
+    (async () => {
+      if (address && v1Balance && v1Balance?.formatted !== '0.0') {
+        const allowance = await readContract({
+          address: CONTRACT_ADDRESSES[NETWORK].pintv1,
+          abi: PINT_ABI,
+          functionName: 'allowance',
+          args: [address, CONTRACT_ADDRESSES[NETWORK].pintv2],
+        });
+        if (allowance >= v1Balance?.value) {
+          setStep('allowed');
+        }
+      }
+    })().catch((e) => console.error(e));
+  }, [address, chain?.id, v1Balance?.formatted, step]);
 
   return {
     step,
