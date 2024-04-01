@@ -1,6 +1,6 @@
 import { Base } from '../ui/base';
 import { Section } from '../ui/layouts';
-import { Button, Modal, RenderLottie } from '../ui/components';
+import { Button, Modal, RenderLottie, DataDisplay } from '../ui/components';
 import { useBurn } from '../hooks/burn';
 import {
   CONTRACT_ADDRESSES,
@@ -8,6 +8,7 @@ import {
   NETWORK,
   REDEMPTION_ENABLED,
   truncate,
+  GTWalsheim,
 } from '../utils';
 import { useAccount, useBalance, useNetwork } from 'wagmi';
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit';
@@ -111,18 +112,22 @@ export default function Burn() {
           </h1>
         </Section>
         <Section padding="y">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 xl:gap-16">
+          <div
+            className={`grid grid-cols-1 md:grid-cols-3 gap-12 xl:gap-16 !font-walsheim`}
+          >
             <div className="md:col-span-2">
               <p className="text-lg">
                 Welcome to the PINT Relaunch! Burn old PINT tokens for our new
                 PWAP token. With a 10 to 1 ratio you will recive 1 new token for
-                ten of your old tokens. It is important to note that the value
-                of your new tokens will be equivelant to the value of your old
+                10 of your old tokens. It is important to note that the value of
+                your new tokens will be equivalent to the value of your old
                 ones.
               </p>
               <p className="mt-4">
-                NOTE: You must approve all PINT tokens to be burned for
-                migration to complete
+                <em>
+                  NOTE: You must approve all PINT tokens to be burned for
+                  migration to succesfully complete
+                </em>
               </p>
               <br />
               <p className="text-lg font-medium mb-2">
@@ -182,6 +187,44 @@ export default function Burn() {
                 </p>
               </Transition>
             </div>
+            <div className="md:col-span-1">
+              <h4 className="text-3xl mb-6 sm:mb-8">Token Stats</h4>
+              <div className="text-lg grid grid-cols-1 gap-x-2 gap-y-6 px-4">
+                {/* <DataDisplay
+                  text={'Price'}
+                  value={data?.length ? data[0]?.usdPrice || '0' : '0'}
+                  type="fancy"
+                  usd
+                  decimals={4}
+                /> */}
+                <DataDisplay
+                  text={'Circulating Supply'}
+                  value={'158000000'}
+                  type="fancy"
+                />
+                <DataDisplay
+                  text={'Total Supply'}
+                  value={'1000000000'}
+                  type="fancy"
+                />
+              </div>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-8">
+                <Link
+                  href="https://app.pintswap.exchange/#/markets/pint-usdc"
+                  target="_blank"
+                >
+                  <Button className="!w-fit">Buy on PintSwap</Button>
+                </Link>
+                <Link
+                  href="https://app.uniswap.org/swap?chain=mainnet&inputCurrency=ETH&outputCurrency=0x58fB30A61C218A3607e9273D52995a49fF2697Ee"
+                  target="_blank"
+                >
+                  <Button type="outline" className="!w-fit">
+                    Buy on Uniswap
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </Section>
       </Base>
@@ -192,7 +235,9 @@ export default function Burn() {
         title="Transaction Details"
         secondary={<div></div>}
       >
-        <div className="flex flex-col items-center justify-center">
+        <div
+          className={`flex flex-col items-center justify-center ${GTWalsheim.className}`}
+        >
           {loading ? (
             <>
               <RenderLottie animation="loading" width={200} height={200} />

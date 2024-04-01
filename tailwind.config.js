@@ -15,14 +15,15 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'round-gothic': ['var(--font-round-gothic)'],
-        'suisse-intl': ['var(--font-suisse-intl)'],
-        'halyard-display': ['var(--font-halyard-display)'],
-        linotype: ['var(--font-linotype)'],
-        'suisse-mono': ['var(--font-suisse-mono)'],
-        'sb-sans': ['var(--font-sb-sans-display)'],
-        'source-code-pro': ['var(--font-source-code-pro)'],
-        'untitled-sans': ['var(--font-untitled-sans)'],
+        // 'round-gothic': ['var(--font-round-gothic)'],
+        // 'suisse-intl': ['var(--font-suisse-intl)'],
+        // 'halyard-display': ['var(--font-halyard-display)'],
+        // linotype: ['var(--font-linotype)'],
+        // 'suisse-mono': ['var(--font-suisse-mono)'],
+        // 'sb-sans': ['var(--font-sb-sans-display)'],
+        // 'source-code-pro': ['var(--font-source-code-pro)'],
+        // 'untitled-sans': ['var(--font-untitled-sans)'],
+        walsheim: ['var(--font-gt-walsheim)'],
       },
       colors: {
         primary: {
