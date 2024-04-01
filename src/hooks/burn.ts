@@ -40,7 +40,7 @@ export const useBurn = () => {
 
   const { data: v1Balance } = useBalance({
     address,
-    token: CONTRACT_ADDRESSES[NETWORK].pintv1,
+    token: CONTRACT_ADDRESSES[NETWORK].pint,
     chainId: CHAIN_ID,
     watch: true,
   });
@@ -52,7 +52,7 @@ export const useBurn = () => {
     NETWORK,
     'ACTIVE_CHAIN_ID:',
     ACTIVE_CHAIN_ID,
-    'regularchain:',
+    'userchain:',
     chain
   );
   console.log('v1Balance:', v1Balance?.value, 'bigInt', BigInt(0));
@@ -77,10 +77,10 @@ export const useBurn = () => {
         setLoading(true);
         console.log('attempting approval');
         const result = await writeContract({
-          address: CONTRACT_ADDRESSES[NETWORK].pintv1,
+          address: CONTRACT_ADDRESSES[NETWORK].pint,
           abi: PINT_ABI,
           functionName: 'approve',
-          args: [CONTRACT_ADDRESSES[NETWORK].pintv2, v1Balance?.value],
+          args: [CONTRACT_ADDRESSES[NETWORK].pwap, v1Balance?.value],
         });
         setStep('approving');
         await waitForTransaction({
@@ -121,7 +121,7 @@ export const useBurn = () => {
       try {
         const { request } = await prepareWriteContract({
           account: address,
-          address: CONTRACT_ADDRESSES[NETWORK].pintv2,
+          address: CONTRACT_ADDRESSES[NETWORK].pwap,
           abi: PINT2_ABI,
           functionName: 'migrate',
         });
@@ -131,6 +131,7 @@ export const useBurn = () => {
           hash: writeRes.hash,
         });
         setStep('complete');
+        setIsSuccess(true);
         setLoading(false);
       } catch (e: any) {
         setLoading(false);
@@ -159,17 +160,17 @@ export const useBurn = () => {
     (async () => {
       if (address && v1Balance && v1Balance?.formatted !== '0.0') {
         const allowance = await readContract({
-          address: CONTRACT_ADDRESSES[NETWORK].pintv1,
+          address: CONTRACT_ADDRESSES[NETWORK].pint,
           abi: PINT_ABI,
           functionName: 'allowance',
-          args: [address, CONTRACT_ADDRESSES[NETWORK].pintv2],
+          args: [address, CONTRACT_ADDRESSES[NETWORK].pwap],
         });
         if (allowance >= v1Balance?.value) {
           setStep('allowed');
         }
       }
     })().catch((e) => console.error(e));
-  }, [address, chain?.id, v1Balance?.formatted, step]);
+  }, [address, chain?.id, v1Balance?.formatted]);
 
   return {
     step,

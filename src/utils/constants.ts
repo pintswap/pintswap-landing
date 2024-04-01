@@ -15,8 +15,8 @@ export const REDEMPTION_ENABLED = true;
 export const CONTRACT_ADDRESSES: any = {
   sepolia: {
     tris: '0x0bA5835F87BAB3d0D66e180ea58e3b4D87ef0f17',
-    pintv1: '0x0401CFe25e3A1E43EA706124e2d0a8557a6538dd',
-    pintv2: '0x436382754092aDD64b69417703d02F97b89a1be6',
+    pint: '0x0401CFe25e3A1E43EA706124e2d0a8557a6538dd',
+    pwap: '0x436382754092aDD64b69417703d02F97b89a1be6',
   },
   hardhat: {
     wock: '0xcB72ed407Cdb97a7161a2b567b5f50B55585Ee6b',
@@ -41,7 +41,7 @@ export const CONTRACT_ADDRESSES: any = {
     trisRedeem: '0xfef8205d4c472fe0442fc1026acc34e6d88e438c',
     pint: '0x58fB30A61C218A3607e9273D52995a49fF2697Ee',
     opps: '0xd665F1153599e8F799b2514069dF4481d3bcb043', // TODO
-    pwap: '',
+    pwap: '0x7a10835DBB0B2BF2f5050A95Dd95D3f3F92342B3',
   },
 };
 
