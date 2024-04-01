@@ -38,7 +38,7 @@ export default function Burn() {
 
   const { data: v1Balance } = useBalance({
     address,
-    token: CONTRACT_ADDRESSES[NETWORK].pintv1,
+    token: CONTRACT_ADDRESSES[NETWORK].pint,
     chainId: CHAIN_ID,
     watch: true,
   });
@@ -47,6 +47,7 @@ export default function Burn() {
     if (!REDEMPTION_ENABLED) return 'Coming soon';
     if (!address) return 'Connect Wallet';
     if (address && step === 'approve') return 'Approve';
+    if (address && v1Balance?.value === BigInt(0)) return 'No Pint';
     if (address && step === 'allowance') return 'Approve';
     if (address && step === 'error') return 'Error';
     if (address && step === 'complete') return 'Complete';
@@ -54,7 +55,6 @@ export default function Burn() {
     if (address && step === 'burn') return 'Burning...';
     if (address && step === 'complete') return 'PINT Burned';
     if (address && step === 'allowed') return 'Burn PINT';
-    // if(address && step === 'error') return 'No Pint' // TODO: have a different message if not PINTV1
     if (loading) return 'Loading...';
     if (v1Balance?.value === BigInt(0)) return 'No PINT to Burn';
     return 'Approve';
@@ -260,11 +260,11 @@ export default function Burn() {
               <Link
                 target="_blank"
                 className=""
-                href={`${EXPLORER_URLS[NETWORK]}/token/${CONTRACT_ADDRESSES[NETWORK].pintv2}`}
+                href={`${EXPLORER_URLS[NETWORK]}/token/${CONTRACT_ADDRESSES[NETWORK].pwap}`}
               >
                 PINT Contract:{' '}
                 <span className="underline transition duration-150 hover:text-neutral-200">
-                  {truncate(CONTRACT_ADDRESSES[NETWORK].pintv2)}
+                  {truncate(CONTRACT_ADDRESSES[NETWORK].pwap)}
                 </span>
               </Link>
             </>

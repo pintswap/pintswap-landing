@@ -14,7 +14,7 @@ import { DEV, NETWORK } from './constants';
 import merge from 'lodash.merge';
 
 const { chains, publicClient } = configureChains(
-  DEV ? [sepolia, mainnet, hardhat, localhost] : [mainnet],
+  DEV ? [mainnet, sepolia, hardhat, localhost] : [mainnet],
   [
     alchemyProvider({
       apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '',
