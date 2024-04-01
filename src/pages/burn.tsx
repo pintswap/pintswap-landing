@@ -50,6 +50,7 @@ export default function Burn() {
     if (address && step === 'complete') return 'Complete';
     if (address && step === 'approving') return 'Approving...';
     if (address && step === 'burn') return 'Burning...';
+    if (address && step === 'complete') return 'PINT Burned';
     // if(address && step === 'error') return 'No Pint' // TODO: have a different message if not PINTV1
     if (loading) return 'Loading...';
     if (v1Balance?.value === BigInt(0)) return 'No PINT to Burn';
