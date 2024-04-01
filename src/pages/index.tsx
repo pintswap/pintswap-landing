@@ -193,12 +193,13 @@ const Index = () => {
                   </Button>
                 </Link>
                 <Link
-                  href="https://t.me/pintswap_bot"
+                  // href="https://t.me/pintswap_bot"
+                  href="/burn"
                   target="_blank"
                   className="w-full sm:w-fit"
                 >
                   <Button type="outline" size="lg" className="w-full sm:w-fit">
-                    Launch TG Bot
+                    Burn Old PINT
                   </Button>
                 </Link>
               </div>
@@ -348,9 +349,8 @@ const Index = () => {
 
         <Section
           id="featured-in"
-          padding="none"
           type="wide"
-          background="bg-neutral-800"
+          background="bg-neutral-900"
           wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
         >
           <ParallaxScrollWrapper
@@ -476,7 +476,9 @@ const Index = () => {
                     orderbook.
                   </p>
                   <Link href="https://t.me/pintswap_bot" target="_blank">
-                    <Button className="sm:w-fit">Launch Telegram Bot</Button>
+                    <Button disabled className="sm:w-fit">
+                      Telegram Bot Currently Offline
+                    </Button>
                   </Link>
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper className="order-1 md:order-2">

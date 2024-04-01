@@ -10,7 +10,7 @@ import {
   truncate,
   GTWalsheim,
 } from '../utils';
-import { useAccount, useNetwork } from 'wagmi';
+import { useAccount, useBalance, useNetwork } from 'wagmi';
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit';
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
@@ -35,6 +35,13 @@ export default function Burn() {
   const { openConnectModal } = useConnectModal();
   const { openChainModal } = useChainModal();
 
+  const { data: v1Balance } = useBalance({
+    address,
+    token: CONTRACT_ADDRESSES[NETWORK].pintv1,
+    chainId: CHAIN_ID,
+    watch: true,
+  });
+
   const renderBtnText = () => {
     if (!REDEMPTION_ENABLED) return 'Coming soon';
     if (!address && step === 'start') return 'Connect Wallet';
@@ -44,7 +51,10 @@ export default function Burn() {
     if (address && step === 'complete') return 'Complete';
     if (address && step === 'approving') return 'Approving...';
     if (address && step === 'burn') return 'Burning...';
+    if (address && step === 'complete') return 'PINT Burned';
+    // if(address && step === 'error') return 'No Pint' // TODO: have a different message if not PINTV1
     if (loading) return 'Loading...';
+    if (v1Balance?.value === BigInt(0)) return 'No PINT to Burn';
     return 'Approve';
   };
 
@@ -132,10 +142,11 @@ export default function Burn() {
               <br />
               <div className="flex items-center">
                 <Button
-                  disabled={false}
+                  disabled={v1Balance?.value === BigInt(0)}
                   size="lg"
                   onClick={handleBtnClick}
                   loading={loading}
+                  className={`${address ? '!rounded-r-none' : ''}`}
                 >
                   {renderBtnText()}
                 </Button>
