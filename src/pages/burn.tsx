@@ -43,7 +43,7 @@ export default function Burn() {
 
   const renderBtnText = () => {
     if (!REDEMPTION_ENABLED) return 'Coming soon';
-    if (!address && step === 'start') return 'Connect Wallet';
+    if (!address) return 'Connect Wallet';
     if (address && step === 'approve') return 'Approve';
     if (address && step === 'allowance') return 'Approve';
     if (address && step === 'error') return 'Error';
