@@ -192,12 +192,12 @@ const Token = () => {
                 /> */}
                 <DataDisplay
                   text={'Circulating Supply'}
-                  value={'158000000'}
+                  value={'15800000'}
                   type="fancy"
                 />
                 <DataDisplay
                   text={'Total Supply'}
-                  value={'1000000000'}
+                  value={'100000000'}
                   type="fancy"
                 />
               </div>

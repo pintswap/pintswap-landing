@@ -8,7 +8,6 @@ import {
   NETWORK,
   REDEMPTION_ENABLED,
   truncate,
-  GTWalsheim,
 } from '../utils';
 import { useAccount, useBalance, useNetwork } from 'wagmi';
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit';
@@ -29,9 +28,11 @@ export default function Burn() {
     CHAIN_ID,
     isSuccess,
     error,
+    approved,
     migrate,
     approveV1,
     reset,
+    addPwapToWallet,
   } = useBurn();
   const { openConnectModal } = useConnectModal();
   const { openChainModal } = useChainModal();
@@ -46,7 +47,7 @@ export default function Burn() {
   const renderBtnText = () => {
     if (!REDEMPTION_ENABLED) return 'Coming soon';
     if (!address) return 'Connect Wallet';
-    if (address && step === 'approve') return 'Approve';
+    if (address && step === 'approve' && !approved) return 'Approve';
     if (address && v1Balance?.value === BigInt(0)) return 'No Pint';
     if (address && step === 'allowance') return 'Approve';
     if (address && step === 'error') return 'Error';
@@ -54,12 +55,12 @@ export default function Burn() {
     if (address && step === 'approving') return 'Approving...';
     if (address && step === 'burn') return 'Burning...';
     if (address && step === 'complete') return 'PINT Burned';
-    if (address && step === 'allowed') return 'Burn PINT';
+    if (address && (step === 'allowed' || approved)) return 'Burn PINT';
     if (loading) return 'Loading...';
     if (v1Balance?.value === BigInt(0)) return 'No PINT to Burn';
-    return 'Approve';
+    return 'Burn Pint';
   };
-
+  console.log('approved?', approved);
   const handleBtnClick = async () => {
     if (!address && openConnectModal) {
       setStep('approve');
@@ -67,7 +68,7 @@ export default function Burn() {
     }
     if (chain?.unsupported && openChainModal) return openChainModal();
     if (address) {
-      if (step === 'allowed') {
+      if (approved) {
         await migrate();
       } else {
         setLoading(true);
@@ -85,9 +86,10 @@ export default function Burn() {
         return 'Migrate failed: must approve max tokens';
       case 'reject':
         return 'User rejected allowance';
+      case 'reject burn':
+        return 'User rejected burn';
       case 'approve':
         return 'Approve transaction in Wallet';
-
       case 'approving':
         return 'Approving transaction';
       case 'burn':
@@ -113,9 +115,7 @@ export default function Burn() {
           </h1>
         </Section>
         <Section padding="y">
-          <div
-            className={`grid grid-cols-1 md:grid-cols-3 gap-12 xl:gap-16 !font-walsheim`}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 xl:gap-16 !font-walsheim h-[60vh]">
             <div className="md:col-span-2">
               <p className="text-lg">
                 Welcome to the PINT Relaunch! Burn old PINT tokens for our new
@@ -200,12 +200,12 @@ export default function Burn() {
                 /> */}
                 <DataDisplay
                   text={'Circulating Supply'}
-                  value={'158000000'}
+                  value={'15800000'}
                   type="fancy"
                 />
                 <DataDisplay
                   text={'Total Supply'}
-                  value={'1000000000'}
+                  value={'100000000'}
                   type="fancy"
                 />
               </div>
@@ -217,7 +217,7 @@ export default function Burn() {
                   <Button className="!w-fit">Buy on PintSwap</Button>
                 </Link>
                 <Link
-                  href="https://app.uniswap.org/swap?chain=mainnet&inputCurrency=ETH&outputCurrency=0x58fB30A61C218A3607e9273D52995a49fF2697Ee"
+                  href={`https://app.uniswap.org/swap?chain=mainnet&inputCurrency=ETH&outputCurrency=${CONTRACT_ADDRESSES[NETWORK].pwap}`}
                   target="_blank"
                 >
                   <Button type="outline" className="!w-fit">
@@ -234,11 +234,19 @@ export default function Burn() {
         state={modal}
         closeFx={() => reset(false)}
         title="Transaction Details"
-        secondary={<div></div>}
+        secondary={
+          isSuccess ? (
+            <div ref={buttonRef} onClick={addPwapToWallet}>
+              <Button className="!w-fit" type="outline">
+                Add to wallet
+              </Button>
+            </div>
+          ) : (
+            <div></div>
+          )
+        }
       >
-        <div
-          className={`flex flex-col items-center justify-center ${GTWalsheim.className}`}
-        >
+        <div className="flex flex-col items-center justify-center">
           {loading ? (
             <>
               <RenderLottie animation="loading" width={200} height={200} />
