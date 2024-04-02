@@ -20,6 +20,7 @@ export const useBurn = () => {
     | 'approve'
     | 'allowance'
     | 'reject'
+    | 'reject burn'
     | 'fail'
     | 'approving'
     | 'error'
@@ -35,6 +36,8 @@ export const useBurn = () => {
   const { address } = useAccount();
   const { chain } = useNetwork();
   const { data: signer } = useWalletClient();
+  const [approved, setApproved] = useState(false);
+  const [recheck, setRecheck] = useState(false);
 
   const CHAIN_ID = chain?.id || ACTIVE_CHAIN_ID;
 
@@ -44,18 +47,18 @@ export const useBurn = () => {
     chainId: CHAIN_ID,
     watch: true,
   });
-  console.log('address:', address, 'signer:', signer);
-  console.log(
-    'chainID:',
-    CHAIN_ID,
-    'NETWORK:',
-    NETWORK,
-    'ACTIVE_CHAIN_ID:',
-    ACTIVE_CHAIN_ID,
-    'userchain:',
-    chain
-  );
-  console.log('v1Balance:', v1Balance?.value, 'bigInt', BigInt(0));
+  // console.log('address:', address, 'signer:', signer);
+  // console.log(
+  //   'chainID:',
+  //   CHAIN_ID,
+  //   'NETWORK:',
+  //   NETWORK,
+  //   'ACTIVE_CHAIN_ID:',
+  //   ACTIVE_CHAIN_ID,
+  //   'userchain:',
+  //   chain
+  // );
+  // console.log('v1Balance:', v1Balance?.value, 'bigInt', BigInt(0));
 
   const reset = (clearSuccess: boolean) => {
     clearSuccess && setIsSuccess(false);
@@ -63,6 +66,7 @@ export const useBurn = () => {
     step && setStep('approve');
     error && setError('');
     loading && setLoading(false);
+    setRecheck(!recheck);
   };
 
   const approveV1 = async () => {
@@ -75,7 +79,6 @@ export const useBurn = () => {
       setStep('approve');
       try {
         setLoading(true);
-        console.log('attempting approval');
         const result = await writeContract({
           address: CONTRACT_ADDRESSES[NETWORK].pint,
           abi: PINT_ABI,
@@ -116,7 +119,9 @@ export const useBurn = () => {
       console.log('no address yet or signer');
       return;
     }
+    setStep('burn');
     setLoading(true);
+    setModal(true);
     if (v1Balance?.value && v1Balance?.value !== BigInt(0)) {
       try {
         const { request } = await prepareWriteContract({
@@ -142,7 +147,7 @@ export const useBurn = () => {
           setStep('allowance');
         } else if (errorMessage.includes('User rejected')) {
           console.log('user rejected');
-          setStep('reject');
+          setStep('reject burn');
         } else {
           console.log('migrate failure');
           setStep('fail');
@@ -152,6 +157,38 @@ export const useBurn = () => {
       console.log('no balance to migrate');
       setStep('error');
       setLoading(false);
+    }
+  };
+
+  const addPwapToWallet = async (e: any) => {
+    e.preventDefault();
+    const tokenAddress = CONTRACT_ADDRESSES[NETWORK].pwap;
+    const tokenSymbol = chain?.id === 1 ? 'PWAP' : 'PINTV2';
+    const tokenDecimals = 18;
+    const tokenImage = 'https://i.ibb.co/VmhyTxM/PINT.png';
+
+    try {
+      // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+      const wasAdded = await (window as any).ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20', // Initially only supports ERC20, but eventually more!
+          options: {
+            address: tokenAddress, // The address that the token is at.
+            symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+            decimals: tokenDecimals, // The number of decimals in the token
+            image: tokenImage, // A string url of the token logo
+          },
+        },
+      });
+
+      if (wasAdded) {
+        console.log('#addPintToWallet: Added PINT');
+      } else {
+        console.log('#addPintToWallet: User rejected');
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -165,12 +202,14 @@ export const useBurn = () => {
           functionName: 'allowance',
           args: [address, CONTRACT_ADDRESSES[NETWORK].pwap],
         });
+        console.log('allowance:', allowance);
         if (allowance >= v1Balance?.value) {
+          setApproved(true);
           setStep('allowed');
         }
       }
     })().catch((e) => console.error(e));
-  }, [address, chain?.id, v1Balance?.formatted]);
+  }, [address, chain?.id, v1Balance?.formatted, approved, recheck]);
 
   return {
     step,
@@ -182,8 +221,10 @@ export const useBurn = () => {
     CHAIN_ID,
     error,
     isSuccess,
+    approved,
     reset,
     migrate,
     approveV1,
+    addPwapToWallet,
   };
 };
