@@ -27,7 +27,7 @@ type IButtonProps = {
 };
 
 const Button = (props: IButtonProps) => {
-  const ctaBtnClass = `hover:text-pink-500 inline-block rounded-md text-center py-2 pl-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 hover:shadow-none p-3 pr-0 !text-left flex items-end h-[72px] text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400`;
+  const ctaBtnClass = `hover:text-indigo-500 inline-block text-center py-2 pl-4 transition duration-150 hover:shadow-none p-3 pr-0 !text-left flex items-end h-[72px] rounded-md text-slate-800 bg-gradient-to-r from-black to-slate-400`;
   const sizeClass = () => {
     switch (props.size) {
       case 'lg':
@@ -38,7 +38,7 @@ const Button = (props: IButtonProps) => {
         return 'py-[5px] px-4';
     }
   };
-  const btnClass = `inline-block font-semibold rounded-lg text-center ${sizeClass()} text-neutral-100 border border-1 ${
+  const btnClass = `inline-block rounded-md text-center ${sizeClass()} text-neutral-100 ${
     props.borderColor || 'border-primary-dark'
   } cursor-pointer disabled:cursor-not-allowed disabled:!text-neutral-400`;
 
@@ -57,7 +57,7 @@ const Button = (props: IButtonProps) => {
       );
     }
     case 'wallet': {
-      const walletClass = `py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 rounded-md text-center text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 hover:shadow-none hover:text-pink-500`;
+      const walletClass = `py-2 px-4 shadow-[4.0px_8.0px_8.0px_rgba(219,39,119,0.38)] transition duration-150 text-center text-slate-800 bg-gradient-to-r from-slate-100 to-slate-400 hover:shadow-none hover:text-pink-500 rounded-md`;
       return (
         <ConnectButton.Custom>
           {({
@@ -150,7 +150,7 @@ const Button = (props: IButtonProps) => {
         >
           {props.children}
           <span
-            className={`h-[90px] w-[90px] bg-sky-400 group-hover:bg-sky-500 duration-150 transition rounded-full ${move}`}
+            className={`h-[90px] w-[90px] bg-sky-400 group-hover:bg-sky-500 duration-150 transition  ${move}`}
           >
             {renderIcon()}
           </span>
@@ -160,12 +160,12 @@ const Button = (props: IButtonProps) => {
     case 'outline': {
       return (
         <button
-          className={`btn-hover outline-click rounded-lg p-0.5 w-full disabled:cursor-not-allowed text-white hover:text-neutral-100 disabled:text-neutral-400 ${
+          className={`btn-hover outline-click p-0.5 w-full disabled:cursor-not-allowed text-white hover:text-neutral-100 disabled:text-neutral-400 rounded-md ${
             props.className || ''
           }`}
           disabled={props.disabled}
         >
-          <div className="flex h-full w-full items-center justify-center transtion duration-150 bg-neutral-900 hover:bg-[rgb(18,18,18)] back rounded-lg">
+          <div className="flex h-full w-full items-center justify-center transition duration-150 bg-black hover:bg-gradient-to-r hover:from-rebrand-purple hover:to-rebrand-secondary rounded-md back">
             <span className={`${sizeClass()} font-medium`}>
               {props.children}
             </span>

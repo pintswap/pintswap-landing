@@ -20,7 +20,6 @@ export const useNftRedeem = () => {
   const [trisIds, setTrisIds] = useState<bigint[]>([]);
   const [wockIds, setWockIds] = useState<bigint[]>([]);
   const [isIdsLoading, setIsIdsLoading] = useState(false);
-
   const [trisRedeemTxHash, setTrisRedeemTxHash] = useState('');
   const [wockRedeemTxHash, setWockRedeemTxHash] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -102,7 +101,6 @@ export const useNftRedeem = () => {
 
       if (wockIds?.length) {
         // WOCK: approve all
-
         if (!(await isWockApproved())) {
           const config = {
             account: address,

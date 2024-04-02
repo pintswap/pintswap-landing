@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Button } from '../components/button';
-import { useWindowSize } from '../../hooks';
 import { Section } from '../layouts';
 import Image from 'next/image';
 import { Transition } from '@headlessui/react';
@@ -19,11 +18,10 @@ const NAV_ITEMS = [
     target: '_blank',
   },
   { text: 'Docs', link: 'https://docs.pintswap.exchange', target: '_blank' },
-  { text: 'Blog', link: '/blog', target: '_self' },
+  // { text: 'Blog', link: '/blog', target: '_self' },
 ];
 
 const Navbar = () => {
-  const { width, breakpoints } = useWindowSize();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
@@ -34,11 +32,11 @@ const Navbar = () => {
         type="wide"
         padding="y"
       >
-        <div className="flex flex-wrap justify-between items-center mx-auto">
+        <div className="flex flex-wrap justify-between items-center mx-auto px-2">
           <Link href="/">
             <div className="max-w-[160px] max-h-[30px]">
               <Image
-                src={'/assets/logo/pintswap-logo.svg'}
+                src={'/assets/logo/pintswap-blue.svg'}
                 alt="PintSwap is a decentralized, P2P OTC crypto exchange"
                 width={790}
                 height={149}
@@ -58,6 +56,11 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/burn">
+                  <Button type="outline">Burn</Button>
+                </Link>
+              </li>
               <li>
                 <Link href="/token">
                   <Button>Buy $PINT</Button>

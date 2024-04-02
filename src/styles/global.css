@@ -2,13 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=GT+Walsheim:wght@400;500;600;700&display=swap');
+
 @layer base {
   html,
   body {
     padding: 0;
     margin: 0;
     color: #fff;
-    background: rgb(0,0,0);
+    background: black;
+    font-family:'GT Walsheim', sans-serif;
   }
 
   img {
@@ -38,8 +41,8 @@
 
 .btn-hover.fill-click {
   background-size: 200% 100%;
-    background-image: linear-gradient(to top right, #5d10c9, #3d167f, #3d167f);
-    box-shadow: 0 2px 6px 0 rgba(116, 79, 168, 0.3);
+    background-image: linear-gradient(to top right, #4F46E5, #3e31cd, #271ba9);
+    
 }
 
 .btn-hover.fill-click:hover {
@@ -48,8 +51,8 @@
 
 .btn-hover.outline-click {
   background-size: 200% 100%;
-    background-image: linear-gradient(to right, #FF6FA9, #FF4878, #FF6FA9);
-    box-shadow: 0 2px 6px 0 rgba(116, 79, 168, 0.3); 
+    background-image: linear-gradient(to right, #5D10C9, #7e1dac);
+    /* box-shadow: 0 2px 6px 0 rgba(116, 79, 168, 0.3);  */
 }
 
 .btn-hover.outline-click:hover {
@@ -120,4 +123,22 @@
 		transform: translate(0%,0%);
 	}			
 }
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+.droplets {
+  animation: rotate 2s;
+}
+
+.tunnel-vision{
+  background: radial-gradient(circle at center, transparent 60%, black);
+}
+
 }

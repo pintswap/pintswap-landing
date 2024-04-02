@@ -16,22 +16,22 @@ import merge from 'lodash.merge';
 const { chains, publicClient } = configureChains(
   DEV ? [mainnet, sepolia, hardhat, localhost] : [mainnet],
   [
+    alchemyProvider({
+      apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '',
+    }),
+    publicProvider(),
     jsonRpcProvider({
       rpc: () => ({
         http: `https://eth.llamarpc.com/rpc/${process.env.NEXT_PUBLIC_LLAMA_NODES_KEY}`,
         webSocket: `wss://eth.llamarpc.com/rpc/${process.env.NEXT_PUBLIC_LLAMA_NODES_KEY}`,
       }),
     }),
-    alchemyProvider({
-      apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '',
-    }),
-    publicProvider(),
   ]
 );
 
 const { connectors } = getDefaultWallets({
   appName: 'PintSwap',
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '',
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '1',
   chains,
 });
 

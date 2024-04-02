@@ -138,31 +138,51 @@ const Index = () => {
       ))}
 
       <Base>
-        <div className="absolute left-0 top-0 w-full h-[50vh] bg-gradient-to-b from-primary to-secondary-black opacity-25" />
+        <div className="absolute left-0 top-0 w-full h-[50vh] bg-gradient-to-t from-black to-neutral-800 opacity-25" />
 
-        <Section id="home" padding="y" wrapperClass={`!z-[99] mt-10 sm:mt-12`}>
-          <div className="flex flex-col md:items-center md:flex-row justify-between">
-            <div className="flex flex-col gap-4 md:gap-6">
-              <div className="flex flex-col gap-2">
+        <Section id="home" padding="y" wrapperClass={`!z-[99]`}>
+          <div className="flex flex-col md:flex-row md:items-center justify-between max-w-5xl mx-auto relative mt-4 md:mt-8 lg:mt-12 xl:mt-16">
+            {/* <Droplets type={"fill"}></Droplets> */}
+            <div className="flex flex-col gap-4 md:gap-6 ">
+              <div className="flex flex-col gap-2 relative z-100">
                 <h1 className="leading-tight">
-                  <span className="text-2xl md:text-3xl font-medium">
+                  <span className="text-4xl md:text-4xl font-medium">
                     P2P Crypto Trading
                   </span>
                   <br />
-                  <span className="text-accent-light text-5xl font-semibold">
+                  <span className="text-indigo-600 text-2xl md:text-3xl font-semibold">
                     Zero Slippage. <br className="sm:hidden" /> Zero Taxes.
                   </span>
+                  {/* <p className="text-primary-light">Primary Light</p>
+                  <p className="text-primary-dark">Primary Dark</p>
+                  <p className="text-primary-regular">Primary Regular</p>
+                  <p className="text-primary-default">Primary Default</p>
+                  <p className="text-secondary-black bg-white">Secondary Black</p>
+                  <p className="text-secondary-dark">Secondary dark</p>
+                  <p className="text-secondary-light">Secondary Light</p>
+                  <p className="text-secondary-regular">Secondary Regular</p>
+                  <p className="text-accent-light">Accent light</p>
+                  <p className="text-accent-regular">Accent regular</p>
+                  <p className="text-accent-default ">Accent default</p>
+                  <p className='text-indigo-500'>New Regular</p> */}
                 </h1>
-                <p className="sm:text-lg text-neutral-300">
-                  Trade <span className="font-semibold">low-liquidity</span>{' '}
+                <p className="sm:text-lg ">
+                  Trade{' '}
+                  <span className="font-semibold text-rebrand-indigo">
+                    low-liquidity
+                  </span>{' '}
                   tokens without all the{' '}
-                  <span className="font-semibold">BS</span>. With our Telegram
-                  bot
-                  <br className="hidden md:block" /> and web app, enter and exit
-                  lowcaps with <span className="font-semibold">ease</span>.
+                  <span className="font-extrabold text-rebrand-indigo">BS</span>
+                  .<br></br> With our Telegram bot and web app, enter and exit
+                  <br className="hidden md:block" />
+                  lowcaps with{' '}
+                  <span className="font-semibold text-rebrand-indigo">
+                    ease
+                  </span>
+                  .
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row items-center gap-3 lg:gap-4 px-2 md:px-0">
+              <div className="flex flex-col sm:flex-row items-center gap-3 lg:gap-4 px-2 md:px-0 relative z-100">
                 <Link
                   href="https://app.pintswap.exchange"
                   target="_blank"
@@ -173,29 +193,58 @@ const Index = () => {
                   </Button>
                 </Link>
                 <Link
-                  href="https://t.me/pintswap_bot"
+                  // href="https://t.me/pintswap_bot"
+                  href="/burn"
                   target="_blank"
                   className="w-full sm:w-fit"
                 >
                   <Button type="outline" size="lg" className="w-full sm:w-fit">
-                    Launch TG Bot
+                    Burn Old PINT
                   </Button>
                 </Link>
               </div>
+              <ParallaxScrollWrapper
+                animation="opacity"
+                reverse
+                startValue={2}
+                endValue={0.2}
+                className="flex flex-col md:flex-row gap-10 mt-4 md:mt-8"
+              >
+                <DataDisplay
+                  loading={isLoading}
+                  usd
+                  value={tokenStats?.all?.amountUsd || 0}
+                  text="Total Volume"
+                  type="fancy"
+                />
+                <DataDisplay
+                  loading={isLoading}
+                  value={tokenStats?.all?.transactions || 0}
+                  text="Transactions"
+                  type="fancy"
+                />
+                {/* TODO: connect */}
+                <DataDisplay
+                  loading={isLoading}
+                  value={Math.floor(Math.random() * 50)}
+                  text="Peers"
+                  type="fancy"
+                />
+              </ParallaxScrollWrapper>
             </div>
-            <div className="hidden md:flex">
+            <div className="hidden md:flex md:w-1/2 md:h-full">
               <Image
                 src="/assets/img/swap-module-min.png"
                 alt="Swap module preview on PintSwap app"
-                width={420}
-                height={410}
-                className="rounded-lg shadow-[-3px_-3px_12px_2px_rgba(0,0,0,0.5),_3px_3px_12px_2px_rgba(0,0,0,0.5)]"
+                width={370}
+                height={360}
+                className="rounded-lg  shadow-[-3px_-3px_12px_2px_rgba(0,0,0,0.5),_3px_3px_12px_2px_rgba(0,0,0,0.5)]"
               />
             </div>
           </div>
         </Section>
 
-        <Section wrapperClass="mt-10 sm:mt-12">
+        {/* <Section wrapperClass="mt-10 sm:mt-12">
           <ParallaxScrollWrapper
             animation="opacity"
             reverse
@@ -216,7 +265,6 @@ const Index = () => {
               text="Transactions"
               type="fancy"
             />
-            {/* TODO: connect */}
             <DataDisplay
               loading={isLoading}
               value={Math.floor(Math.random() * 50)}
@@ -224,7 +272,7 @@ const Index = () => {
               type="fancy"
             />
           </ParallaxScrollWrapper>
-        </Section>
+        </Section> */}
 
         <Section
           padding="y"
@@ -239,27 +287,25 @@ const Index = () => {
           >
             <ParallaxScrollWrapper className="text-center mb-10 sm:mb-12 2xl:mb-20">
               <h2 className="text-3xl md:text-4xl font-medium">
-                Trading Made <span className="text-accent-light">Easy</span>
+                Trading Made <span className="text-rebrand-indigo">Easy</span>
               </h2>
-              <h4 className="text-neutral-300">
+              <h4 className="">
                 We simplify the technical complexities, allowing you to focus on
                 trading.
               </h4>
             </ParallaxScrollWrapper>
-            <div className="bg-gradient-to-b from-black to-neutral-900 rounded-3xl">
+            <div className="bg-gradient-to-b from-black to-neutral-800 rounded-md">
               <Tab.Group>
                 <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 gap-6 px-4 pb-8">
                   <Tab.List className="grid grid-cols-2 lg:flex lg:flex-col lg:px-4 gap-2 lg:gap-4 lg:mt-10">
                     {TabItems.map((x, i) => (
                       <Tab
                         key={`how-it-works-tab-${i}`}
-                        className={
-                          'ring-0 focus-visible:ring-0 focus:outline-0 focus:ring-0 focus-visible:outline-0'
-                        }
+                        className={'ring-0 focus:ring-0 focus:outline-none'}
                       >
                         {({ selected }) => (
                           <div
-                            className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-lg border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between text-center ${
+                            className={`lg:text-left sm:text-lg px-4 py-2 lg:py-3 rounded-md border border-1 border-neutral-500 transition duration-150 font-medium flex items-center justify-center lg:justify-between text-center ${
                               selected
                                 ? 'bg-neutral-800 hover:bg-neutral-800 !border-neutral-300'
                                 : 'hover:bg-neutral-900'
@@ -268,7 +314,7 @@ const Index = () => {
                             <div className="flex items-center gap-2">
                               <x.icon
                                 size={20}
-                                color={selected ? '#ff3869' : '#FF6FA9'}
+                                color={selected ? '#4F46E5' : '#6052FF'}
                                 className="hidden md:block"
                               />
                               <span>{x.title}</span>
@@ -303,7 +349,6 @@ const Index = () => {
 
         <Section
           id="featured-in"
-          padding="none"
           type="wide"
           background="bg-neutral-900"
           wrapperClass="mt-16 sm:mt-24 xl:mt-32 2xl:mt-36"
@@ -344,9 +389,9 @@ const Index = () => {
         >
           <ParallaxScrollWrapper className="text-center mb-10 sm:mb-12 2xl:mb-20">
             <h2 className="text-3xl md:text-4xl font-medium">
-              <span className="text-accent-light">How</span> It Works
+              <span className="text-rebrand-indigo">How</span> It Works
             </h2>
-            <h4 className="text-neutral-300">
+            <h4 className="">
               Think of us like a combination of Uniswap and Unibot, but better.
             </h4>
           </ParallaxScrollWrapper>
@@ -366,7 +411,7 @@ const Index = () => {
                   className="mt-2 md:mt-3 lg:mt-4 flex flex-col gap-3 md:gap-4"
                 >
                   <div className="flex flex-col">
-                    <span className="text-accent-light">
+                    <span className="text-rebrand-indigo">
                       Public and OTC Features
                     </span>
                     <h3 className="text-3xl font-medium">
@@ -388,9 +433,7 @@ const Index = () => {
                     target="_blank"
                     className="w-fit"
                   >
-                    <Button className="w-fit" type="outline">
-                      See Available Trades
-                    </Button>
+                    <Button className="w-fit">See Available Trades</Button>
                   </Link>
                 </ParallaxScrollWrapper>
               </Split>
@@ -407,7 +450,7 @@ const Index = () => {
                   className="mt-2 md:mt-3 lg:mt-4 flex flex-col gap-3 md:gap-4 order-2 md:order-1"
                 >
                   <div className="flex flex-col">
-                    <span className="text-accent-light">
+                    <span className="text-rebrand-indigo">
                       Automatic Matching
                     </span>
                     <h3 className="text-3xl font-medium">
@@ -433,7 +476,9 @@ const Index = () => {
                     orderbook.
                   </p>
                   <Link href="https://t.me/pintswap_bot" target="_blank">
-                    <Button className="sm:w-fit">Launch Telegram Bot</Button>
+                    <Button disabled className="sm:w-fit">
+                      Telegram Bot Currently Offline
+                    </Button>
                   </Link>
                 </ParallaxScrollWrapper>
                 <ParallaxScrollWrapper className="order-1 md:order-2">
@@ -455,10 +500,11 @@ const Index = () => {
             startValue={2}
             endValue={0.2}
           >
-            <div className="bg-gradient-to-b to-black from-neutral-900 rounded-3xl pt-12">
+            <div className="bg-gradient-to-b to-black from-neutral-900 rounded-md pt-12 pb-4">
               <ParallaxScrollWrapper className="text-center mb-10 sm:mb-12 2xl:mb-20">
                 <h2 className="text-3xl md:text-4xl font-medium">
-                  Join the <span className="text-accent-light">Community</span>
+                  Join the{' '}
+                  <span className="text-rebrand-indigo">Community</span>
                 </h2>
                 <h4 className="text-neutral-300">
                   Be a part of the protocol, see new OTC offers, and get updates
