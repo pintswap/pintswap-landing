@@ -60,7 +60,7 @@ export default function Burn() {
     if (v1Balance?.value === BigInt(0)) return 'No PINT to Burn';
     return 'Burn Pint';
   };
-  console.log('approved?', approved);
+
   const handleBtnClick = async () => {
     if (!address && openConnectModal) {
       setStep('approve');
@@ -113,9 +113,12 @@ export default function Burn() {
             <span className="text-rebrand-indigo text-5xl">PINT</span>
             <span className="text-5xl ml-3">Relaunch</span>
           </h1>
+          <h3 className="text-2xl md:text-3xl font-medium">
+            Brand new drip, same great taste.
+          </h3>
         </Section>
         <Section padding="y">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 xl:gap-16 !font-walsheim h-[60vh]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 xl:gap-16 !font-walsheim">
             <div className="md:col-span-2">
               <p className="text-lg">
                 Welcome to the PINT Relaunch! Burn old PINT tokens for our new
@@ -191,13 +194,6 @@ export default function Burn() {
             <div className="md:col-span-1">
               <h4 className="text-3xl mb-6 sm:mb-8">Token Stats</h4>
               <div className="text-lg grid grid-cols-1 gap-x-2 gap-y-6 px-4">
-                {/* <DataDisplay
-                  text={'Price'}
-                  value={data?.length ? data[0]?.usdPrice || '0' : '0'}
-                  type="fancy"
-                  usd
-                  decimals={4}
-                /> */}
                 <DataDisplay
                   text={'Circulating Supply'}
                   value={'15800000'}
@@ -211,7 +207,7 @@ export default function Burn() {
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-8">
                 <Link
-                  href="https://app.pintswap.exchange/#/markets/pint-usdc"
+                  href="https://app.pintswap.exchange/#/markets/pwap-usdc"
                   target="_blank"
                 >
                   <Button className="!w-fit">Buy on PintSwap</Button>

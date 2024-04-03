@@ -14,7 +14,9 @@ const Base = (props: IBaseProps) => {
     <>
       <Meta {...AppConfig} />
       <Navbar />
+
       {props.children}
+
       <Footer />
     </>
   );

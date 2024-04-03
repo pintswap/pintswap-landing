@@ -183,13 +183,6 @@ const Token = () => {
             <div className="md:col-span-1">
               <h4 className="text-3xl mb-6 sm:mb-8">Token Stats</h4>
               <div className="text-lg grid grid-cols-1 gap-x-2 gap-y-6 px-4">
-                {/* <DataDisplay
-                  text={'Price'}
-                  value={data?.length ? data[0]?.usdPrice || '0' : '0'}
-                  type="fancy"
-                  usd
-                  decimals={4}
-                /> */}
                 <DataDisplay
                   text={'Circulating Supply'}
                   value={'15800000'}
@@ -203,13 +196,13 @@ const Token = () => {
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-8">
                 <Link
-                  href="https://app.pintswap.exchange/#/markets/pint-usdc"
+                  href="https://app.pintswap.exchange/#/markets/pwap-usdc"
                   target="_blank"
                 >
                   <Button className="!w-fit">Buy on PintSwap</Button>
                 </Link>
                 <Link
-                  href="https://app.uniswap.org/swap?chain=mainnet&inputCurrency=ETH&outputCurrency=0x58fB30A61C218A3607e9273D52995a49fF2697Ee"
+                  href={`https://app.uniswap.org/swap?chain=mainnet&inputCurrency=ETH&outputCurrency=${CONTRACT_ADDRESSES[NETWORK].pwap}`}
                   target="_blank"
                 >
                   <Button type="outline" className="!w-fit">
