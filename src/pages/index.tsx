@@ -20,7 +20,7 @@ import {
 } from 'react-icons/md';
 import { useSubgraphStore } from '../stores';
 import { useWindowSize } from '../hooks';
-import { SOCIAL_LINKS } from '../utils';
+import { SOCIAL_LINKS, APP_URL } from '../utils';
 
 const ParallaxItems: any = [
   {
@@ -184,7 +184,7 @@ const Index = () => {
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-3 lg:gap-4 px-2 md:px-0 relative z-100">
                 <Link
-                  href="https://app.pintswap.exchange"
+                  href={APP_URL}
                   target="_blank"
                   className="w-full sm:w-fit"
                 >
@@ -429,7 +429,7 @@ const Index = () => {
                     be shared with someone.
                   </p>
                   <Link
-                    href="https://app.pintswap.exchange/#/markets"
+                    href={`${APP_URL}/#/markets`}
                     target="_blank"
                     className="w-fit"
                   >

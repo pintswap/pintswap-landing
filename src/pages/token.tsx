@@ -3,6 +3,7 @@ import { Section } from '../ui/layouts';
 import { Button, DataDisplay, Modal, RenderLottie } from '../ui/components';
 import { useNftRedeem, usePrices } from '../hooks';
 import {
+  APP_URL,
   CONTRACT_ADDRESSES,
   EXPLORER_URLS,
   NETWORK,
@@ -195,10 +196,7 @@ const Token = () => {
                 />
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-8">
-                <Link
-                  href="https://app.pintswap.exchange/#/markets/pwap-usdc"
-                  target="_blank"
-                >
+                <Link href={`${APP_URL}/#/markets`} target="_blank">
                   <Button className="!w-fit">Buy on PintSwap</Button>
                 </Link>
                 <Link

@@ -11,6 +11,7 @@ export const NETWORK = process.env.NEXT_PUBLIC_NETWORK || 'mainnet';
 export const ACTIVE_CHAIN_ID = Number(process.env.NEXT_PUBLIC_CHAINID || 1);
 export const DEV = !!process.env.NEXT_PUBLIC_DEV;
 export const REDEMPTION_ENABLED = true;
+export const APP_URL = 'https://pintswap.eth.limo';
 
 export const CONTRACT_ADDRESSES: any = {
   sepolia: {
