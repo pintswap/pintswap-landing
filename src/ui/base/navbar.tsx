@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Transition } from '@headlessui/react';
 import { useState } from 'react';
 import { AnimatedHamburger } from '../components';
+import { APP_URL } from '../../utils';
 
 const NAV_ITEMS = [
   {
@@ -110,7 +111,7 @@ const Navbar = () => {
           <li className="w-full">
             {/* <Button wallet>Connect</Button> */}
             <Link
-              href="https://app.pintswap.exchange"
+              href={`${APP_URL}`}
               target="_blank"
               className={`w-full ${isMobileOpen ? '' : 'opacity-0'}`}
             >
