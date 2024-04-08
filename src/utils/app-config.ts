@@ -7,15 +7,15 @@ const AppConfig = {
   title: 'PintSwap | P2P OTC Crypto Exchange',
   description:
     'The most secure peer-to-peer token swap. Enabling slippage-free, OTC token trading, all while avoiding token taxes.',
-  canonical: 'https://pintswap.exchange',
+  canonical: 'https://pintswap.com',
   openGraph: {
-    url: 'https://pintswap.exchange',
+    url: 'https://pintswap.com',
     title: 'PintSwap | P2P OTC Crypto Exchange',
     description:
       'The most secure peer-to-peer token swap. Enabling slippage-free, OTC token swapping without relying on liquidity.',
     images: [
       {
-        url: 'https://pintswap.exchange/assets/logo/pintswap-logo.svg',
+        url: 'https://pintswap.com/assets/logo/pintswap-logo.svg',
         width: 800,
         height: 600,
         alt: 'PintSwap logo',
@@ -31,7 +31,7 @@ const AppConfig = {
   },
   locale: 'en',
   legalName: 'PintSwap LLC',
-  image: 'https://pintswap.exchange/assets/logo/pintswap-logo.svg',
+  image: 'https://pintswap.com/assets/logo/pintswap-logo.svg',
 };
 
 export { QueryClientProvider, queryClient, AppConfig };

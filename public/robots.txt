@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://pintswap.exchange
+Host: https://pintswap.com
 
 # Sitemaps
-Sitemap: https://pintswap.exchange/sitemap.xml
+Sitemap: https://pintswap.com/sitemap.xml

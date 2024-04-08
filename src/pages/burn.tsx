@@ -207,7 +207,7 @@ export default function Burn() {
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-8">
                 <Link
-                  href="https://app.pintswap.exchange/#/markets/pwap-usdc"
+                  href="https://app.pintswap.com/#/markets/pwap-usdc"
                   target="_blank"
                 >
                   <Button className="!w-fit">Buy on PintSwap</Button>

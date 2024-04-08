@@ -10,15 +10,15 @@ import { APP_URL } from '../../utils';
 const NAV_ITEMS = [
   {
     text: 'Analytics',
-    link: 'https://analytics.pintswap.exchange',
+    link: 'https://analytics.pintswap.com',
     target: '_blank',
   },
   {
     text: 'Litepaper',
-    link: 'https://pintswap.exchange/litepaper.pdf',
+    link: 'https://pintswap.com/litepaper.pdf',
     target: '_blank',
   },
-  { text: 'Docs', link: 'https://docs.pintswap.exchange', target: '_blank' },
+  { text: 'Docs', link: 'https://docs.pintswap.com', target: '_blank' },
   // { text: 'Blog', link: '/blog', target: '_self' },
 ];
 

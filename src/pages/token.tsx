@@ -115,7 +115,7 @@ const Token = () => {
                 captured by the{' '}
                 <Link
                   target="_blank"
-                  href="https://docs.pintswap.exchange/contracts"
+                  href="https://docs.pintswap.com/contracts"
                   className="underline"
                 >
                   OPPS contract

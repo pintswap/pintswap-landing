@@ -17,12 +17,12 @@ const Footer = () => (
         <SocialList />
       </div>
       <div className="flex gap-3 xl:gap-4 justify-self-end">
-        <Link href="https://analytics.pintswap.exchange">
+        <Link href="https://analytics.pintswap.com">
           <Button type="link" noIcon>
             Analytics
           </Button>
         </Link>
-        <Link href="https://docs.pintswap.exchange">
+        <Link href="https://docs.pintswap.com">
           <Button type="link" noIcon>
             Docs
           </Button>
